@@ -1,0 +1,18 @@
+Pasos al crear la app:
+
+1- Crear app en una carpeta llamada client:
+
+npx create-expo-app client -t expo-template-blank-typescript
+
+Otra opcion seria crear app en la carpeta actual:
+
+npx create-expo-app -t expo-template-blank-typescript .
+
+Despues al correr la app con:
+
+expo start --web
+
+Te pide instalar esto:
+
+yarn add react-native-web@~0.18.11 react-dom
+yarn add --dev @types/react-native

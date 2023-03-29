@@ -6,20 +6,31 @@
   "scripts": {
     "dev": "tsnd --exit-child --transpile-only src/server.ts",
     "build": "rimraf ./build && tsc -p tsconfig.build.json",
-    "start": "npm run build && node build/server.js"
+    "start": "npm run build && node build/server.js",
+    "lint": "eslint --ext .js,.ts",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.57.0",
-    "eslint": "^8.36.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.8.7",
     "rimraf": "^4.4.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.3"
+    "typescript": "*"
   },
   "dependencies": {
-    "@typegoose/typegoose": "^11.0.0"
+    "@typegoose/typegoose": "^11.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0"
   }
 }

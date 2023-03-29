@@ -1,7 +1,20 @@
-import { prop, Ref, getModelForClass } from '@typegoose/typegoose';
+import { prop, Ref, getModelForClass, pre } from '@typegoose/typegoose';
+import argon2 from "argon2";
 
-class User {
-  @prop({ lowercase: true, required: true })
+
+@pre<User>("save", async function (next) {
+  if (this.isModified("password") || this.isNew) {
+    const hash = await argon2.hash(this.password);
+
+    this.password = hash;
+
+    return next();
+  }
+})
+
+
+export class User {
+  @prop({ lowercase: true, required: true, unique: true })
   public email!: string;
 
   @prop({ required: true })
@@ -12,11 +25,20 @@ class User {
 
   @prop({ required: true })
   public password!: string;
-  @prop({ required: true })
+
+  @prop({ required: true , unique: true})
   public dni!: number;
 
   @prop() //{ ref:()=>Cart }
-  public cart: any; //Ref<Cart>[]  //User
+  public cart: string; //Ref<Cart>[]  //User
+
+  public async comparePassword(password: string): Promise<boolean> {
+    return argon2.verify(this.password, password);
+  }
 }
 
-const UserModel = getModelForClass(User);
+export const UserModel = getModelForClass(User, {
+  schemaOptions: {
+    timestamps: true,
+  },
+});

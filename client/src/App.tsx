@@ -5,9 +5,9 @@ import { StyleSheet, Text, View } from "react-native";
 export default function App() {
   const [data, setData] = useState(10);
 
-  const num1 = 20;
+  const num1: number = 20;
 
-  if (num1 == data) {
+  if (num1 === data) {
     console.log("num1 == data");
   }
 

@@ -1,26 +1,24 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { TestStep1 } from '../screens/TestStep1'
-import { TestStep2 } from '../screens/TestStep2'
-import { TestStep3 } from '../screens/TestStep3'
-import { TestStep4 } from '../screens/TestStep4'
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Onboarding1Screen } from "../screens/Onboarding1Screen";
+import { Onboarding2Screen } from "../screens/Onboarding2Screen";
+import { Onboarding4Screen } from "../screens/Onboarding4Screen";
 import {
   NavigationContainer,
   DefaultTheme,
-  DarkTheme
-} from '@react-navigation/native'
+  DarkTheme,
+} from "@react-navigation/native";
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
-    <NavigationContainer theme={DefaultTheme} >
+    <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator>
-        <Stack.Screen name="TestStep1Name" component={TestStep1} />
-        <Stack.Screen name="TestStep2Name" component={TestStep2} />
-        <Stack.Screen name="TestStep3Name" component={TestStep3} />
-        <Stack.Screen name="TestStep4Name" component={TestStep4} />
+        <Stack.Screen name="Onboarding1Name" component={Onboarding1Screen} />
+        <Stack.Screen name="Onboarding2Name" component={Onboarding2Screen} />
+        <Stack.Screen name="Onboarding4Name" component={Onboarding4Screen} />
       </Stack.Navigator>
     </NavigationContainer>
-  )
-}
+  );
+};

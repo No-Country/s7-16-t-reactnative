@@ -1,10 +1,9 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
 
 import { StackRoutes } from "./src/navigation/StackRoutes";
 
 export default function App() {
-
   return (
     <View style={styles.container}>
       {/* <Example /> */}

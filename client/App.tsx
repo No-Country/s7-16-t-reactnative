@@ -1,22 +1,22 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, View } from 'react-native'
-import Example from './src/Example'
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View } from "react-native";
+
+import { StackRoutes } from "./src/navigation/StackRoutes";
 
 export default function App() {
-	return (
-		<View style={styles.container}>
-			<Example />
-			{/* <Text>Open up App.tsx to start working on your app!</Text> */}
-			<StatusBar style='auto' />
-		</View>
-	)
+  return (
+    <View style={styles.container}>
+      {/* <Example /> */}
+      <StackRoutes />
+      {/* <Text>Open up App.tsx to start working on your app!</Text> */}
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: 'red',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-})
+  container: {
+    flex: 1,
+    backgroundColor: "blue",
+  },
+});

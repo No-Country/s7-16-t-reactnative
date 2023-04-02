@@ -1,8 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AppButton } from "../components/AppButton";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
 
-export const Onboarding2Screen = () => {
+type ScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Onboarding3Name"
+>;
+interface Props {
+  navigation: ScreenNavigationProp;
+}
+export const Onboarding2Screen: React.FC<Props> = ({ navigation }) => {
+  const handleNavigate = () => {
+    navigation.navigate("Onboarding3Name");
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -21,8 +34,8 @@ export const Onboarding2Screen = () => {
       </View>
 
       <View>
-        <AppButton text="Siguiente" onPress={() => console.log("Siguiente")} />
-        <TouchableOpacity onPress={() => console.log("Saltar presentación")}>
+        <AppButton text="Siguiente" onPress={handleNavigate} />
+        <TouchableOpacity onPress={handleNavigate}>
           <Text style={styles.textFooter}>Saltar presentación</Text>
         </TouchableOpacity>
       </View>

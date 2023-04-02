@@ -1,28 +1,43 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
 
-export const Onboarding1Screen = () => {
+type ScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Onboarding2Name"
+>;
+interface Props {
+  navigation: ScreenNavigationProp;
+}
+
+export const Onboarding1Screen: React.FC<Props> = ({ navigation }) => {
+  const handleNavigate = () => {
+    navigation.navigate("Onboarding2Name");
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-        <Text style={styles.textLogo}>LOGO</Text>
-      </View>
-      <View style={{ marginBottom: 10 }}>
-        <Text style={styles.textTitle}>
-          ¡Bienvenid@ a “Supermercado sin fila”!
-        </Text>
-      </View>
+    <TouchableWithoutFeedback onPress={handleNavigate}>
+      <View style={styles.container}>
+        <View style={styles.logo}>
+          <Text style={styles.textLogo}>LOGO</Text>
+        </View>
+        <View style={{ marginBottom: 10 }}>
+          <Text style={styles.textTitle}>
+            ¡Bienvenid@ a “Supermercado sin fila”!
+          </Text>
+        </View>
 
-      <View style={{ width: 222, height: 32, marginBottom: 50 }}>
-        <Text style={styles.textsubTitle}>
-          Te presentamos cómo funciona esta nueva experiencia de compra
-        </Text>
+        <View style={{ width: 222, height: 32, marginBottom: 50 }}>
+          <Text style={styles.textsubTitle}>
+            Te presentamos cómo funciona esta nueva experiencia de compra
+          </Text>
+        </View>
+        <View>
+          <Text style={styles.textFooter}>Saltar presentación</Text>
+        </View>
       </View>
-
-      <View>
-        <Text style={styles.textFooter}>Saltar presentación</Text>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

@@ -1,15 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+// import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const Example = () => {
-  const [data, setData] = useState(10);
+  // const [data, setData] = useState(10);
 
-  const num1: number = 20;
+  // const num1: number = 20;
 
-  if (num1 === data) {
-    console.log("num1 == data");
-  }
+  // if (num1 === data) {
+  //   console.log("num1 == data");
+  // }
 
   return (
     <View style={styles.container}>
@@ -21,7 +21,7 @@ const Example = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 100,
     backgroundColor: "red",
     alignItems: "center",
     justifyContent: "center",

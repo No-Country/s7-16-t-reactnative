@@ -5980,11 +5980,7 @@
     "object-assign" "^4.0.1"
     "thenify-all" "^1.0.0"
 
-<<<<<<< HEAD
-"nanoid@^3.3.4":
-=======
-"nanoid@^3.1.23":
->>>>>>> 1c265d37f793d3e0f8796cbafa90bf671021183c
+"nanoid@^3.1.23", "nanoid@^3.3.4":
   "integrity" "sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA=="
   "resolved" "https://registry.npmjs.org/nanoid/-/nanoid-3.3.6.tgz"
   "version" "3.3.6"
@@ -6851,12 +6847,12 @@
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.16.tgz"
   "version" "0.71.16"
 
-"react-native-safe-area-context@>= 3.0.0", "react-native-safe-area-context@4.5.0":
+"react-native-safe-area-context@>= 3.0.0":
   "integrity" "sha512-0WORnk9SkREGUg2V7jHZbuN5x4vcxj/1B0QOcXJjdYWrzZHgLcUzYWWIUecUPJh747Mwjt/42RZDOaFn3L8kPQ=="
   "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.5.0.tgz"
   "version" "4.5.0"
 
-"react-native-screens@>= 3.0.0", "react-native-screens@~3.20.0":
+"react-native-screens@>= 3.0.0":
   "integrity" "sha512-joWUKWAVHxymP3mL9gYApFHAsbd9L6ZcmpoZa6Sl3W/82bvvNVMqcfP7MeNqVCg73qZ8yL4fW+J/syusHleUgg=="
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-3.20.0.tgz"
   "version" "3.20.0"
@@ -6930,7 +6926,7 @@
     "object-assign" "^4.1.1"
     "react-is" "^16.12.0 || ^17.0.0 || ^18.0.0"
 
-"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.2.0", "react@>=17.0.0", "react@18.2.0":
+"react@*", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.2.0", "react@>=16.8", "react@>=17.0.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -8282,16 +8278,12 @@
     "querystringify" "^2.1.1"
     "requires-port" "^1.0.0"
 
-<<<<<<< HEAD
-"use-sync-external-store@^1.0.0", "use-sync-external-store@^1.1.0":
-=======
 "use-latest-callback@^0.1.5":
   "integrity" "sha512-HtHatS2U4/h32NlkhupDsPlrbiD27gSH5swBdtXbCAlc6pfOFzaj0FehW/FO12rx8j2Vy4/lJScCiJyM01E+bQ=="
   "resolved" "https://registry.npmjs.org/use-latest-callback/-/use-latest-callback-0.1.5.tgz"
   "version" "0.1.5"
 
-"use-sync-external-store@^1.0.0":
->>>>>>> 1c265d37f793d3e0f8796cbafa90bf671021183c
+"use-sync-external-store@^1.0.0", "use-sync-external-store@^1.1.0", "use-sync-external-store@1.2.0":
   "integrity" "sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA=="
   "resolved" "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   "version" "1.2.0"
@@ -8612,3 +8604,10 @@
   "integrity" "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="
   "resolved" "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz"
   "version" "0.1.0"
+
+"zustand@^4.3.7":
+  "integrity" "sha512-dY8ERwB9Nd21ellgkBZFhudER8KVlelZm8388B5nDAXhO/+FZDhYMuRnqDgu5SYyRgz/iaf8RKnbUs/cHfOGlQ=="
+  "resolved" "https://registry.npmjs.org/zustand/-/zustand-4.3.7.tgz"
+  "version" "4.3.7"
+  dependencies:
+    "use-sync-external-store" "1.2.0"

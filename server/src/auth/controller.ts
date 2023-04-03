@@ -1,12 +1,13 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { UserModel } from "../entity/user/model";
+import welcome from "../providers/templates/welcome";
 
 export const register = async (req: Request, res: Response) => {
-    const { firstName, lastName, DNI, email, password} = req.body;
+    const { firstName, lastName, dni, email, password } = req.body;
     try {
-        const user = await UserModel.findOne({ email: email})
+        const user = await UserModel.findOne({ email: email })
 
-        if(user) {
+        if (user) {
             return res.status(200).json({
                 error: true,
                 message: `User ${firstName} ${lastName} ya existe`
@@ -18,18 +19,53 @@ export const register = async (req: Request, res: Response) => {
             lastName,
             email,
             password,
-            DNI,
+            dni,
         });
         await newUser.save();
-    } catch(error) {
+
+        let welcomeTemplate = welcome(firstName, lastName);
+        // sendEmail(email, "Vienvenido a SmartShop", welcomeTemplate)
+
+    } catch (error) {
         res.status(400).json({
             error: true,
-            message: 'Datos invalidos'
+            message: 'Los datos no son validos'
         })
     }
 }
 
 export const login = (req: Request, res: Response) => {
     const message = req.flash("error")
-    res.json({message})
+    res.json({ message })
 }
+
+export const loginSuccess = (req: Request, res: Response): void => {
+    if (req.user) {
+        res.status(200).json({
+            error: false,
+            message: "Has iniciado sec¿sion con exito",
+            user: req.user
+        })
+    } else {
+        res.status(403).json({
+            error: true,
+            message: "No estas autorizado",
+        })
+    }
+};
+
+export const loginFailed = (req: Request, res: Response) => {
+    res.status(400).json({
+        error: true,
+        message: "Login Failed",
+    });
+};
+
+export const logout = (req: Request, res: Response, next: NextFunction) => {
+    req.logout(error => {
+        if (error) {
+            return next(error)
+        }
+        res.redirect("http://localhost:3000/")
+    });
+};

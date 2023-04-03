@@ -11,6 +11,8 @@
     "prepare": "cd .. && husky install client/.husky"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
     "expo": "~48.0.9",
     "expo-status-bar": "~1.4.4",
     "nativewind": "^2.0.11",

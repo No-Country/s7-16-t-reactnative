@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { UserModel } from "../entity/user/model";
+import { sendEmail } from "../providers/email.service";
 import welcome from "../providers/templates/welcome";
 
 export const register = async (req: Request, res: Response) => {
@@ -24,7 +25,12 @@ export const register = async (req: Request, res: Response) => {
         await newUser.save();
 
         let welcomeTemplate = welcome(firstName, lastName);
-        // sendEmail(email, "Vienvenido a SmartShop", welcomeTemplate)
+        sendEmail(email, "Vienvenido a SmartShop", welcomeTemplate)
+
+        res.status(200).send({
+            error: false,
+            message: "El usuario fue registrado",
+        });
 
     } catch (error) {
         res.status(400).json({
@@ -36,7 +42,7 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = (req: Request, res: Response) => {
     const message = req.flash("error")
-    res.json({ message })
+    res.json({ message: 'Has sido logeado' })
 }
 
 export const loginSuccess = (req: Request, res: Response): void => {

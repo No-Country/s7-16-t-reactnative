@@ -1,20 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./types";
-type ScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "Onboarding1Name"
->;
-interface Props {
-  navigation: ScreenNavigationProp;
-}
-export const Onboarding4Screen: React.FC<Props> = ({ navigation }) => {
-  const handleNavigate = () => {
-    navigation.navigate("Onboarding1Name");
-  };
 
+export const Onboarding4Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -30,7 +18,10 @@ export const Onboarding4Screen: React.FC<Props> = ({ navigation }) => {
         </Text>
       </View>
       <View>
-        <AppButton text="Comenzar" onPress={handleNavigate} />
+        <AppButton
+          text="Comenzar"
+          onPress={() => navigation.navigate("MainLogin")}
+        />
       </View>
     </View>
   );

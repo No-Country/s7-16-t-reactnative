@@ -1,23 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./types";
+import { useNavigation } from "@react-navigation/native";
 
-type ScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  "Onboarding2Name"
->;
-interface Props {
-  navigation: ScreenNavigationProp;
-}
-
-export const Onboarding1Screen: React.FC<Props> = ({ navigation }) => {
-  const handleNavigate = () => {
-    navigation.navigate("Onboarding2Name");
-  };
+export const Onboarding1Screen = () => {
+  const navigation = useNavigation();
 
   return (
-    <TouchableWithoutFeedback onPress={handleNavigate}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate("Onboarding2Name")}
+    >
       <View style={styles.container}>
         <View style={styles.logo}>
           <Text style={styles.textLogo}>LOGO</Text>

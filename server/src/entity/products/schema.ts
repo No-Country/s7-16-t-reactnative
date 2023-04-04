@@ -26,9 +26,9 @@ export const newProductSchema = {
       required_error: 'BarCode is required',
       invalid_type_error: 'BarCode must be a string',
     }),
-    img: z.string({
-      required_error: 'A img is required',
-      invalid_type_error: 'Img must be a string of url',
+    photo: z.string({
+      required_error: 'A image is required',
+      invalid_type_error: 'Image must be a string of url',
     }),
   }),
 };

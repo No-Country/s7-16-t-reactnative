@@ -1,7 +1,4 @@
-import deserializeUser from "./deserializeUser"
-import requireUser from "./requireUser"
+import deserializeUser from './deserializeUser';
+import requireUser from './requireUser';
 
-export {
-  deserializeUser,
-  requireUser
-}
+export { deserializeUser, requireUser };

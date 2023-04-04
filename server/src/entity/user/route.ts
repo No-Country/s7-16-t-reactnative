@@ -7,7 +7,7 @@ import { requireUser } from '../../middleware';
 const router = express.Router();
 
 //Return logged user
-router.get('/',requireUser, (req, res) => {
+router.get('/', requireUser, (req, res) => {
   return res.send(res.locals.user);
 });
 

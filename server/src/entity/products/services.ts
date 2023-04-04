@@ -21,7 +21,7 @@ export async function updateProduct(id: string, data: Product) {
     new: true,
   });
   return responseProducts;
-};
+}
 
 export async function deleteProduct(id: string) {
   const responseProducts = await ProductModel.deleteOne({ _id: id });
@@ -29,4 +29,4 @@ export async function deleteProduct(id: string) {
     throw new Error(`Product ${id} not found`);
   }
   return responseProducts;
-};
+}

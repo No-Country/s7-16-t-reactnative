@@ -2,13 +2,12 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { createProduct, deleteProduct, getProduct, getProducts, updateProduct } from './services';
 import { NewProductBody } from './schema';
-import { date } from 'zod';
 
 export async function newProductHandler(req: Request<{}, {}, NewProductBody>, res: Response) {
-  const { name, brand, description, expiryDate, price, barCode, img } = req.body;
+  const { name, brand, description, expiryDate, price, barCode, photo } = req.body;
 
   try {
-    const newProduct = await createProduct({ name, brand, description, expiryDate, price, barCode, img });
+    const newProduct = await createProduct({ name, brand, description, expiryDate, price, barCode, photo });
     if (!newProduct) {
       res.status(StatusCodes.CONFLICT).send(`Product with code ${barCode} already exists`);
     }

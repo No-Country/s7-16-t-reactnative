@@ -20,7 +20,7 @@ export class Product {
   public barCode!: number;
 
   @prop({ required: true })
-  public img!: string;
+  public photo!: string;
 
   @prop()
   public business?: string; //Ref<Business>[]  //Business?

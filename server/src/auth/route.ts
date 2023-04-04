@@ -49,6 +49,6 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }));
 
-router.get('/login', login)
+router.get('/login', login);
 
 export default router;

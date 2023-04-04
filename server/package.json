@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.3",
     "@types/cors": "^2.8.13",
     "@types/dotenv": "^8.2.0",
@@ -23,6 +24,7 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^18.15.11",
     "@types/passport": "^1.0.12",
+    "@types/passport-local": "^1.0.35",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.57.0",
     "dotenv": "^16.0.3",
@@ -43,6 +45,8 @@
     "@types/connect-flash": "^0.0.37",
     "@types/express-session": "^1.17.7",
     "argon2": "^0.30.3",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -54,6 +58,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "zod": "^3.21.4",
     "zod-express-middleware": "^1.4.0"
   }

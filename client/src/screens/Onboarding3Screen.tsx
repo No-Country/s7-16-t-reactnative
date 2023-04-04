@@ -1,29 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { AppButton } from "../components/AppButton";
 
-export const Onboarding2Screen = ({ navigation }) => {
+export const Onboarding3Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
         <Text style={styles.textLogo}>ILUSTRACIÓN</Text>
       </View>
-
-      <View style={{ marginBottom: 150, width: 274, height: 48 }}>
+      <View style={{ marginBottom: 150, width: 274, height: 32 }}>
         <Text style={styles.textsubTitle}>
-          Cuando ingreses al mercado vas a poder
+          Una vez cargados en la app, podrás
           <Text style={{ fontWeight: "600" }}>
             {" "}
-            escanear el código de barras{" "}
+            pagar a través del carrito{" "}
           </Text>
-          de tus productos
         </Text>
       </View>
-
       <View>
         <AppButton
           text="Siguiente"
-          onPress={() => navigation.navigate("Onboarding3Name")}
+          onPress={() => navigation.navigate("Onboarding4Name")}
         />
         <TouchableOpacity>
           <Text style={styles.textFooter}>Saltar presentación</Text>

@@ -1,10 +1,7 @@
-import { Router } from "express";
 import passport from "passport";
-import { login, register } from "./controller";
-
 import { Strategy as LocalStrategy } from "passport-local"
+import { UserModel } from "../../entity/user/model";
 import bcrypt from "bcrypt"
-import { UserModel } from "../entity/user/model";
 
 passport.use(
     new LocalStrategy({
@@ -38,17 +35,3 @@ passport.deserializeUser(async (id, done) => {
     const user = await UserModel.findOne({ _id: id });
     done(null, user)
 })
-
-const router: Router = Router();
-
-router.post('/register', register);
-
-router.post('/login', passport.authenticate('local', {
-    successRedirect: "/api/auth/login",
-    failureRedirect: "/api/auth/login/failed",
-    failureFlash: true
-}));
-
-router.get('/login', login);
-
-export default router;

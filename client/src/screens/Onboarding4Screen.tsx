@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 
-export const Onboarding4Screen = () => {
+export const Onboarding4Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -18,7 +18,10 @@ export const Onboarding4Screen = () => {
         </Text>
       </View>
       <View>
-        <AppButton text="Comenzar" onPress={() => console.log("Comenzar")} />
+        <AppButton
+          text="Comenzar"
+          onPress={() => navigation.navigate("MainLogin")}
+        />
       </View>
     </View>
   );

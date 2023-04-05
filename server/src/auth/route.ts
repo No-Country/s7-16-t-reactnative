@@ -1,6 +1,7 @@
-import { Router } from "express";
-import passport from "passport";
-import { login, register } from "./controller";
+// import { Router } from "express";
+// import passport from "passport";
+// import { login, register } from "./controller";
+// import { StatusCodes } from "http-status-codes";
 
 // import { Strategy as LocalStrategy } from "passport-local"
 // import bcrypt from "bcrypt"
@@ -39,16 +40,29 @@ import { login, register } from "./controller";
 //     done(null, user)
 // })
 
+// const router: Router = Router();
+
+// router.post('/register', register);
+
+// router.post('/login', passport.authenticate('local', {
+//     successRedirect: "/api/auth/login",
+//     failureRedirect: "/api/auth/login/failed",
+//     failureFlash: true
+// }));
+
+// router.get('/login', login);
+
+// export default router;
+
+import { Router } from 'express';
+import { login, register } from './controller';
+
+
+
 const router: Router = Router();
 
 router.post('/register', register);
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: "/api/auth/login",
-    failureRedirect: "/api/auth/login/failed",
-    failureFlash: true
-}));
-
-router.get('/login', login);
+router.post('/login', login);
 
 export default router;

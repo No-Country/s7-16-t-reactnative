@@ -1,9 +1,9 @@
 import { Text, View } from "react-native";
 
 interface TextTitle {
-  title: string | null;
-  paragraph: string | null;
-  paragraphSecond: string | null;
+  title?: string;
+  paragraph?: string;
+  paragraphSecond?: string;
 }
 
 const TextTitle = ({ title, paragraph, paragraphSecond }: TextTitle) => {

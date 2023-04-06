@@ -37,9 +37,7 @@ const Example: React.FC = () => {
                 value={values.password}
               />
             </View>
-            {/* <TouchableOpacity onPress={() => handleSubmit()}>
-              <Text>PRESIONAR</Text>
-            </TouchableOpacity> */}
+
             <View className="flex justify-center items-center">
               <AppButton text="PRESIONAR" onPress={() => handleSubmit()} />
             </View>

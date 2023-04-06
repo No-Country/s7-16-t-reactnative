@@ -16,6 +16,7 @@ export const StackRoutes = () => {
   return (
     <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Onboarding1Name" component={Onboarding1Screen} />
         <Stack.Screen name="Onboarding2Name" component={Onboarding2Screen} />
         <Stack.Screen name="Onboarding3Name" component={Onboarding3Screen} />
@@ -23,7 +24,6 @@ export const StackRoutes = () => {
         <Stack.Screen name="MainLogin" component={MainLogin} />
         <Stack.Screen name="Register1" component={Register1} />
         <Stack.Screen name="Register2" component={Register2} />
-        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );

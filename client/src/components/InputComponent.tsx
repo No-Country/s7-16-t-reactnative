@@ -4,12 +4,12 @@ import { useField } from "formik";
 interface InputProps extends TextInputProps {
   name: string;
   label?: string;
-  type?: boolean;
+  typePassword?: boolean;
   placeholder?: string;
 }
 
 const InputComponent: React.FC<InputProps> = ({
-  type,
+  typePassword,
   label,
   name,
   placeholder,
@@ -22,13 +22,16 @@ const InputComponent: React.FC<InputProps> = ({
         <Text className="py-2 font-body text-body-bold">{label}</Text>
         <TextInput
           className="w-full text-caption font-caption border h-10 rounded-lg pl-2"
-          secureTextEntry={type}
+          secureTextEntry={typePassword}
           placeholder={placeholder}
           onChangeText={(value) => helpers.setValue(value)}
           onBlur={() => helpers.setTouched(true)}
           value={field.value}
           {...props}
         />
+        <View>
+          {meta.touched && meta.error ? <Text>{meta.error}</Text> : null}
+        </View>
       </View>
     </View>
   );

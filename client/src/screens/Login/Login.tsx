@@ -1,21 +1,55 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { SessionBtn } from "../../components/LoginButton";
+import { FormikProps, Formik } from "formik";
+import { loginValidationSchema } from "./loginValidationSchema";
+import InputComponent from "../../components/InputComponent";
+
+interface Values {
+  email: string;
+  password: string;
+}
 
 export const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>¡Te damos la bienvenida!</Text>
-      <View>
-        <TextInput style={styles.input} placeholder="Email" />
-        <TextInput style={styles.input} placeholder="Contraseña" />
-      </View>
-      <Text style={styles.question}>¿Olvidaste la constraseña?</Text>
-      <View style={styles.buttons}>
-        <SessionBtn
-          text="INICIAR SESIÓN"
-          onPress={() => navigation.navigate("Home")}
-        />
-      </View>
+      <Formik
+        validationSchema={loginValidationSchema}
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values, actions) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            actions.setSubmitting(false);
+          }, 1000);
+        }}
+      >
+        {(props: FormikProps<Values>) => (
+          <>
+            <View>
+              <InputComponent
+                name="email"
+                label="email"
+                style={styles.input}
+                placeholder="Email"
+              />
+              <InputComponent
+                name="password"
+                label="password"
+                style={styles.input}
+                placeholder="Contraseña"
+                typePassword={true}
+              />
+            </View>
+            <Text style={styles.question}>¿Olvidaste la constraseña?</Text>
+            <View style={styles.buttons}>
+              <SessionBtn
+                text="INICIAR SESIÓN"
+                onPress={() => navigation.navigate("Home")}
+              />
+            </View>
+          </>
+        )}
+      </Formik>
     </View>
   );
 };

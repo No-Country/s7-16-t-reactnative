@@ -1,14 +1,15 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Onboarding1Screen } from "../screens/Onboarding1Screen";
-import { Onboarding2Screen } from "../screens/Onboarding2Screen";
-import { Onboarding3Screen } from "../screens/Onboarding3Screen";
-import { Onboarding4Screen } from "../screens/Onboarding4Screen";
+import { Onboarding1Screen } from "../screens/Onboarding/Onboarding1Screen";
+import { Onboarding2Screen } from "../screens/Onboarding/Onboarding2Screen";
+import { Onboarding3Screen } from "../screens/Onboarding/Onboarding3Screen";
+import { Onboarding4Screen } from "../screens/Onboarding/Onboarding4Screen";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { MainLogin } from "../screens/Login/MainLogin";
 import { Login } from "../screens/Login/Login";
 import { Register1 } from "../screens/Login/Register1";
 import { Register2 } from "../screens/Login/Register2";
+
 const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {

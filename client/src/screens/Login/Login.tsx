@@ -4,13 +4,12 @@ import {
   Text,
   View,
   StyleSheet,
-  TextInput,
   Platform,
 } from "react-native";
 import { SessionBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
-import InputComponent from "../../components/InputComponent";
+import InputComponent2 from "../../components/InputComponent2";
 
 interface Values {
   email: string;
@@ -18,6 +17,11 @@ interface Values {
 }
 
 export const Login = ({ navigation }) => {
+  const handleSubmit = () => {
+    console.log("No hay errores");
+    navigation.navigate("MyData");
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -30,33 +34,30 @@ export const Login = ({ navigation }) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values, actions) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                actions.setSubmitting(false);
-              }, 1000);
-            }}
+            onSubmit={handleSubmit}
           >
             {(props: FormikProps<Values>) => (
               <>
                 <View>
-                  <InputComponent
+                  <InputComponent2
                     name="email"
-                    style={styles.input1}
+                    style={styles.input}
                     placeholder="Mail"
                   />
-                  <InputComponent
+                  <InputComponent2
                     name="password"
-                    style={styles.input2}
+                    style={styles.input}
                     placeholder="Contraseña"
-                    typePassword={true}
+                    type={true}
                   />
+                  <Text style={styles.question}>
+                    ¿Olvidaste la constraseña?
+                  </Text>
                 </View>
-                <Text style={styles.question}>¿Olvidaste la constraseña?</Text>
                 <View style={styles.buttons}>
                   <SessionBtn
                     text="INICIAR SESIÓN"
-                    onPress={() => navigation.navigate("Home")}
+                    onPress={props.handleSubmit}
                   />
                 </View>
               </>
@@ -79,32 +80,25 @@ const styles = StyleSheet.create({
   form: {
     marginTop: 130,
   },
-  input1: {
+  input: {
     width: "88%",
     height: 52,
     borderWidth: 1,
     borderColor: "#999",
     borderRadius: 3.5,
     alignSelf: "center",
-    marginBottom: 17,
-  },
-  input2: {
-    width: "88%",
-    height: 52,
-    borderWidth: 1,
-    borderColor: "#999",
-    borderRadius: 3.5,
-    alignSelf: "center",
-    marginBottom: 17,
+    marginBottom: 27,
   },
   question: {
+    position: "absolute",
     fontSize: 12,
     fontWeight: "300",
     color: "#005AC2",
-    marginLeft: 25,
     textDecorationLine: "underline",
-    marginTop: 9,
     lineHeight: 14,
+    bottom: -22,
+    left: 28,
+    zIndex: 10,
   },
   buttons: {
     alignSelf: "center",

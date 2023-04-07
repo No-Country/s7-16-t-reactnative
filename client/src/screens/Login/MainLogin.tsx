@@ -1,7 +1,10 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 import { NormalBtn, GoogleBtn, SessionBtn } from "../../components/LoginButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const MainLogin = ({ navigation }) => {
+export const MainLogin = () => {
+  const navigation = useNavigation();
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -10,15 +13,15 @@ export const MainLogin = ({ navigation }) => {
         <View style={styles.buttons}>
           <SessionBtn
             text="INICIAR SESIÓN"
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("Login" as never)}
           />
           <NormalBtn
             text="REGISTRARME"
-            onPress={() => navigation.navigate("Register1")}
+            onPress={() => navigation.navigate("Register1" as never)}
           />
           <GoogleBtn
             text="REGISTRATE CON GOOGLE"
-            onPress={() => navigation.navigate("Register1")}
+            onPress={() => navigation.navigate("Register1" as never)}
           />
         </View>
       </View>

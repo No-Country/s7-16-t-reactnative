@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../../components/AppButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Onboarding4Screen = ({ navigation }) => {
+export const Onboarding4Screen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -20,7 +22,7 @@ export const Onboarding4Screen = ({ navigation }) => {
       <View>
         <AppButton
           text="Comenzar"
-          onPress={() => navigation.navigate("MainLogin")}
+          onPress={() => navigation.navigate("LoginStack" as never)}
         />
       </View>
     </View>

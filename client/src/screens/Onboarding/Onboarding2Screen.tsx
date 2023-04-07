@@ -1,8 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { AppButton } from "../../components/AppButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Onboarding2Screen = ({ navigation }) => {
+export const Onboarding2Screen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -23,7 +25,7 @@ export const Onboarding2Screen = ({ navigation }) => {
       <View>
         <AppButton
           text="Siguiente"
-          onPress={() => navigation.navigate("Onboarding3Name")}
+          onPress={() => navigation.navigate("Onboarding3Screen" as never)}
         />
         <TouchableOpacity>
           <Text style={styles.textFooter}>Saltar presentación</Text>

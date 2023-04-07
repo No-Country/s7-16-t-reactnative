@@ -1,7 +1,9 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { NormalBtn, GoogleBtn } from "../../components/LoginButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Register1 = ({ navigation }) => {
+export const Register1 = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Estamos felices de que seas parte</Text>
@@ -13,11 +15,11 @@ export const Register1 = ({ navigation }) => {
       <View style={styles.buttons}>
         <NormalBtn
           text="REGISTRARME"
-          onPress={() => navigation.navigate("Register2")}
+          onPress={() => navigation.navigate("Register2" as never)}
         />
         <GoogleBtn
           text="REGISTRATE CON GOOGLE"
-          onPress={() => navigation.navigate("Register2")}
+          onPress={() => navigation.navigate("Register2" as never)}
         />
       </View>
     </View>

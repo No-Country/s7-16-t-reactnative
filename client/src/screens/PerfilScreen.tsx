@@ -1,10 +1,13 @@
 import React from "react";
 import { Text, View, Image } from "react-native";
 import { NavigateButton } from "../components/NavigateButton";
+import { useNavigation } from "@react-navigation/native";
 
 export const PerfilScreen = () => {
+  const navigation = useNavigation();
+
   return (
-    <View className="flex-1 container mx-auto py-10 items-center border border-red-400">
+    <View className="flex-1 container mx-auto py-10 items-center">
       <Image
         source={require("../assets/logo.png")}
         className="w-[129] h-[61] mb-14"
@@ -21,7 +24,7 @@ export const PerfilScreen = () => {
       <View>
         <NavigateButton
           text="Mis datos"
-          onPress={() => console.log("Mis datos")}
+          onPress={() => navigation.navigate("MyData" as never)}
         />
         <NavigateButton
           text="Mis compras"

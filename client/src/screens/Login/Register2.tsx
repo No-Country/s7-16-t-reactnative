@@ -1,7 +1,9 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { NormalBtn } from "../../components/LoginButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Register2 = ({ navigation }) => {
+export const Register2 = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Estamos felices de que seas parte</Text>
@@ -17,7 +19,7 @@ export const Register2 = ({ navigation }) => {
       <View style={styles.buttons}>
         <NormalBtn
           text="REGISTRARME"
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate("Login" as never)}
         />
       </View>
     </View>

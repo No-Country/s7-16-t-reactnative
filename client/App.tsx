@@ -1,10 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { View } from "react-native";
-
-import { StackRoutes } from "./src/navigation/StackRoutes";
-import Example from "./src/Example";
-import MyData from "./src/screens/Home/MyData";
+import { StatusBar } from "react-native";
+import { MainNavigation } from "./src/navigation/StackRoutes";
 
 export default function App() {
-  return <StackRoutes />;
+  return (
+    <>
+      <StatusBar barStyle="light-content" />
+      <MainNavigation />
+    </>
+  );
 }

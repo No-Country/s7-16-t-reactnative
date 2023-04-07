@@ -1,7 +1,10 @@
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { SessionBtn } from "../../components/LoginButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Login = ({ navigation }) => {
+export const Login = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>¡Te damos la bienvenida!</Text>
@@ -13,7 +16,7 @@ export const Login = ({ navigation }) => {
       <View style={styles.buttons}>
         <SessionBtn
           text="INICIAR SESIÓN"
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("StackNavigation" as never)}
         />
       </View>
     </View>

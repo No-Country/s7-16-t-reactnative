@@ -9,7 +9,8 @@ import {
 import { SessionBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
-import InputComponent2 from "../../components/InputComponent2";
+import InputComponent2 from "../../components/InputComponent";
+import { AntDesign } from "@expo/vector-icons";
 
 interface Values {
   email: string;
@@ -25,10 +26,17 @@ export const Login = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : null}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView>
+        <AntDesign
+          style={styles.back}
+          name="arrowleft"
+          size={24}
+          color="black"
+          onPress={() => navigation.goBack()}
+        />
         <Text style={styles.title}>¡Te damos la bienvenida!</Text>
         <View style={styles.form}>
           <Formik
@@ -71,6 +79,7 @@ export const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {},
+  back: { top: 43, left: "6%" },
   title: {
     fontSize: 24,
     fontWeight: "500",
@@ -87,7 +96,7 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     borderRadius: 3.5,
     alignSelf: "center",
-    marginBottom: 27,
+    marginBottom: 18,
   },
   question: {
     position: "absolute",
@@ -104,6 +113,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginTop: 219,
-    marginBottom: 162,
+    marginBottom: 100,
   },
 });

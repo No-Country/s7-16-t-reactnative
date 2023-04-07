@@ -4,11 +4,13 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
+  Platform,
 } from "react-native";
 import { NormalBtn, GoogleBtn } from "../../components/LoginButton";
-import InputComponent2 from "../../components/InputComponent2";
+import InputComponent2 from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
+import { AntDesign } from "@expo/vector-icons";
 
 interface Values {
   email: string;
@@ -25,10 +27,17 @@ export const Register1 = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : null}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView>
+        <AntDesign
+          style={styles.back}
+          name="arrowleft"
+          size={24}
+          color="black"
+          onPress={() => navigation.goBack()}
+        />
         <Formik
           validationSchema={registerValidationSchema}
           initialValues={{ email: "", password: "", password2: "" }}
@@ -75,12 +84,7 @@ export const Register1 = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {},
-  buttons: {
-    alignSelf: "center",
-    alignItems: "center",
-    marginTop: 140,
-    marginBottom: 100,
-  },
+  back: { top: 43, left: "6%" },
   title: {
     fontSize: 24,
     fontWeight: "500",
@@ -97,6 +101,12 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     borderRadius: 3.5,
     alignSelf: "center",
-    marginBottom: 27,
+    marginBottom: 18,
+  },
+  buttons: {
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 100,
+    marginBottom: 100,
   },
 });

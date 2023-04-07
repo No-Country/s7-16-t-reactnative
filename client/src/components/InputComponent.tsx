@@ -17,21 +17,33 @@ const InputComponent: React.FC<InputProps> = ({
 }) => {
   const [field, meta, helpers] = useField(name);
   return (
-    <View className="flex flex-col w-full">
-      <View className="flex flex-col justify-center">
-        <Text className="py-2 font-body text-body-bold">{label}</Text>
-        <TextInput
-          className="w-full text-caption font-caption border h-10 rounded-lg pl-2"
-          secureTextEntry={typePassword}
-          placeholder={placeholder}
-          onChangeText={(value) => helpers.setValue(value)}
-          onBlur={() => helpers.setTouched(true)}
-          value={field.value}
-          {...props}
-        />
-        <View>
-          {meta.touched && meta.error ? <Text>{meta.error}</Text> : null}
-        </View>
+    <View>
+      {/* <Text className="py-2 font-body text-body-bold">{label}</Text> */}
+      <TextInput
+        className="w-full text-caption font-caption border h-13 rounded-lg pl-2"
+        secureTextEntry={typePassword}
+        placeholder={placeholder}
+        onChangeText={(value) => helpers.setValue(value)}
+        onBlur={() => helpers.setTouched(true)}
+        value={field.value}
+        {...props}
+      />
+      <View>
+        {meta.touched && meta.error ? (
+          <Text
+            style={{
+              position: "absolute",
+              textAlign: "center",
+              color: "#fb8500",
+              fontWeight: "800",
+              top: -37,
+              left: 40,
+              right: 40,
+            }}
+          >
+            {meta.error}
+          </Text>
+        ) : null}
       </View>
     </View>
   );

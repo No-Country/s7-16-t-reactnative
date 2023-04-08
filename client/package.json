@@ -15,7 +15,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "axios": "^1.3.5",
     "expo": "~48.0.9",
-    "expo-barcode-scanner": "^12.3.2",
+    "expo-barcode-scanner": "^12.3.2",    
     "expo-status-bar": "~1.4.4",
     "formik": "^2.2.9",
     "nativewind": "^2.0.11",

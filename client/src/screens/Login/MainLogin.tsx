@@ -27,16 +27,7 @@ export const MainLogin = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: "5%",
-    height: 800,
-  },
-  buttons: {
-    alignSelf: "center",
-    alignItems: "center",
-    marginTop: 189,
-  },
+  container: {},
   title: {
     alignSelf: "center",
     fontSize: 24,
@@ -49,5 +40,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: 179,
     width: 284,
+  },
+  buttons: {
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 189,
+    marginBottom: 100,
   },
 });

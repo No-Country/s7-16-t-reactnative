@@ -1,15 +1,10 @@
 import { create } from "zustand";
+import { LoginRes } from "../utils/interfaces/api.interfaces";
 
 interface UserState {
-  user: null | User;
-  setUser: (user: User) => void;
+  user: null | LoginRes;
+  setUser: (user: LoginRes) => void;
   logout: () => void;
-}
-
-// Interface de ejemplo, seguramente crezca una vez se tenga acceso al api login
-interface User {
-  name: string;
-  email: string;
 }
 
 export const UseUserStore = create<UserState>((set) => ({
@@ -25,4 +20,8 @@ export const UseUserStore = create<UserState>((set) => ({
 
     Este es un ejemplo de zustand para cambiar el estado user:
     useUserStore.getState().setUser(res.data.response.userData)
+
+    
+    const setUser = UseUserStore((state) => state.setUser);
+    setUser(res.data.response.userData)
  */

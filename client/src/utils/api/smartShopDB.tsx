@@ -30,12 +30,18 @@ export const getOneProduct = async (barcode: number) => {
   }
 };
 
-export const Login = async (data: LoginData) => {
+export const Login = async ({ email, password }: LoginData) => {
   try {
-    const res = await api.post<LoginRes>(`/auth/login`, { data });
+    const res = await api.post<LoginRes>(`/auth/login`, {
+      email,
+      password,
+    });
+
     return res;
   } catch (error) {
-    console.log(error);
+    alert(
+      "Hubo un error en el servidor. Por favor, inténtelo de nuevo más tarde o contáctese con el soporte técnico."
+    );
   }
 };
 
@@ -47,3 +53,10 @@ export const Register = async (data: RegisterData) => {
     console.log(error);
   }
 };
+
+/*
+
+feat(api): integrar llamado api "Login" en pantalla "Login"
+
+Integra llamado a la API Login en la pantalla de Login. Ahora se necesita un usuario y contraseña válidos para ingresar.
+*/

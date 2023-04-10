@@ -22,9 +22,10 @@ const InputComponent: React.FC<InputProps> = ({
         <Text className="py-2 font-body text-body-bold">{label}</Text>
       )}
       <TextInput
-        className="w-full text-caption font-caption border h-13 rounded-lg pl-2"
+        className="border-azulLogo text-azulLogo w-full border h-13 rounded-lg pl-2"
         secureTextEntry={type}
         placeholder={placeholder}
+        placeholderTextColor="rgba(10, 76, 134, 1)"
         onChangeText={(value) => helpers.setValue(value)}
         onBlur={() => helpers.setTouched(true)}
         value={field.value}
@@ -34,11 +35,12 @@ const InputComponent: React.FC<InputProps> = ({
         {meta.touched && meta.error ? (
           <Text
             style={{
+              fontSize: 10,
               position: "absolute",
               textAlign: "center",
               color: "#f66",
               fontWeight: "800",
-              top: -22,
+              top: -20,
               left: 35,
               right: 35,
               padding: 1,

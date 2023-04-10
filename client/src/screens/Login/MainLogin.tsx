@@ -3,7 +3,7 @@ import { WhiteBtn, GoogleBtn, OrangeBtn } from "../../components/LoginButton";
 
 export const MainLogin = ({ navigation }) => {
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View>
         <Image
           style={styles.image}
@@ -19,6 +19,11 @@ export const MainLogin = ({ navigation }) => {
             marginTop={10}
             onPress={() => navigation.navigate("Register1")}
           />
+          <View style={styles.view}>
+            <View style={styles.linea} />
+            <Text style={styles.text}> O continúa con </Text>
+            <View style={styles.linea} />
+          </View>
           <View
             style={{
               flexDirection: "row",
@@ -28,12 +33,14 @@ export const MainLogin = ({ navigation }) => {
             }}
           >
             <WhiteBtn
+              icon="google"
               width={156}
               marginTop={10}
               text="Google"
               onPress={() => navigation.navigate("Register1")}
             />
             <WhiteBtn
+              icon="facebook"
               width={156}
               marginTop={10}
               text="Facebook"
@@ -47,7 +54,9 @@ export const MainLogin = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    backgroundColor: "white",
+  },
   image: {
     marginTop: 205,
     alignSelf: "center",
@@ -59,5 +68,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     marginBottom: 100,
+  },
+  linea: {
+    width: 106,
+    height: 0,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "black",
+  },
+  view: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 32,
+    marginBottom: 16,
+  },
+  text: {
+    fontSize: 16,
   },
 });

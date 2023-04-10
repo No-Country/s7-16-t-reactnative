@@ -1,9 +1,11 @@
 import { StyleSheet, View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 interface Props {
   width: number | undefined;
   marginTop: number | undefined;
   text: string;
+  icon: string | undefined;
   onPress: () => void;
 }
 
@@ -24,6 +26,7 @@ export const WhiteBtn = ({
   marginTop = 0,
   width = 328,
   text,
+  icon = undefined,
   onPress,
 }: Props) => {
   return (
@@ -32,9 +35,20 @@ export const WhiteBtn = ({
       style={styles.whiteBtn(width, marginTop)}
       onPress={onPress}
     >
-      <Text className={"color-azulLogo"} style={styles.whiteBtnText}>
-        {text}
-      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        {icon === "google" && <Icon name="google" size={23} color="rgba(10, 76, 134, 1)" />}
+        {icon === "facebook" && <Icon name="facebook" size={23} color="rgba(10, 76, 134, 1)" />}
+        <Text className={"color-azulLogo"} style={styles.whiteBtnText}>
+          {text}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

@@ -69,10 +69,6 @@ export const Register1 = ({ navigation }) => {
               </View>
               <View style={styles.buttons}>
                 <WhiteBtn text="REGISTRARME" onPress={props.handleSubmit} />
-                <GoogleBtn
-                  text="REGISTRATE CON GOOGLE"
-                  onPress={props.handleSubmit}
-                />
               </View>
             </>
           )}

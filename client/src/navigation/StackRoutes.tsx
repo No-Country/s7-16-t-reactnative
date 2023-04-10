@@ -17,8 +17,16 @@ export const StackRoutes = () => {
   return (
     <NavigationContainer theme={DefaultTheme}>
       <Stack.Navigator>
-        <Stack.Screen name="MainLogin" component={MainLogin} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="MainLogin"
+          component={MainLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Register1" component={Register1} />
         <Stack.Screen name="Register2" component={Register2} />
         <Stack.Screen name="Onboarding1Name" component={Onboarding1Screen} />

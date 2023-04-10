@@ -35,8 +35,8 @@ export const Login = ({ navigation }) => {
           style={styles.back}
           name="arrowleft"
           size={24}
-          color="black"
           onPress={() => navigation.goBack()}
+          color="rgba(10, 76, 134, 1)"
         />
         <Image
           style={styles.image}
@@ -82,7 +82,7 @@ export const Login = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { backgroundColor: "white", flex: 1 },
   back: { top: 43, left: "6%" },
   title: {
     fontSize: 24,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   image: {
-    marginTop: 205,
+    marginTop: 205 - 32,
     alignSelf: "center",
     height: 92,
     width: 188,

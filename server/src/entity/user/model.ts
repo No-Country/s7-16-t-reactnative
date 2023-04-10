@@ -1,5 +1,6 @@
-import { prop, Ref, getModelForClass, pre } from '@typegoose/typegoose';
+import { prop, Ref, getModelForClass, pre, mongoose } from '@typegoose/typegoose';
 import argon2 from 'argon2';
+import { Cart } from '../cart/model';
 
 @pre<User>('save', async function (next) {
   if (this.isModified('password') || this.isNew) {
@@ -26,8 +27,13 @@ export class User {
   @prop({ required: true, unique: true })
   public dni!: number;
 
-  @prop() //{ ref:()=>Cart }
-  public cart: string; //Ref<Cart>[]  //User
+  @prop()
+  public carts: [
+    {
+      type: mongoose.Schema.Types.ObjectId;
+      ref: () => Cart;
+    },
+  ];
 
   public async comparePassword(password: string): Promise<boolean> {
     return argon2.verify(this.password, password);

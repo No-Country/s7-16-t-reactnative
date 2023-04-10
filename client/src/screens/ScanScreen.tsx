@@ -8,10 +8,12 @@ import {
   Dimensions,
 } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
+import { getOneProduct } from "../utils/api/smartShopDB";
 
 export const ScanScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
+  const [scanning, setScanning] = useState<boolean>(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -23,11 +25,21 @@ export const ScanScreen = () => {
     getBarCodeScannerPermissions();
   }, []);
 
-  const handleBarCodeScanned = (result: BarCodeScannerResult) => {
-    setScanned(true);
-    alert(
-      `Bar code with type ${result.type} and data ${result.data} has been scanned!`
-    );
+  const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
+    if (scanning || scanned) {
+      return;
+    }
+
+    setScanning(true);
+
+    const res = await getOneProduct(Number(result.data));
+
+    if (res && res.status === 200 && res.data) {
+      setScanned(true);
+      alert(`${res?.data.product.name}: ${res?.data.product.description}`);
+    }
+
+    setScanning(false);
   };
 
   if (hasPermission === null) {

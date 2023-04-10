@@ -10,18 +10,10 @@ import { SessionBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent2 from "../../components/InputComponent";
-import { AntDesign } from "@expo/vector-icons";
+import { Values, useLogin } from "../../hooks/useLogin";
 
-interface Values {
-  email: string;
-  password: string;
-}
-
-export const Login = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("MyData");
-  };
+export const Login = () => {
+  const { handleSubmit } = useLogin();
 
   return (
     <KeyboardAvoidingView
@@ -30,19 +22,12 @@ export const Login = ({ navigation }) => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView>
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
         <Text style={styles.title}>¡Te damos la bienvenida!</Text>
         <View style={styles.form}>
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={handleSubmit}
+            onSubmit={(values) => handleSubmit(values)}
           >
             {(props: FormikProps<Values>) => (
               <>

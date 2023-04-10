@@ -9,7 +9,7 @@ import { MainLogin } from "../screens/Login/MainLogin";
 import { Login } from "../screens/Login/Login";
 import { Register1 } from "../screens/Login/Register1";
 import { Register2 } from "../screens/Login/Register2";
-import MyData from "../screens/Home/MyData"
+import MyData from "../screens/Home/MyData";
 
 const Stack = createNativeStackNavigator();
 

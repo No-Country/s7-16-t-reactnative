@@ -1,25 +1,45 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
-import { NormalBtn, GoogleBtn, SessionBtn } from "../../components/LoginButton";
+import { WhiteBtn, GoogleBtn, OrangeBtn } from "../../components/LoginButton";
 
 export const MainLogin = ({ navigation }) => {
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <Text style={styles.title}>¡Bienvenido a SmartShop!</Text>
-        <Image style={styles.image} source={require("../../assets/logo.png")} />
+      <View>
+        <Image
+          style={styles.image}
+          source={require("../../assets/logo-sin-margenes.png")}
+        />
         <View style={styles.buttons}>
-          <SessionBtn
-            text="INICIAR SESIÓN"
+          <OrangeBtn
+            text="Iniciar sesión"
             onPress={() => navigation.navigate("Login")}
           />
-          <NormalBtn
-            text="REGISTRARME"
+          <WhiteBtn
+            text="Crear cuenta"
+            marginTop={10}
             onPress={() => navigation.navigate("Register1")}
           />
-          <GoogleBtn
-            text="REGISTRATE CON GOOGLE"
-            onPress={() => navigation.navigate("Register1")}
-          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 16,
+            }}
+          >
+            <WhiteBtn
+              width={156}
+              marginTop={10}
+              text="Google"
+              onPress={() => navigation.navigate("Register1")}
+            />
+            <WhiteBtn
+              width={156}
+              marginTop={10}
+              text="Facebook"
+              onPress={() => navigation.navigate("Register1")}
+            />
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -28,23 +48,16 @@ export const MainLogin = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {},
-  title: {
-    alignSelf: "center",
-    fontSize: 24,
-    fontWeight: "500",
-    marginTop: 89,
-    height: 53,
-  },
   image: {
-    top: 40,
+    marginTop: 205,
     alignSelf: "center",
-    height: 179,
-    width: 284,
+    height: 92,
+    width: 188,
   },
   buttons: {
+    marginTop: 62,
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 189,
     marginBottom: 100,
   },
 });

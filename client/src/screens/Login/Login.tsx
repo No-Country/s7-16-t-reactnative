@@ -5,8 +5,9 @@ import {
   View,
   StyleSheet,
   Platform,
+  Image,
 } from "react-native";
-import { SessionBtn } from "../../components/LoginButton";
+import { OrangeBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent2 from "../../components/InputComponent";
@@ -37,7 +38,10 @@ export const Login = ({ navigation }) => {
           color="black"
           onPress={() => navigation.goBack()}
         />
-        <Text style={styles.title}>¡Te damos la bienvenida!</Text>
+        <Image
+          style={styles.image}
+          source={require("../../assets/logo-sin-margenes.png")}
+        />
         <View style={styles.form}>
           <Formik
             validationSchema={loginValidationSchema}
@@ -50,7 +54,7 @@ export const Login = ({ navigation }) => {
                   <InputComponent2
                     name="email"
                     style={styles.input}
-                    placeholder="Mail"
+                    placeholder="Usuario"
                   />
                   <InputComponent2
                     name="password"
@@ -58,13 +62,13 @@ export const Login = ({ navigation }) => {
                     placeholder="Contraseña"
                     type={true}
                   />
-                  <Text style={styles.question}>
-                    ¿Olvidaste la constraseña?
+                  <Text className="color-azulLogo" style={styles.question}>
+                    ¿Olvidó su constraseña?
                   </Text>
                 </View>
                 <View style={styles.buttons}>
-                  <SessionBtn
-                    text="INICIAR SESIÓN"
+                  <OrangeBtn
+                    text="Iniciar sesion"
                     onPress={props.handleSubmit}
                   />
                 </View>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     marginLeft: 19,
   },
   form: {
-    marginTop: 130,
+    marginTop: 62,
   },
   input: {
     width: "88%",
@@ -100,19 +104,23 @@ const styles = StyleSheet.create({
   },
   question: {
     position: "absolute",
-    fontSize: 12,
-    fontWeight: "300",
-    color: "#005AC2",
-    textDecorationLine: "underline",
-    lineHeight: 14,
-    bottom: -22,
+    fontSize: 16,
+    fontWeight: "400",
+    lineHeight: 19,
+    bottom: -16,
     left: 28,
     zIndex: 10,
   },
   buttons: {
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 219,
+    marginTop: 67,
     marginBottom: 100,
+  },
+  image: {
+    marginTop: 205,
+    alignSelf: "center",
+    height: 92,
+    width: 188,
   },
 });

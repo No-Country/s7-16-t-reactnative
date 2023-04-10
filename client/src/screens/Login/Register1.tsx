@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { NormalBtn, GoogleBtn } from "../../components/LoginButton";
+import { WhiteBtn, GoogleBtn } from "../../components/LoginButton";
 import InputComponent2 from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
@@ -68,7 +68,7 @@ export const Register1 = ({ navigation }) => {
                 />
               </View>
               <View style={styles.buttons}>
-                <NormalBtn text="REGISTRARME" onPress={props.handleSubmit} />
+                <WhiteBtn text="REGISTRARME" onPress={props.handleSubmit} />
                 <GoogleBtn
                   text="REGISTRATE CON GOOGLE"
                   onPress={props.handleSubmit}

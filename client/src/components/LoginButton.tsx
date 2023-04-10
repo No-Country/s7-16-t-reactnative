@@ -20,7 +20,12 @@ export const OrangeBtn = ({ text, onPress }: Props) => {
     </TouchableOpacity>
   );
 };
-export const WhiteBtn = ({ marginTop = 0, width = 328, text, onPress }: Props) => {
+export const WhiteBtn = ({
+  marginTop = 0,
+  width = 328,
+  text,
+  onPress,
+}: Props) => {
   return (
     <TouchableOpacity
       className={"bg-white border-azulLogo"}

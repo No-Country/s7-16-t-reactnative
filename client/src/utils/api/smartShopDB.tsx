@@ -3,6 +3,7 @@ import {
   LoginData,
   LoginRes,
   Product,
+  ProductResponse,
   Products,
   RegisterData,
   RegisterRes,
@@ -23,10 +24,11 @@ export const getProducts = async () => {
 
 export const getOneProduct = async (barcode: number) => {
   try {
-    const res = await api.get<Product>(`/product/${barcode}`);
+    const res = await api.get<ProductResponse>(`/product/${barcode}`);
     return res;
   } catch (error) {
     console.log(error);
+    alert("Error al buscar el producto en la base de datos");
   }
 };
 

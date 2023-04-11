@@ -1,29 +1,30 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
-import { WhiteBtn, GoogleBtn, OrangeBtn } from "../../components/LoginButton";
+import {
+  PrimaryBtn,
+  GoogleBtn,
+  SecundaryBtn,
+} from "../../components/LoginButton";
 
 export const MainLogin = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
+      <View style={styles.view}>
+        <Text style={styles.text}> ¡Bienvenido a SmartShop! </Text>
+      </View>
       <View>
-        <Image
-          style={styles.image}
-          source={require("../../assets/logo-sin-margenes.png")}
-        />
+        <Image style={styles.image} source={require("../../assets/logo.png")} />
         <View style={styles.buttons}>
-          <OrangeBtn
-            text="Iniciar sesión"
+          <SecundaryBtn
+            width={146}
+            text="INICIAR SESION"
             onPress={() => navigation.navigate("Login")}
           />
-          <WhiteBtn
-            text="Crear cuenta"
-            marginTop={10}
+          <PrimaryBtn
+            text="REGISTRARME"
+            width={146}
+            marginTop={16}
             onPress={() => navigation.navigate("Register1")}
           />
-          <View style={styles.view}>
-            <View style={styles.linea} />
-            <Text style={styles.text}> O continúa con </Text>
-            <View style={styles.linea} />
-          </View>
           <View
             style={{
               flexDirection: "row",
@@ -32,18 +33,11 @@ export const MainLogin = ({ navigation }) => {
               gap: 16,
             }}
           >
-            <WhiteBtn
+            <PrimaryBtn
               icon="google"
-              width={156}
-              marginTop={10}
-              text="Google"
-              onPress={() => navigation.navigate("Register1")}
-            />
-            <WhiteBtn
-              icon="facebook"
-              width={156}
-              marginTop={10}
-              text="Facebook"
+              width={244}
+              marginTop={24}
+              text="REGISTRATE CON GOOGLE"
               onPress={() => navigation.navigate("Register1")}
             />
           </View>
@@ -58,13 +52,13 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   image: {
-    marginTop: 205,
+    marginTop: 25,
     alignSelf: "center",
-    height: 92,
-    width: 188,
+    height: 179,
+    width: 284,
   },
   buttons: {
-    marginTop: 62,
+    marginTop: 189,
     alignSelf: "center",
     alignItems: "center",
     marginBottom: 100,
@@ -84,6 +78,13 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   text: {
-    fontSize: 16,
+    marginTop: 60,
+    fontSize: 24,
+    lineHeight: 28,
+    fontWeight: "500",
+    fontStyle: "normal",
+    textTransform: "capitalize",
+    paddingTop: 15,
+    paddingBottom: 14,
   },
 });

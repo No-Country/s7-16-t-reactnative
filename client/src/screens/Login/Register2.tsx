@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { WhiteBtn } from "../../components/LoginButton";
+import { PrimaryBtn } from "../../components/LoginButton";
 import InputComponent2 from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema2 } from "./registerValidationsSchema2";
@@ -98,7 +98,11 @@ export const Register2 = ({ navigation }) => {
                 />
               </View>
               <View style={styles.buttons}>
-                <WhiteBtn text="REGISTRARME" onPress={props.handleSubmit} />
+                <PrimaryBtn
+                  width={135}
+                  text="REGISTRARME"
+                  onPress={props.handleSubmit}
+                />
               </View>
             </>
           )}
@@ -109,8 +113,8 @@ export const Register2 = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  back: { top: 43, left: "6%" },
+  container: { backgroundColor: "white" },
+  back: { position: "absolute", top: 43, left: "6%" },
   title: {
     fontSize: 24,
     fontWeight: "500",

@@ -9,20 +9,7 @@ interface Props {
   onPress: () => void;
 }
 
-export const OrangeBtn = ({ text, onPress }: Props) => {
-  return (
-    <TouchableOpacity
-      className={"bg-acento"}
-      style={styles.orangeBtn}
-      onPress={onPress}
-    >
-      <View>
-        <Text style={styles.orangeBtnText}>{text}</Text>
-      </View>
-    </TouchableOpacity>
-  );
-};
-export const WhiteBtn = ({
+export const SecundaryBtn = ({
   marginTop = 0,
   width = 328,
   text,
@@ -31,8 +18,29 @@ export const WhiteBtn = ({
 }: Props) => {
   return (
     <TouchableOpacity
-      className={"bg-white border-azulLogo"}
-      style={styles.whiteBtn(width, marginTop)}
+      className={"bg-secundario"}
+      style={styles.secundaryBtn(width, marginTop)}
+      onPress={onPress}
+    >
+      <View>
+        <Text className={"text-primario"} style={styles.secundaryBtnText}>
+          {text}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+export const PrimaryBtn = ({
+  marginTop = 0,
+  width = 328,
+  text,
+  icon = undefined,
+  onPress,
+}: Props) => {
+  return (
+    <TouchableOpacity
+      className="bg-primario"
+      style={styles.primaryBtn(width, marginTop)}
       onPress={onPress}
     >
       <View
@@ -43,9 +51,13 @@ export const WhiteBtn = ({
           gap: 10,
         }}
       >
-        {icon === "google" && <Icon name="google" size={23} color="rgba(10, 76, 134, 1)" />}
-        {icon === "facebook" && <Icon name="facebook" size={23} color="rgba(10, 76, 134, 1)" />}
-        <Text className={"color-azulLogo"} style={styles.whiteBtnText}>
+        {icon === "google" && (
+          <Icon name="google" size={23} color="rgba(10, 76, 134, 1)" />
+        )}
+        {icon === "facebook" && (
+          <Icon name="facebook" size={23} color="rgba(10, 76, 134, 1)" />
+        )}
+        <Text className={"color-secundario"} style={styles.primaryBtnText}>
           {text}
         </Text>
       </View>
@@ -54,38 +66,40 @@ export const WhiteBtn = ({
 };
 
 const styles = StyleSheet.create({
-  orangeBtn: {
-    width: 328,
-    height: 51,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 10,
-  },
-  orangeBtnText: {
-    fontSize: 16,
-    fontWeight: "700",
-    fontStyle: "normal",
-    lineHeight: 19,
-    textAlign: "center",
-    color: "white",
-  },
-  whiteBtn: (width, marginTop) => ({
+  secundaryBtn: (width, marginTop) => ({
     width: width,
-    height: 51,
-    borderRadius: 10,
+    height: 36,
+    borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 6,
     paddingLeft: 8,
-    borderWidth: 1,
     marginTop: marginTop,
   }),
-  whiteBtnText: {
-    fontSize: 16,
-    fontWeight: "700",
+  secundaryBtnText: {
+    fontSize: 14,
+    fontWeight: "500",
     fontStyle: "normal",
-    lineHeight: 19,
+    lineHeight: 16,
     textAlign: "center",
+    letterSpacing: 1.25,
+  },
+  primaryBtn: (width, marginTop) => ({
+    width: width,
+    height: 36,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 6,
+    paddingLeft: 8,
+    marginTop: marginTop,
+  }),
+  primaryBtnText: {
+    fontSize: 14,
+    fontWeight: "500",
+    fontStyle: "normal",
+    lineHeight: 16,
+    textAlign: "center",
+    letterSpacing: 1.25,
   },
 });

@@ -1,6 +1,5 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 interface Props {
   width: number | undefined;
   marginTop: number | undefined;

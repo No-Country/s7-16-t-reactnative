@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { PrimaryBtn, GoogleBtn } from "../../components/LoginButton";
+import { PrimaryBtn } from "../../components/LoginButton";
 import InputComponent2 from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";

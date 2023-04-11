@@ -1,9 +1,5 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
-import {
-  PrimaryBtn,
-  GoogleBtn,
-  SecundaryBtn,
-} from "../../components/LoginButton";
+import { PrimaryBtn, SecundaryBtn } from "../../components/LoginButton";
 
 export const MainLogin = ({ navigation }) => {
   return (

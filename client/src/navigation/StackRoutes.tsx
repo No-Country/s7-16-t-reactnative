@@ -10,13 +10,14 @@ import { Login } from "../screens/Login/Login";
 import { Register1 } from "../screens/Login/Register1";
 import { Register2 } from "../screens/Login/Register2";
 import MyData from "../screens/Home/MyData";
-
+import { PerfilScreen } from "../screens/Home/PerfilScreen";
+import { ScanScreen } from "../screens/ScanScreen";
 const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
     <NavigationContainer theme={DefaultTheme}>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Onboarding1Name">
         <Stack.Screen name="MainLogin" component={MainLogin} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register1" component={Register1} />
@@ -26,6 +27,8 @@ export const StackRoutes = () => {
         <Stack.Screen name="Onboarding3Name" component={Onboarding3Screen} />
         <Stack.Screen name="Onboarding4Name" component={Onboarding4Screen} />
         <Stack.Screen name="MyData" component={MyData} />
+        <Stack.Screen name="Profile" component={PerfilScreen} />
+        <Stack.Screen name="Scan" component={ScanScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

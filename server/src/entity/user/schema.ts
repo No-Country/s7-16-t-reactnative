@@ -11,6 +11,14 @@ export const registerUserSchema = {
         required_error: 'lastName is required',
         invalid_type_error: 'lastName must be a string',
       }),
+      photo: z.string({
+        required_error: 'Profile pic is required',
+        invalid_type_error: 'Profile pic must be a string of url',
+      }),
+      phNumber: z.number({
+        required_error: 'Phone number is required',
+        invalid_type_error: 'Phone number must be a number',
+      }),
       dni: z.number({
         required_error: 'dni is required',
         invalid_type_error: 'dni must be a string',

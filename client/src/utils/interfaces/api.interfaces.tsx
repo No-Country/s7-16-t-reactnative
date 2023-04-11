@@ -36,3 +36,7 @@ export interface RegisterData {
   password: string;
   confirmPassword: string;
 }
+
+export interface ProductResponse {
+  product: Product;
+}

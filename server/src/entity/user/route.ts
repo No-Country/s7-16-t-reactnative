@@ -1,17 +1,14 @@
 import express from 'express';
 import { processRequestBody } from 'zod-express-middleware';
-import { registerUserHandler } from './controller';
 import { registerUserSchema } from './schema';
 import { requireUser } from '../../middleware';
+import { deleteUser, getAllUsers, getUserById, updateUserById } from './controller';
 
 const router = express.Router();
 
-//Return logged user
-router.get('/', requireUser, (req, res) => {
-  return res.send(res.locals.user);
-});
-
-//register new user
-router.post('/', processRequestBody(registerUserSchema.body), registerUserHandler);
+router.get('/', getAllUsers)
+router.get('/:id', getUserById)
+router.patch('/:id', updateUserById)
+router.delete('/:id', deleteUser)
 
 export default router;

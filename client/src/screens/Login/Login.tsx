@@ -11,18 +11,10 @@ import { SecundaryBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent2 from "../../components/InputComponent";
-import { AntDesign } from "@expo/vector-icons";
+import { Values, useLogin } from "../../hooks/useLogin";
 
-interface Values {
-  email: string;
-  password: string;
-}
-
-export const Login = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("MyData");
-  };
+export const Login = () => {
+  const { handleSubmit } = useLogin();
 
   return (
     <KeyboardAvoidingView
@@ -42,7 +34,7 @@ export const Login = ({ navigation }) => {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={handleSubmit}
+            onSubmit={(values) => handleSubmit(values)}
           >
             {(props: FormikProps<Values>) => (
               <>

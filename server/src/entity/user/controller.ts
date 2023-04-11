@@ -1,20 +1,105 @@
-import { Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import { createUser } from './services';
-import { RegisterUserBody } from './schema';
+import { Request, response, Response } from "express";
+import { StatusCodes } from "http-status-codes";
+import { UserModel } from "./model";
 
-export async function registerUserHandler(req: Request<{}, {}, RegisterUserBody>, res: Response) {
-  const { firstName, lastName, dni, email, password } = req.body;
 
-  try {
-    await createUser({ firstName, lastName, dni, email, password });
+export const getAllUsers = async (req: Request, res: Response) => {
+  const { limit = 5, from = 0 } = req.query;
 
-    return res.status(StatusCodes.CREATED).send('user created successfully');
-  } catch (e: any) {
-    if (e.code === 11000) {
-      return res.status(StatusCodes.CONFLICT).send('User already exists');
-    }
-
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);
+  if (isNaN(Number(from))) {
+    return res.status(400).json({
+      message: "Invalid queries",
+      error: true,
+    });
   }
-}
+
+  if (isNaN(Number(limit))) {
+    return res.status(400).json({
+      message: "Invalid queries",
+      error: true,
+    });
+  }
+
+  const [total, users] = await Promise.all([
+    UserModel.countDocuments(),
+    UserModel.find().skip(Number(from)).limit(Number(limit)),
+  ]);
+
+  res.json({
+    total,
+    users,
+    error: false,
+  });
+};
+
+export const getUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const user = await UserModel.findById({ _id: id });
+  if (user) {
+    return res.json({
+      user,
+      error: false,
+    });
+  } else {
+    return res.status(404).json({
+      message: "User not found",
+      error: true,
+    });
+  }
+};
+
+export const updateUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { _id, role, isActive, verified, emailVerified, googleId, ...rest } =
+    req.body;
+
+  const data = ["email", "firstName", "lastName", "country", "password"];
+  const compare: boolean[] = Object.keys(rest).map((el: string) => {
+    if (!data.includes(el)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  if (compare.includes(true)) {
+    return res.status(400).json({
+      error: true,
+      message: "Invalid request body",
+    });
+  }
+
+  //TODO validar contra db
+
+  const user = await UserModel.findByIdAndUpdate(id, rest, { new: true });
+  if (user) {
+    res.status(201).json({
+      user,
+      message: "User information updated successfully.",
+      error: false,
+    });
+  } else {
+    res.status(404).json({
+      error: true,
+      message: "User not found",
+    });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const user = await UserModel.findByIdAndDelete(id);
+
+  if (user) {
+    res.status(200).json({
+      message: "User deleted successfully",
+      error: false,
+    });
+  } else {
+    res.status(404).json({
+      error: true,
+      message: "User not found",
+    });
+  }
+};

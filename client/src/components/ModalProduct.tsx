@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  Alert,
   Modal,
   StyleSheet,
   Text,
-  Pressable,
   View,
   Image,
   TouchableOpacity,
@@ -14,22 +12,18 @@ import { Product } from "../utils/interfaces/api.interfaces";
 
 interface Props {
   product: Product | null;
-  // modalVisible: boolean
+  modalVisible: boolean;
+  closeModal: () => void;
 }
 
-export const ModalProduct = ({ product }: Props) => {
-  const [modalVisible, setModalVisible] = useState(false);
-
+export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
   return (
     <View style={styles.centeredView}>
       <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
+        onRequestClose={closeModal}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -42,12 +36,12 @@ export const ModalProduct = ({ product }: Props) => {
               <Image
                 className="w-[100] h-[100]"
                 source={{
-                  uri: product!.photo,
+                  uri: product?.photo,
                 }}
               />
               <View>
-                <Text className="font-bold text-lg">{product!.name}</Text>
-                <Text className="text-lg">{product!.description}</Text>
+                <Text className="font-bold text-lg">{product?.name}</Text>
+                <Text className="text-lg">{product?.brand}</Text>
               </View>
             </View>
 
@@ -64,18 +58,18 @@ export const ModalProduct = ({ product }: Props) => {
                 </TouchableOpacity>
               </View>
               <View className="items-end w-1/2">
-                <Text className="text-xl font-bold">$ {product!.price}</Text>
+                <Text className="text-xl font-bold">$ {product?.price}</Text>
               </View>
             </View>
 
             {/* Botones */}
-            <View className="w-3/4 flex-row items-center justify-evenly">
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            <View className="flex-row items-center justify-around">
+              <TouchableOpacity onPress={closeModal}>
                 <Text className="font-medium text-lg">Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => setModalVisible(!modalVisible)}
-                className="bg-orange-400 rounded-2xl py-2 px-3"
+                onPress={closeModal}
+                className="bg-orange-400 rounded-2xl py-2 px-3 "
               >
                 <Text className="font-medium text-lg text-white">
                   Confirmar
@@ -85,14 +79,6 @@ export const ModalProduct = ({ product }: Props) => {
           </View>
         </View>
       </Modal>
-
-      {/* Boton que despliega el modal */}
-      <Pressable
-        style={[styles.button, styles.buttonOpen]}
-        onPress={() => setModalVisible(true)}
-      >
-        <Text>Show Modal</Text>
-      </Pressable>
     </View>
   );
 };
@@ -100,16 +86,16 @@ export const ModalProduct = ({ product }: Props) => {
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    position: "absolute",
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -118,13 +104,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
   },
 });

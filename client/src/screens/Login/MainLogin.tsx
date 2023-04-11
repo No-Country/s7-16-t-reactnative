@@ -14,12 +14,15 @@ export const MainLogin = ({ navigation }) => {
             width={146}
             text="INICIAR SESION"
             onPress={() => navigation.navigate("Login")}
+            marginTop={undefined}
+            icon={undefined}
           />
           <PrimaryBtn
             text="REGISTRARME"
             width={146}
             marginTop={16}
             onPress={() => navigation.navigate("Register1")}
+            icon={undefined}
           />
           <View
             style={{

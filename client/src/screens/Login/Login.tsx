@@ -10,11 +10,14 @@ import {
 import { SecundaryBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
-import InputComponent2 from "../../components/InputComponent";
+import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
+import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export const Login = () => {
   const { handleSubmit } = useLogin();
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -39,12 +42,12 @@ export const Login = () => {
             {(props: FormikProps<Values>) => (
               <>
                 <View>
-                  <InputComponent2
+                  <InputComponent
                     name="email"
                     style={styles.input}
                     placeholder="Mail"
                   />
-                  <InputComponent2
+                  <InputComponent
                     name="password"
                     style={styles.input}
                     placeholder="Contraseña"
@@ -59,6 +62,8 @@ export const Login = () => {
                     width={136}
                     text="INICIAR SESION"
                     onPress={props.handleSubmit}
+                    marginTop={undefined}
+                    icon={undefined}
                   />
                 </View>
               </>

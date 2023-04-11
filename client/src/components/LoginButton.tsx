@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 interface Props {
   width: number | undefined;
   marginTop: number | undefined;
@@ -12,6 +13,7 @@ export const SecundaryBtn = ({
   marginTop = 0,
   width = 328,
   text,
+  icon = undefined,
   onPress,
 }: Props) => {
   return (

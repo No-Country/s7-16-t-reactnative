@@ -12,7 +12,6 @@ export const SecundaryBtn = ({
   marginTop = 0,
   width = 328,
   text,
-  icon = undefined,
   onPress,
 }: Props) => {
   return (

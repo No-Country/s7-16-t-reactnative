@@ -10,11 +10,17 @@ import {
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
 import { getOneProduct } from "../utils/api/smartShopDB";
 import { Navbar } from "../components/Navbar";
+import { ModalProduct } from "../components/ModalProduct";
+import { Product } from "../utils/interfaces/api.interfaces";
 
 export const ScanScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanning, setScanning] = useState<boolean>(false);
+
+  // Modal
+  const [product, setProduct] = useState<Product | null>(null);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -37,7 +43,9 @@ export const ScanScreen = () => {
 
     if (res && res.status === 200 && res.data) {
       setScanned(true);
-      alert(`${res?.data.product.name}: ${res?.data.product.description}`);
+      setProduct(res.data.product);
+
+      setModalVisible(true);
     }
 
     setScanning(false);
@@ -115,6 +123,14 @@ export const ScanScreen = () => {
             </Text>
           </View>
         </View>
+
+        {modalVisible && (
+          <ModalProduct
+            modalVisible={modalVisible}
+            product={product}
+            closeModal={() => setModalVisible(!modalVisible)}
+          />
+        )}
       </View>
       <View>
         <Navbar />

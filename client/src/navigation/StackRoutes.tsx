@@ -22,6 +22,27 @@ export const StackRoutes = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register1" component={Register1} />
         <Stack.Screen name="Register2" component={Register2} />
+      <Stack.Navigator>
+        <Stack.Screen
+          name="MainLogin"
+          component={MainLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register1"
+          component={Register1}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register2"
+          component={Register2}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="Onboarding1Name" component={Onboarding1Screen} />
         <Stack.Screen name="Onboarding2Name" component={Onboarding2Screen} />
         <Stack.Screen name="Onboarding3Name" component={Onboarding3Screen} />

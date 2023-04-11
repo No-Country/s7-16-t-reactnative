@@ -6,7 +6,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { NormalBtn, GoogleBtn } from "../../components/LoginButton";
+import { PrimaryBtn } from "../../components/LoginButton";
 import InputComponent2 from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
@@ -63,15 +63,22 @@ export const Register1 = ({ navigation }) => {
                 <InputComponent2
                   name="password2"
                   style={styles.input}
-                  placeholder="Repite tu Contraseña"
+                  placeholder="Repite tu contraseña"
                   type={true}
                 />
               </View>
               <View style={styles.buttons}>
-                <NormalBtn text="REGISTRARME" onPress={props.handleSubmit} />
-                <GoogleBtn
-                  text="REGISTRATE CON GOOGLE"
+                <PrimaryBtn
+                  width={135}
+                  text="REGISTRARME"
                   onPress={props.handleSubmit}
+                />
+                <PrimaryBtn
+                  icon="google"
+                  width={244}
+                  marginTop={24}
+                  text="REGISTRATE CON GOOGLE"
+                  onPress={() => navigation.navigate("Register1")}
                 />
               </View>
             </>
@@ -83,8 +90,8 @@ export const Register1 = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  back: { top: 43, left: "6%" },
+  container: { backgroundColor: "white" },
+  back: { position: "absolute", top: 43, left: "6%" },
   title: {
     fontSize: 24,
     fontWeight: "500",
@@ -101,12 +108,12 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     borderRadius: 3.5,
     alignSelf: "center",
-    marginBottom: 18,
+    marginBottom: 20,
   },
   buttons: {
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 100,
+    marginTop: 118,
     marginBottom: 100,
   },
 });

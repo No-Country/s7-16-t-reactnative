@@ -9,6 +9,7 @@ module.exports = {
         primario: "rgba(238, 238, 238, 1)",
         secundario: "rgba(2, 48, 71, 1)",
         acento: "rgba(251, 133, 0, 1)",
+        azulLogo: "rgba(10, 76, 134,1)",
       },
       fonts: {
         titulo: 24,

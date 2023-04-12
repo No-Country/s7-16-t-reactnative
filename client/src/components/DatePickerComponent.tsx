@@ -18,7 +18,7 @@ const DateTimePickerComponent: React.FC<MyDateTimePickerProps> = ({
   const [field, meta, helpers] = useField(name);
   const [showPicker, setShowPicker] = useState(false);
 
-  const handlePickerChange = (event: any, selectedDate: any) => {
+  const handlePickerChange = (event: unknown, selectedDate: unknown) => {
     setShowPicker(false);
     if (selectedDate) {
       helpers.setValue(selectedDate);
@@ -38,39 +38,73 @@ const DateTimePickerComponent: React.FC<MyDateTimePickerProps> = ({
   const formattedDate = field.value ? formatDate(field.value) : "";
 
   return (
-    <View
+    <TouchableOpacity
       style={{
-        justifyContent: "center",
-        alignItems: "flex-start",
-        paddingLeft: 10,
-        borderWidth: 1,
-        marginLeft: 25,
-        marginRight: 25,
+        width: "100%",
+        margin: 0,
+        paddingTop: 25,
         marginBottom: 25,
-        paddingTop: 15,
-        paddingBottom: 15,
-        borderRadius: 8,
-        borderColor: "#50505060",
       }}
+      onPress={() => setShowPicker(true)}
     >
-      <TouchableOpacity onPress={() => setShowPicker(true)}>
-        <View>
-          {!field.value && <Text>{label}</Text>}
-          {field.value && <Text>Fecha de Nacimiento: {formattedDate}</Text>}
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "flex-start",
+          paddingLeft: 10,
+          borderWidth: 1,
+          marginLeft: 22,
+          marginRight: 22,
+          marginTop: -25,
+          marginBottom: 0,
+          paddingTop: 15,
+          paddingBottom: 15,
+          borderRadius: 8,
+          borderColor: "#50505060",
+        }}
+      >
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {!field.value && (
+            <Text style={{ paddingLeft: 5, fontSize: 14, letterSpacing: 0 }}>
+              {label}
+            </Text>
+          )}
+          {field.value && (
+            <>
+              <Text style={{ paddingLeft: 5, fontSize: 14, letterSpacing: 0 }}>
+                {formattedDate}
+              </Text>
+            </>
+          )}
         </View>
-      </TouchableOpacity>
-      {showPicker && (
-        <DateTimePicker
-          value={field.value || new Date()}
-          mode={mode}
-          onChange={handlePickerChange}
-          {...props}
-        />
-      )}
+        {showPicker && (
+          <DateTimePicker
+            value={field.value || new Date()}
+            mode={mode}
+            onChange={handlePickerChange}
+            {...props}
+          />
+        )}
+      </View>
       {meta.error && meta.touched && (
-        <Text style={{ color: "red" }}>{meta.error}</Text>
+        <Text
+          style={{
+            position: "absolute",
+            top: 52,
+            fontSize: 12,
+            color: "red",
+            paddingLeft: 35,
+          }}
+        >
+          {meta.error}
+        </Text>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 

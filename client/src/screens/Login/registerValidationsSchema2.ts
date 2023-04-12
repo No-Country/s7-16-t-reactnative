@@ -36,11 +36,11 @@ export const registerValidationSchema2 = yup.object().shape({
       return isNaN(date.getTime()) ? undefined : date;
     })
     .nullable(true)
-    .max(new Date(), "No puede ser posterior a la fecha actual")
-    .required("La fecha de nacimiento es obligatoria")
+    .max(new Date(), "· No puede ser posterior a la fecha actual")
+    .required("· La fecha de nacimiento es obligatoria")
     .test(
       "isValidDate",
-      "Por favor ingrese una fecha válida",
+      "· Por favor ingrese una fecha válida",
       (value) => value instanceof Date && !isNaN(value.getTime())
     ),
 });

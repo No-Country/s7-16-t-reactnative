@@ -75,10 +75,11 @@ const PickerComponent: React.FC<MyPickerProps> = ({
               textAlign: "left",
               color: "#f66",
               fontWeight: "800",
-              top: -32,
-              left: 35,
-              right: 35,
+              top: 0,
+              left: 10,
+              right: -210,
               padding: 1,
+              zIndex: 1000,
             }}
           >
             {meta.error}

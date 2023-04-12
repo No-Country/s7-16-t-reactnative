@@ -1,43 +1,30 @@
-import { View, Text, Image, ImageSourcePropType } from "react-native";
+import { View, Text, Image } from "react-native";
 import CounterComponent from "./CounterComponent";
 import { useState } from "react";
-import { AppButton } from "./AppButton";
+import { Product } from "../utils/interfaces/api.interfaces";
 
-interface Product {
-  name: string;
-  description: string;
-  price: number;
-  img: ImageSourcePropType; //Esto es provicional posterior se cambia a string ya que debe ser una url
+interface Props {
+  product: Product;
 }
 
-const initialProduct: Product = {
-  name: "Coca cola",
-  description: "Lata de Coca Cola de 354 ml",
-  price: 300,
-  img: require("../assets/coca.png"),
-};
-
-const CardProduct = () => {
-  const { name, description, price, img } = initialProduct;
+const CardProduct = ({ product }: Props) => {
   const [counterProduct, setCounterProduct] = useState(0);
 
   const updateCounter = (counter: number) => {
     setCounterProduct(counter);
   };
   return (
-    <View>
-      <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white">
-        <View className="">
-          <Image className="w-16 h-24" source={img} />
-        </View>
-        <View className="flex flex-col w-36 justify-center">
-          <Text className="text-xl">{name}</Text>
-          <Text className="text-base">{description}</Text>
-        </View>
-        <View className="flex flex-col justify-center items-center w-20 gap-4">
-          <CounterComponent updateCounter={updateCounter} />
-          <Text>$ {price}</Text>
-        </View>
+    <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2">
+      <View className="">
+        <Image className="w-16 h-24" source={{ uri: product.photo }} />
+      </View>
+      <View className="flex flex-col w-36 justify-center">
+        <Text className="text-xl">{product.name}</Text>
+        <Text className="text-base">{product.brand}</Text>
+      </View>
+      <View className="flex flex-col justify-center items-center w-20 gap-4">
+        <CounterComponent updateCounter={updateCounter} />
+        <Text>$ {product.price}</Text>
       </View>
     </View>
   );

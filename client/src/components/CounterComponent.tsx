@@ -7,7 +7,7 @@ type Props = {
 };
 
 const CounterComponent = (props: Props) => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(1);
 
   const incrementCounter = () => {
     setCounter(counter + 1);

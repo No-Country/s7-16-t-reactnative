@@ -8,10 +8,5 @@ import CardProduct from "./src/components/CardProduct";
 import { AppButton } from "./src/components/AppButton";
 
 export default function App() {
-  // return <StackRoutes />;
-  return (
-    <View className="flex flex-col justify-center h-full w-full">
-      <CardProduct />
-    </View>
-  );
+  return <StackRoutes />;
 }

@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import {
   LoginData,
-  LoginRes,
-  Product,
+  LoginResponse,
   ProductResponse,
   Products,
   RegisterData,
@@ -34,7 +33,7 @@ export const getOneProduct = async (barcode: number) => {
 
 export const Login = async ({ email, password }: LoginData) => {
   try {
-    const res = await api.post<LoginRes>(`/auth/login`, {
+    const res = await api.post<LoginResponse>(`/auth/login`, {
       email,
       password,
     });
@@ -55,10 +54,3 @@ export const Register = async (data: RegisterData) => {
     console.log(error);
   }
 };
-
-/*
-
-feat(api): integrar llamado api "Login" en pantalla "Login"
-
-Integra llamado a la API Login en la pantalla de Login. Ahora se necesita un usuario y contraseña válidos para ingresar.
-*/

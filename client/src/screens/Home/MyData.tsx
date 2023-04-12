@@ -1,11 +1,12 @@
-import { Image, SafeAreaView, ScrollView, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import InputComponent from "../../components/InputComponent";
 import { Formik } from "formik";
 import { AppButton } from "../../components/AppButton";
 import TextTitle from "../../components/TextTitle";
 import { Ionicons } from "@expo/vector-icons";
+import { UseUserStore } from "../../store/UserStore";
 
-interface MyDartaValues {
+interface MyDataValues {
   img?: string;
   name?: string;
   lastname?: string;
@@ -14,16 +15,18 @@ interface MyDartaValues {
   cellphone?: string;
 }
 
-const initialValues: MyDartaValues = {
-  img: "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
-  name: "Victor",
-  lastname: "Romero Juarez",
-  cuit_dni: "123456",
-  email: "victor@gmail.com",
-  cellphone: "987654321",
-};
 const MyData = () => {
-  const imgUrl = initialValues.img;
+  const user = UseUserStore.getState().user;
+
+  const initialValues: MyDataValues = {
+    img: "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
+    name: user?.firstName ?? "Victor",
+    lastname: user?.lastName ?? "Romero Juarez",
+    cuit_dni: user?.dni.toString() ?? "123456",
+    email: user?.email ?? "victor@gmail.com",
+    cellphone: user?.dni.toString() ?? "987654321", // TODO aca se debe poner el telefono, la res del back todavia no la trae, se debe hacer un cambio en las interfaces
+  };
+
   return (
     <ScrollView className="w-full pb-5">
       <View className="pb-5">
@@ -36,7 +39,10 @@ const MyData = () => {
         </View>
         {/* VIEW PARA LAS IMAGENES */}
         <View className="flex flex-col gap-4 justify-center items-center">
-          <Image className="w-20 h-20 rounded-full" source={{ uri: imgUrl }} />
+          <Image
+            className="w-20 h-20 rounded-full"
+            source={{ uri: initialValues.img }}
+          />
           <View>
             <TextTitle title="MIS DATOS" />
           </View>

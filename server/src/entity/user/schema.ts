@@ -23,6 +23,10 @@ export const registerUserSchema = {
         required_error: 'dni is required',
         invalid_type_error: 'dni must be a string',
       }),
+      birthdate: z.date({
+        required_error: 'Birthdate is required',
+        invalid_type_error: 'Birthdate must be a valid Date',
+      }),
       email: z
         .string({
           required_error: 'email is required',

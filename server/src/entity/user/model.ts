@@ -24,6 +24,15 @@ export class User {
   @prop({ required: true })
   public photo!: string;
 
+  @prop({ required: true })
+  public documentType!: string;
+
+  @prop({ required: true })
+  public birthdate!: Date;
+
+  @prop({ required: true })
+  public genre!: string;
+
   @prop({ required: true, unique: true })
   public phNumber!: number;
 

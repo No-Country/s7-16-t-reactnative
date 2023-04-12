@@ -5,7 +5,7 @@ import { UserModel } from '../entity/user/model';
 import { sendEmail } from '../providers/email.service';
 import welcome from '../providers/templates/welcome';
 import { Strategy as LocalStrategy } from 'passport-local';
-import jwt from 'jsonwebtoken';
+import { generateToken } from "../middleware/jwt";
 
 passport.use(
   'login',
@@ -94,9 +94,9 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
           updatedAt: user.updatedAt,
           __v: user.__v,
         };
-        const secret = process.env.SECRET as string;
+        
+        const token = generateToken(userResponse);
 
-        const token = jwt.sign(userResponse, secret, { expiresIn: '2h' });
         return res.status(StatusCodes.OK).json({
           message: 'User access successfully',
           userResponse,

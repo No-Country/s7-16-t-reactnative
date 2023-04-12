@@ -5,7 +5,7 @@ import { UserModel } from '../entity/user/model';
 import { sendEmail } from '../providers/email.service';
 import welcome from '../providers/templates/welcome';
 import { Strategy as LocalStrategy } from 'passport-local';
-import jwt from 'jsonwebtoken';
+import { generateToken } from '../middleware/jwt';
 
 passport.use(
   'login',
@@ -37,7 +37,7 @@ passport.use(
 );
 
 export const register = async (req: Request, res: Response) => {
-  const { firstName, lastName, photo, phNumber, dni, email, password } = req.body;
+  const { firstName, lastName, photo, phNumber, genre, documentType, birthdate, dni, email, password } = req.body;
   try {
     const user = await UserModel.findOne({ email: email });
 
@@ -53,6 +53,9 @@ export const register = async (req: Request, res: Response) => {
       lastName,
       photo,
       phNumber,
+      genre,
+      documentType,
+      birthdate,
       email,
       password,
       dni,
@@ -88,15 +91,18 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
           firstName: user.firstName,
           lastName: user.lastName,
           profilePic: user.photo,
+          documentType: user.documentType,
           dni: user.dni,
+          genre: user.genre,
+          birthdate: user.birthdate,
           phNumber: user.phNumber,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
           __v: user.__v,
         };
-        const secret = process.env.SECRET as string;
 
-        const token = jwt.sign(userResponse, secret, { expiresIn: '2h' });
+        const token = generateToken(userResponse);
+
         return res.status(StatusCodes.OK).json({
           message: 'User access successfully',
           userResponse,

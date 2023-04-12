@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { AppButton } from "../components/AppButton";
+import { AppButton } from "../../components/AppButton";
 
 export const Onboarding4Screen = ({ navigation }) => {
   return (

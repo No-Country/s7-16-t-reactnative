@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { decodeToken } from './jwt';
 
 function deserializeUser(req: Request, res: Response, next: NextFunction) {
   const accessToken = (req.headers.authorization || '').replace(/^Bearer\s/, '');
@@ -6,9 +7,8 @@ function deserializeUser(req: Request, res: Response, next: NextFunction) {
   if (!accessToken) {
     return next();
   }
-  console.log(accessToken);
 
-  const decoded = ''; //TODO:function decode JWT
+  const decoded = decodeToken(accessToken);
 
   if (decoded) {
     res.locals.user = decoded;

@@ -1,43 +1,89 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import { NormalBtn, GoogleBtn, SessionBtn } from "../../components/LoginButton";
+import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
+import { PrimaryBtn, SecundaryBtn } from "../../components/LoginButton";
 
 export const MainLogin = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>¡Bienvenido a SmartShop!</Text>
-      <Image source={require("../../assets/logo.png")} style={{ margin: 40 }} />
-      <View style={styles.buttons}>
-        <SessionBtn
-          text="INICIAR SESIÓN"
-          onPress={() => navigation.navigate("Login")}
-        />
-        <NormalBtn
-          text="REGISTRARME"
-          onPress={() => navigation.navigate("Register1")}
-        />
-        <GoogleBtn
-          text="REGISTRATE CON GOOGLE"
-          onPress={() => navigation.navigate("Register1")}
-        />
+    <ScrollView style={styles.container}>
+      <View style={styles.view}>
+        <Text style={styles.text}> ¡Bienvenido a SmartShop! </Text>
       </View>
-    </View>
+      <View>
+        <Image style={styles.image} source={require("../../assets/logo.png")} />
+        <View style={styles.buttons}>
+          <SecundaryBtn
+            width={146}
+            text="INICIAR SESION"
+            onPress={() => navigation.navigate("Login")}
+            marginTop={undefined}
+            icon={undefined}
+          />
+          <PrimaryBtn
+            text="REGISTRARME"
+            width={146}
+            marginTop={16}
+            onPress={() => navigation.navigate("Register1")}
+            icon={undefined}
+          />
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 16,
+            }}
+          >
+            <PrimaryBtn
+              icon="google"
+              width={244}
+              marginTop={24}
+              text="REGISTRATE CON GOOGLE"
+              onPress={() => navigation.navigate("Register1")}
+            />
+          </View>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: "5%",
+    backgroundColor: "white",
+  },
+  image: {
+    marginTop: 25,
+    alignSelf: "center",
+    height: 179,
+    width: 284,
   },
   buttons: {
+    marginTop: 189,
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 150,
+    marginBottom: 100,
   },
-  title: {
-    alignSelf: "center",
+  linea: {
+    width: 106,
+    height: 0,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "black",
+  },
+  view: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 32,
+    marginBottom: 16,
+  },
+  text: {
+    marginTop: 60,
     fontSize: 24,
+    lineHeight: 28,
     fontWeight: "500",
-    marginTop: "5%",
+    fontStyle: "normal",
+    textTransform: "capitalize",
+    paddingTop: 15,
+    paddingBottom: 14,
   },
 });

@@ -1,14 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
 import { StackRoutes } from "./src/navigation/StackRoutes";
 import Example from "./src/Example";
+import MyData from "./src/screens/Home/MyData";
+import CardProduct from "./src/components/CardProduct";
+import { AppButton } from "./src/components/AppButton";
 
 export default function App() {
-  return (
-    <View className="flex-1 items-center justify-center bg-orange-600">
-      <Example />
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <StackRoutes />;
 }

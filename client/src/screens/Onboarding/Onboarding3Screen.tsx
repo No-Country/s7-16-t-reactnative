@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { AppButton } from "../components/AppButton";
+import { AppButton } from "../../components/AppButton";
 
 export const Onboarding3Screen = ({ navigation }) => {
   return (

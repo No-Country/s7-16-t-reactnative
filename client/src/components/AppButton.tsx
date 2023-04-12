@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontWeight: "400",
     lineHeight: 19,
-    width: 67,
+    // width: 67,
     height: 19,
   },
 });

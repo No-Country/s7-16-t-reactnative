@@ -19,12 +19,14 @@ const MyData = () => {
   const user = UseUserStore.getState().user;
 
   const initialValues: MyDataValues = {
-    img: "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
-    name: user?.firstName ?? "Victor",
-    lastname: user?.lastName ?? "Romero Juarez",
-    cuit_dni: user?.dni.toString() ?? "123456",
-    email: user?.email ?? "victor@gmail.com",
-    cellphone: user?.dni.toString() ?? "987654321", // TODO aca se debe poner el telefono, la res del back todavia no la trae, se debe hacer un cambio en las interfaces
+    img:
+      user?.profilePic ??
+      "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
+    name: user?.firstName ?? "Nombre",
+    lastname: user?.lastName ?? "Apellido",
+    cuit_dni: user?.dni.toString() ?? "12435679",
+    email: user?.email ?? "mail@mail.com",
+    cellphone: user?.phNumber.toString() ?? "0800555123",
   };
 
   return (

@@ -48,7 +48,9 @@ export interface UserResponse {
   email: string;
   firstName: string;
   lastName: string;
+  profilePic: string;
   dni: number;
+  phNumber: number;
   createdAt: string;
   updatedAt: string;
   __v: number;

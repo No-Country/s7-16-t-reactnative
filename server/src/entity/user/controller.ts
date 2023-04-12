@@ -1,5 +1,4 @@
-import { Request, response, Response } from "express";
-import { StatusCodes } from "http-status-codes";
+import { Request, Response } from "express";
 import { UserModel } from "./model";
 
 
@@ -51,10 +50,9 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const updateUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { _id, role, isActive, verified, emailVerified, googleId, ...rest } =
-    req.body;
+  const { _id, ...rest } = req.body;
 
-  const data = ["email", "firstName", "lastName", "country", "password"];
+  const data = ["email", "firstName", "lastName", "dni", "password"];
   const compare: boolean[] = Object.keys(rest).map((el: string) => {
     if (!data.includes(el)) {
       return true;

@@ -29,12 +29,12 @@ export const StackRoutes = () => {
         />
         <Stack.Screen
           name="Register1"
-          component={Register2}
+          component={Register1}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Register2"
-          component={Register1}
+          component={Register2}
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Onboarding1Name" component={Onboarding1Screen} />

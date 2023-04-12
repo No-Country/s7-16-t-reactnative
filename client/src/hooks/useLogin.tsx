@@ -18,7 +18,7 @@ export const useLogin = () => {
     const res = await Login(values);
 
     if (res && res.status === 200 && res.data) {
-      setUser(res.data);
+      setUser(res.data.userResponse);
       navigation.navigate("MyData" as never);
     }
   };

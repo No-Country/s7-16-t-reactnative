@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { LoginRes } from "../utils/interfaces/api.interfaces";
+import { UserResponse } from "../utils/interfaces/api.interfaces";
 
-interface UserState {
-  user: null | LoginRes;
-  setUser: (user: LoginRes) => void;
+export interface UserState {
+  user: null | UserResponse;
+  setUser: (user: UserResponse) => void;
   logout: () => void;
 }
 

@@ -13,11 +13,6 @@ export interface Product {
   photo: string;
 }
 
-export interface LoginRes {
-  _id: string;
-  email: string;
-}
-
 export interface LoginData {
   email: string;
   password: string;
@@ -39,4 +34,24 @@ export interface RegisterData {
 
 export interface ProductResponse {
   product: Product;
+}
+
+export interface LoginResponse {
+  message: string;
+  userResponse: UserResponse;
+  token: string;
+}
+
+export interface UserResponse {
+  carts: Product[];
+  _id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  profilePic: string;
+  dni: number;
+  phNumber: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }

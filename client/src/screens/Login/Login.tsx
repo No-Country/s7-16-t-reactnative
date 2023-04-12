@@ -5,15 +5,19 @@ import {
   View,
   StyleSheet,
   Platform,
+  Image,
 } from "react-native";
-import { SessionBtn } from "../../components/LoginButton";
+import { SecundaryBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
-import InputComponent2 from "../../components/InputComponent";
+import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
+import { useNavigation } from "@react-navigation/native";
+import { AntDesign } from "@expo/vector-icons";
 
 export const Login = () => {
   const { handleSubmit } = useLogin();
+  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -22,7 +26,13 @@ export const Login = () => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView>
-        <Text style={styles.title}>¡Te damos la bienvenida!</Text>
+        <AntDesign
+          style={styles.back}
+          name="arrowleft"
+          size={24}
+          onPress={() => navigation.goBack()}
+        />
+        <Image style={styles.image} source={require("../../assets/logo.png")} />
         <View style={styles.form}>
           <Formik
             validationSchema={loginValidationSchema}
@@ -32,25 +42,28 @@ export const Login = () => {
             {(props: FormikProps<Values>) => (
               <>
                 <View>
-                  <InputComponent2
+                  <InputComponent
                     name="email"
                     style={styles.input}
                     placeholder="Mail"
                   />
-                  <InputComponent2
+                  <InputComponent
                     name="password"
                     style={styles.input}
                     placeholder="Contraseña"
                     type={true}
                   />
                   <Text style={styles.question}>
-                    ¿Olvidaste la constraseña?
+                    ¿Olvidaste tu constraseña?
                   </Text>
                 </View>
                 <View style={styles.buttons}>
-                  <SessionBtn
-                    text="INICIAR SESIÓN"
+                  <SecundaryBtn
+                    width={136}
+                    text="INICIAR SESION"
                     onPress={props.handleSubmit}
+                    marginTop={undefined}
+                    icon={undefined}
                   />
                 </View>
               </>
@@ -63,7 +76,7 @@ export const Login = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: { backgroundColor: "white", flex: 1 },
   back: { top: 43, left: "6%" },
   title: {
     fontSize: 24,
@@ -72,7 +85,7 @@ const styles = StyleSheet.create({
     marginLeft: 19,
   },
   form: {
-    marginTop: 130,
+    marginTop: 32,
   },
   input: {
     width: "88%",
@@ -85,19 +98,26 @@ const styles = StyleSheet.create({
   },
   question: {
     position: "absolute",
+    fontStyle: "normal",
     fontSize: 12,
     fontWeight: "300",
-    color: "#005AC2",
-    textDecorationLine: "underline",
     lineHeight: 14,
-    bottom: -22,
+    bottom: -16,
     left: 28,
     zIndex: 10,
+    color: "rgba(0, 90, 194, 1)",
+    textDecorationLine: "underline",
   },
   buttons: {
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 219,
+    marginTop: 209 - 18,
     marginBottom: 100,
+  },
+  image: {
+    marginTop: 99,
+    alignSelf: "center",
+    height: 142,
+    width: 226,
   },
 });

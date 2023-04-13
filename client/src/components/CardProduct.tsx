@@ -2,6 +2,7 @@ import { View, Text, Image } from "react-native";
 import CounterComponent from "./CounterComponent";
 import { useState } from "react";
 import { Product } from "../utils/interfaces/api.interfaces";
+import { useCartStore } from "../store/CartStore";
 
 interface Props {
   product: Product;
@@ -12,6 +13,7 @@ const CardProduct = ({ product }: Props) => {
 
   const updateCounter = (counter: number) => {
     setCounterProduct(counter);
+    useCartStore.getState().updateProduct(product._id, { amount: counter });
   };
   return (
     <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2">

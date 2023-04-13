@@ -1,13 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
 
 export const Onboarding4Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
-        <Text style={styles.textLogo}>ILUSTRACIÓN</Text>
-      </View>
+      <Image source={require("../../assets/Onboarding/screen4.png")} />
       <View style={{ marginBottom: 150, width: 274, height: 32 }}>
         <Text style={styles.textsubTitle}>
           En la salida del mercado solo

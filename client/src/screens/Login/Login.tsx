@@ -65,6 +65,13 @@ export const Login = () => {
                     marginTop={undefined}
                     icon={undefined}
                   />
+                  <SecundaryBtn
+                    width={136}
+                    text="INICIAR SESION"
+                    onPress={() => navigation.navigate("HomeScreen")}
+                    marginTop={undefined}
+                    icon={undefined}
+                  />
                 </View>
               </>
             )}

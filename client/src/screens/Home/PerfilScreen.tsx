@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, View, ScrollView, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import { NavigateButton } from "../../components/NavigateButton";
-import { Navbar } from "../../components/Navbar";
-export const PerfilScreen = () => {
+
+export const PerfilScreen = ({ navigation }) => {
   return (
     <>
-      <ScrollView className="flex-1 container mx-auto py-10 items-center">
+      <View className="flex-1 container mx-auto py-10 items-center">
         <Image
           source={require("../../assets/logo.png")}
           className="w-[129] h-[61] mb-14"
@@ -22,7 +22,7 @@ export const PerfilScreen = () => {
         <View>
           <NavigateButton
             text="Mis datos"
-            onPress={() => console.log("Mis datos")}
+            onPress={() => navigation.navigate("MyData")}
           />
           <NavigateButton
             text="Mis compras"
@@ -38,9 +38,6 @@ export const PerfilScreen = () => {
             cancel
           />
         </View>
-      </ScrollView>
-      <View>
-        <Navbar />
       </View>
     </>
   );

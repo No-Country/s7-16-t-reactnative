@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+} from "react-native";
+import { AppButton } from "../../components/AppButton";
 import { useNavigation } from "@react-navigation/native";
 
 export const Onboarding1Screen = () => {
@@ -10,9 +17,7 @@ export const Onboarding1Screen = () => {
       onPress={() => navigation.navigate("Onboarding2Name")}
     >
       <View style={styles.container}>
-        <View style={styles.logo}>
-          <Text style={styles.textLogo}>LOGO</Text>
-        </View>
+        <Image source={require("../../assets/logo.png")} />
         <View style={{ marginBottom: 10 }}>
           <Text style={styles.textTitle}>
             ¡Bienvenid@ a “Supermercado sin fila”!
@@ -25,6 +30,10 @@ export const Onboarding1Screen = () => {
           </Text>
         </View>
         <View>
+          <AppButton
+            text="Siguiente"
+            onPress={() => navigation.navigate("Onboarding4Name")}
+          />
           <Text style={styles.textFooter}>Saltar presentación</Text>
         </View>
       </View>

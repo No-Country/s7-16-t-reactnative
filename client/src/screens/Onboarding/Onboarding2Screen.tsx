@@ -1,14 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
 
 export const Onboarding2Screen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
-        <Text style={styles.textLogo}>ILUSTRACIÓN</Text>
-      </View>
-
+      <Image source={require("../../assets/Onboarding/screen2.png")} />
       <View style={{ marginBottom: 150, width: 274, height: 48 }}>
         <Text style={styles.textsubTitle}>
           Cuando ingreses al mercado vas a poder

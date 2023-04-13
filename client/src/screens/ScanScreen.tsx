@@ -9,12 +9,16 @@ import {
 } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
 import { getOneProduct } from "../utils/api/smartShopDB";
-import { Navbar } from "../components/Navbar";
-
+import { ModalProduct } from "../components/ModalProduct";
+import { Product } from "../utils/interfaces/api.interfaces";
 export const ScanScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanning, setScanning] = useState<boolean>(false);
+
+  // Modal
+  const [product, setProduct] = useState<Product | null>(null);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -37,7 +41,9 @@ export const ScanScreen = () => {
 
     if (res && res.status === 200 && res.data) {
       setScanned(true);
-      alert(`${res?.data.product.name}: ${res?.data.product.description}`);
+      setProduct(res.data.product);
+
+      setModalVisible(true);
     }
 
     setScanning(false);
@@ -52,74 +58,76 @@ export const ScanScreen = () => {
   }
 
   return (
-    <>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image
+          source={require("../assets/logo.png")}
+          style={{ width: 129, height: 61, top: 6 }}
+        />
+      </View>
+
+      <View style={{ flex: 2, backgroundColor: "white", width: "100%" }}>
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={[StyleSheet.absoluteFillObject, styles.scanbar]}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
+          type={BarCodeScanner.Constants.Type.back}
+        />
+
         <View
           style={{
             flex: 1,
-            backgroundColor: "white",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <Image
-            source={require("../assets/logo.png")}
-            style={{ width: 129, height: 61 }}
-          />
-        </View>
-
-        <View style={{ flex: 2, backgroundColor: "white", width: "100%" }}>
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={[StyleSheet.absoluteFillObject, styles.scanbar]}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
-            type={BarCodeScanner.Constants.Type.back}
-          />
-
           <View
             style={{
-              flex: 1,
+              borderWidth: 2,
+              borderColor: "white",
               alignItems: "center",
               justifyContent: "center",
+              width: "90%",
+              height: "70%",
+            }}
+          ></View>
+          {scanned && (
+            <Button
+              title={"Tap to Scan Again"}
+              onPress={() => setScanned(false)}
+            />
+          )}
+        </View>
+      </View>
+      <View style={{ flex: 3, backgroundColor: "white" }}>
+        <View style={{ backgroundColor: "#D9D9D9", paddingVertical: 7 }}>
+          <Text
+            style={{
+              textAlign: "center",
+              fontWeight: "500",
+              fontSize: 16,
             }}
           >
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: "white",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "90%",
-                height: "70%",
-              }}
-            ></View>
-            {scanned && (
-              <Button
-                title={"Tap to Scan Again"}
-                onPress={() => setScanned(false)}
-              />
-            )}
-          </View>
+            Escanea el producto
+          </Text>
         </View>
+      </View>
 
-        <View style={{ flex: 3, backgroundColor: "white" }}>
-          <View style={{ backgroundColor: "#D9D9D9", paddingVertical: 7 }}>
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "500",
-                fontSize: 16,
-              }}
-            >
-              Escanea el producto
-            </Text>
-          </View>
-        </View>
-      </View>
-      <View>
-        <Navbar />
-      </View>
-    </>
+      {modalVisible && (
+        <ModalProduct
+          modalVisible={modalVisible}
+          product={product}
+          closeModal={() => setModalVisible(!modalVisible)}
+        />
+      )}
+    </View>
   );
 };
 const styles = StyleSheet.create({

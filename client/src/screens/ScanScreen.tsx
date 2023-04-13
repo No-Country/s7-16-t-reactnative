@@ -11,6 +11,10 @@ import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
 import { getOneProduct } from "../utils/api/smartShopDB";
 import { ModalProduct } from "../components/ModalProduct";
 import { Product } from "../utils/interfaces/api.interfaces";
+import CardProduct from "../components/CardProduct";
+import { ScrollView } from "react-native";
+import { useCartStore } from "../store/CartStore";
+import { OrangeButton } from "../components/OrangeButton";
 
 export const ScanScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -30,6 +34,8 @@ export const ScanScreen = () => {
 
     getBarCodeScannerPermissions();
   }, []);
+
+  const products = useCartStore((state) => state.products);
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
     if (scanning || scanned) {
@@ -110,16 +116,26 @@ export const ScanScreen = () => {
         </View>
 
         <View style={{ flex: 3, backgroundColor: "white" }}>
-          <View style={{ backgroundColor: "#D9D9D9", paddingVertical: 7 }}>
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "500",
-                fontSize: 16,
-              }}
-            >
+          <View className="bg-gray-300 py-2 mb-3">
+            <Text className="text-center font-medium text-base">
               Escanea el producto
             </Text>
+          </View>
+          {/* Productos */}
+          <ScrollView className="bg-white">
+            {products.length > 0 &&
+              products.map((prod: Product) => (
+                <CardProduct key={prod._id} product={prod} />
+              ))}
+          </ScrollView>
+
+          {/* Terminar compra */}
+          <View className="justify-center items-center my-2">
+            <OrangeButton
+              text="Terminar compra"
+              onPress={() => alert("terminar compra")}
+              disabled={products.length > 0 ? true : false}
+            />
           </View>
         </View>
 

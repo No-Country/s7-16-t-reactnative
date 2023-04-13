@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Product } from "../utils/interfaces/api.interfaces";
+import { useCartStore } from "../store/CartStore";
 
 interface Props {
   product: Product | null;
@@ -17,6 +18,14 @@ interface Props {
 }
 
 export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
+  const addToCart = useCartStore((state) => state.addProduct); // zustand
+
+  const confirm = (product: Product) => {
+    addToCart(product);
+
+    closeModal();
+  };
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -68,7 +77,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
                 <Text className="font-medium text-lg">Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={closeModal}
+                onPress={() => confirm(product!)}
                 className="bg-orange-400 rounded-2xl py-2 px-3 "
               >
                 <Text className="font-medium text-lg text-white">

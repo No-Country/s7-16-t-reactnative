@@ -23,8 +23,6 @@ app.use(
 
 setupRoutes(app);
 
-//app.use(deserializeUser);
-
 app.use('/api', router);
 
 const server = app.listen(PORT, async () => {

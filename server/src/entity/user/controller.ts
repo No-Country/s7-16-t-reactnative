@@ -1,29 +1,32 @@
-import { Request, response, Response } from "express";
-import { StatusCodes } from "http-status-codes";
-import { UserModel } from "./model";
-
+import { Request, response, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+import { UserModel } from './model';
 
 export const getAllUsers = async (req: Request, res: Response) => {
   const { limit = 5, from = 0 } = req.query;
 
+  if (!res.locals.user.isAdmin) {
+    return res.status(403).json({
+      message: 'It route is only for admins',
+      error: true,
+    });
+  }
+
   if (isNaN(Number(from))) {
     return res.status(400).json({
-      message: "Invalid queries",
+      message: 'Invalid queries',
       error: true,
     });
   }
 
   if (isNaN(Number(limit))) {
     return res.status(400).json({
-      message: "Invalid queries",
+      message: 'Invalid queries',
       error: true,
     });
   }
 
-  const [total, users] = await Promise.all([
-    UserModel.countDocuments(),
-    UserModel.find().skip(Number(from)).limit(Number(limit)),
-  ]);
+  const [total, users] = await Promise.all([UserModel.countDocuments(), UserModel.find().skip(Number(from)).limit(Number(limit))]);
 
   res.json({
     total,
@@ -43,7 +46,7 @@ export const getUserById = async (req: Request, res: Response) => {
     });
   } else {
     return res.status(404).json({
-      message: "User not found",
+      message: 'User not found',
       error: true,
     });
   }
@@ -51,10 +54,9 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const updateUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { _id, role, isActive, verified, emailVerified, googleId, ...rest } =
-    req.body;
+  const { _id, role, isActive, verified, emailVerified, googleId, ...rest } = req.body;
 
-  const data = ["email", "firstName", "lastName", "country", "password"];
+  const data = ['email', 'firstName', 'lastName', 'country', 'password'];
   const compare: boolean[] = Object.keys(rest).map((el: string) => {
     if (!data.includes(el)) {
       return true;
@@ -66,7 +68,7 @@ export const updateUserById = async (req: Request, res: Response) => {
   if (compare.includes(true)) {
     return res.status(400).json({
       error: true,
-      message: "Invalid request body",
+      message: 'Invalid request body',
     });
   }
 
@@ -76,13 +78,13 @@ export const updateUserById = async (req: Request, res: Response) => {
   if (user) {
     res.status(201).json({
       user,
-      message: "User information updated successfully.",
+      message: 'User information updated successfully.',
       error: false,
     });
   } else {
     res.status(404).json({
       error: true,
-      message: "User not found",
+      message: 'User not found',
     });
   }
 };
@@ -93,13 +95,13 @@ export const deleteUser = async (req: Request, res: Response) => {
 
   if (user) {
     res.status(200).json({
-      message: "User deleted successfully",
+      message: 'User deleted successfully',
       error: false,
     });
   } else {
     res.status(404).json({
       error: true,
-      message: "User not found",
+      message: 'User not found',
     });
   }
 };

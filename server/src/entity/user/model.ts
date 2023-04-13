@@ -22,18 +22,28 @@ export class User {
   public lastName!: string;
 
   @prop({ required: true })
+  public photo!: string;
+
+  @prop({ required: true })
+  public documentType!: string;
+
+  @prop({ required: true })
+  public birthdate!: Date;
+
+  @prop({ required: true })
+  public genre!: string;
+
+  @prop({ required: true, unique: true })
+  public phNumber!: number;
+
+  @prop({ required: true })
   public password!: string;
 
   @prop({ required: true, unique: true })
   public dni!: number;
 
-  @prop()
-  public carts: [
-    {
-      type: mongoose.Schema.Types.ObjectId;
-      ref: () => Cart;
-    },
-  ];
+  @prop({ ref: () => Cart })
+  public carts: Ref<Cart>[];
 
   public async comparePassword(password: string): Promise<boolean> {
     return argon2.verify(this.password, password);

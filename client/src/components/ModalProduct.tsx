@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   StyleSheet,
@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Product } from "../utils/interfaces/api.interfaces";
+import { useCartStore } from "../store/CartStore";
+import CounterComponent from "./CounterComponent";
 
 interface Props {
   product: Product | null;
@@ -17,6 +19,29 @@ interface Props {
 }
 
 export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
+  const addToCart = useCartStore((state) => state.addProduct); // zustand
+
+  const [counterPrduct, setCounterProduct] = useState(1);
+
+  const updateProductCounter = (amount: number) => {
+    const updatedProducts = {
+      ...product,
+      amount: amount,
+    };
+    useCartStore.getState().updateProduct(product?._id ?? " ", updatedProducts);
+  };
+
+  const updateCounter = (counter: number) => {
+    setCounterProduct(counter);
+    updateProductCounter(counter);
+  };
+
+  const confirm = (product: Product) => {
+    addToCart(product);
+
+    closeModal();
+  };
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -48,7 +73,8 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
             {/* Footer */}
             <View className="w-3/4 flex-row items-center justify-center mb-4">
               {/* Contador */}
-              <View className=" flex-row w-1/2 items-center justify-between">
+              <CounterComponent updateCounter={updateCounter} />
+              {/* <View className=" flex-row w-1/2 items-center justify-between">
                 <TouchableOpacity>
                   <MaterialIcons name="delete" size={24} color="black" />
                 </TouchableOpacity>
@@ -56,7 +82,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
                 <TouchableOpacity>
                   <MaterialIcons name="add-circle" size={24} color="black" />
                 </TouchableOpacity>
-              </View>
+              </View> */}
               <View className="items-end w-1/2">
                 <Text className="text-xl font-bold">$ {product?.price}</Text>
               </View>
@@ -68,7 +94,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
                 <Text className="font-medium text-lg">Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={closeModal}
+                onPress={() => confirm(product!)}
                 className="bg-orange-400 rounded-2xl py-2 px-3 "
               >
                 <Text className="font-medium text-lg text-white">

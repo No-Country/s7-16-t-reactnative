@@ -5,7 +5,10 @@ function requireUser(req: Request, res: Response, next: NextFunction) {
   const user = res.locals.user;
 
   if (!user) {
-    return res.sendStatus(StatusCodes.FORBIDDEN);
+    return res.status(StatusCodes.FORBIDDEN).json({
+      error: true,
+      message: 'You are not authorized to access this route.',
+    });
   }
 
   return next();

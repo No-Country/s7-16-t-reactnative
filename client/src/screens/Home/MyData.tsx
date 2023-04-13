@@ -4,8 +4,9 @@ import { Formik } from "formik";
 import { AppButton } from "../../components/AppButton";
 import TextTitle from "../../components/TextTitle";
 import { Ionicons } from "@expo/vector-icons";
-import { Navbar } from "../../components/Navbar";
-interface MyDartaValues {
+import { UseUserStore } from "../../store/UserStore";
+
+interface MyDataValues {
   img?: string;
   name?: string;
   lastname?: string;
@@ -14,16 +15,20 @@ interface MyDartaValues {
   cellphone?: string;
 }
 
-const initialValues: MyDartaValues = {
-  img: "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
-  name: "Victor",
-  lastname: "Romero Juarez",
-  cuit_dni: "123456",
-  email: "victor@gmail.com",
-  cellphone: "987654321",
-};
 const MyData = () => {
-  const imgUrl = initialValues.img;
+  const user = UseUserStore.getState().user;
+
+  const initialValues: MyDataValues = {
+    img:
+      user?.profilePic ??
+      "https://cdn.pixabay.com/photo/2023/03/27/13/48/squirrel-7880791_960_720.jpg",
+    name: user?.firstName ?? "Nombre",
+    lastname: user?.lastName ?? "Apellido",
+    cuit_dni: user?.dni.toString() ?? "12435679",
+    email: user?.email ?? "mail@mail.com",
+    cellphone: user?.phNumber.toString() ?? "0800555123",
+  };
+
   return (
     <>
       <ScrollView className="w-full pb-5">
@@ -39,7 +44,7 @@ const MyData = () => {
           <View className="flex flex-col gap-4 justify-center items-center">
             <Image
               className="w-20 h-20 rounded-full"
-              source={{ uri: imgUrl }}
+              source={{ uri: initialValues.img }}
             />
             <View>
               <TextTitle title="MIS DATOS" />
@@ -103,9 +108,6 @@ const MyData = () => {
           </Formik>
         </View>
       </ScrollView>
-      <View>
-        <Navbar />
-      </View>
     </>
   );
 };

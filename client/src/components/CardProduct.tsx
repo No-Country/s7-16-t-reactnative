@@ -1,20 +1,16 @@
 import { View, Text, Image } from "react-native";
 import CounterComponent from "./CounterComponent";
-import { useState } from "react";
 import { Product } from "../utils/interfaces/api.interfaces";
-import { useCartStore } from "../store/CartStore";
+import { useCounter } from "../hooks/useCounter";
 
 interface Props {
   product: Product;
 }
 
 const CardProduct = ({ product }: Props) => {
-  const [counterProduct, setCounterProduct] = useState(0);
-
-  const updateCounter = (counter: number) => {
-    setCounterProduct(counter);
-    useCartStore.getState().updateProduct(product._id, { amount: counter });
-  };
+  const { counter, decrementCounter, incrementCounter } = useCounter(
+    product.amount
+  );
   return (
     <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2">
       <View className="">
@@ -25,8 +21,12 @@ const CardProduct = ({ product }: Props) => {
         <Text className="text-base">{product.brand}</Text>
       </View>
       <View className="flex flex-col justify-center items-center w-20 gap-4">
-        <CounterComponent updateCounter={updateCounter} />
-        <Text>$ {product.price}</Text>
+        <CounterComponent
+          counter={counter}
+          decrementCounter={decrementCounter}
+          incrementCounter={incrementCounter}
+        />
+        <Text>$ {product.price * counter}</Text>
       </View>
     </View>
   );

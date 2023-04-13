@@ -10,7 +10,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { Product } from "../utils/interfaces/api.interfaces";
 import { useCartStore } from "../store/CartStore";
-import CounterComponent from "./CounterComponent";
+import { useCounter } from "../hooks/useCounter";
 
 interface Props {
   product: Product | null;
@@ -20,24 +20,14 @@ interface Props {
 
 export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
   const addToCart = useCartStore((state) => state.addProduct); // zustand
+  const updateProd = useCartStore((state) => state.updateProduct); // zustand
 
-  const [counterPrduct, setCounterProduct] = useState(1);
+  const { counter, decrementCounter, incrementCounter } = useCounter();
 
-  const updateProductCounter = (amount: number) => {
-    const updatedProducts = {
-      ...product,
-      amount: amount,
-    };
-    useCartStore.getState().updateProduct(product?._id ?? " ", updatedProducts);
-  };
-
-  const updateCounter = (counter: number) => {
-    setCounterProduct(counter);
-    updateProductCounter(counter);
-  };
-
-  const confirm = (product: Product) => {
+  const confirm = (product: Product, amount: number) => {
     addToCart(product);
+
+    updateProd(product._id, amount);
 
     closeModal();
   };
@@ -73,18 +63,19 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
             {/* Footer */}
             <View className="w-3/4 flex-row items-center justify-center mb-4">
               {/* Contador */}
-              <CounterComponent updateCounter={updateCounter} />
-              {/* <View className=" flex-row w-1/2 items-center justify-between">
-                <TouchableOpacity>
+              <View className=" flex-row w-1/2 items-center justify-between">
+                <TouchableOpacity onPress={decrementCounter}>
                   <MaterialIcons name="delete" size={24} color="black" />
                 </TouchableOpacity>
-                <Text className="text-lg">1</Text>
-                <TouchableOpacity>
+                <Text className="text-lg">{counter}</Text>
+                <TouchableOpacity onPress={incrementCounter}>
                   <MaterialIcons name="add-circle" size={24} color="black" />
                 </TouchableOpacity>
-              </View> */}
+              </View>
               <View className="items-end w-1/2">
-                <Text className="text-xl font-bold">$ {product?.price}</Text>
+                <Text className="text-xl font-bold">
+                  $ {product!.price * counter}
+                </Text>
               </View>
             </View>
 
@@ -94,7 +85,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
                 <Text className="font-medium text-lg">Cancelar</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => confirm(product!)}
+                onPress={() => confirm(product!, counter)}
                 className="bg-orange-400 rounded-2xl py-2 px-3 "
               >
                 <Text className="font-medium text-lg text-white">

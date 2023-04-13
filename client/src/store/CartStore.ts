@@ -5,7 +5,7 @@ interface CartState {
   products: Product[];
   addProduct: (product: Product) => void;
   removeProduct: (productId: string) => void;
-  updateProduct: (productId: string, updateProps: Partial<Product>) => void;
+  updateProduct: (productId: string, amount: number) => void;
 }
 
 export const useCartStore = create<CartState>((set) => ({
@@ -16,21 +16,11 @@ export const useCartStore = create<CartState>((set) => ({
     set((state) => ({
       products: state.products.filter((prod) => prod._id !== productId),
     })),
-  updateProduct: (productId, updateProps) =>
-    set((state) => {
-      const productIndex = state.products.findIndex(
-        (prod) => prod._id === productId
-      );
-      if (productIndex === -1) return state;
 
-      const updatedProduct = {
-        ...state.products[productIndex],
-        ...updateProps,
-      };
-
-      const updatedProducts = [...state.products];
-      updatedProducts[productIndex] = updatedProduct;
-
-      return { ...state, products: updatedProducts };
-    }),
+  updateProduct: (productId, amount) =>
+    set((state) => ({
+      products: state.products.map((product) =>
+        product._id === productId ? { ...product, amount } : product
+      ),
+    })),
 }));

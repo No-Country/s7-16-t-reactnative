@@ -77,7 +77,7 @@ export const ScanScreen = () => {
         >
           <Image
             source={require("../assets/logo.png")}
-            style={{ width: 129, height: 61 }}
+            style={{ width: 129, height: 61, top: 6 }}
           />
         </View>
 

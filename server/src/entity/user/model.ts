@@ -21,7 +21,7 @@ export class User {
   @prop({ required: true })
   public lastName!: string;
 
-  @prop({ required: true })
+  @prop({ required: true, default: process.env.DEF_PROFILE_PIC })
   public photo!: string;
 
   @prop({ required: true })

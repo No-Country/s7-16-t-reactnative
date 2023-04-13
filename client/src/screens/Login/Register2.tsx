@@ -13,6 +13,7 @@ import { FormikProps, Formik } from "formik";
 import { registerValidationSchema2 } from "./registerValidationsSchema2";
 import { AntDesign } from "@expo/vector-icons";
 import DateTimePickerComponent from "../../components/DatePickerComponent";
+import { useRegister } from "../../hooks/useRegister";
 
 const documentTypes: object[] = [
   { id: 1, nombre: "DNI-Argentina" },
@@ -45,10 +46,7 @@ interface Values {
 }
 
 export const Register2 = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("MyData");
-  };
+  const { handleSubmit2 } = useRegister();
 
   return (
     <KeyboardAvoidingView
@@ -75,7 +73,7 @@ export const Register2 = ({ navigation }) => {
             mobile: "",
             birthdate: "",
           }}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit2}
         >
           {(props: FormikProps<Values>) => (
             <>

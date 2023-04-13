@@ -12,6 +12,8 @@ import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
 import { AntDesign } from "@expo/vector-icons";
 
+import { useRegister } from "../../hooks/useRegister";
+
 interface Values {
   email: string;
   password: string;
@@ -19,10 +21,12 @@ interface Values {
 }
 
 export const Register1 = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("Register2");
-  };
+  // const handleSubmit = () => {
+  //   console.log("No hay errores");
+  //   navigation.navigate("Register2");
+  // };
+
+  const { handleSubmit } = useRegister();
 
   return (
     <KeyboardAvoidingView

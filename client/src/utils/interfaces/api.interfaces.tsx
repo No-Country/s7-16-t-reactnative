@@ -11,6 +11,7 @@ export interface Product {
   price: number;
   barCode: number;
   photo: string;
+  amount: number;
 }
 
 export interface LoginData {

@@ -27,10 +27,14 @@ export interface RegisterRes {
 export interface RegisterData {
   firstName: string;
   lastName: string;
-  dni: string;
   email: string;
   password: string;
   confirmPassword: string;
+  phNumber: number | string;
+  birthdate: Date;
+  documentType: string;
+  dni: number | string;
+  genre: string;
 }
 
 export interface ProductResponse {

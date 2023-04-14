@@ -1,7 +1,9 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 import { PrimaryBtn, SecundaryBtn } from "../../components/LoginButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const MainLogin = ({ navigation }) => {
+export const MainLogin = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       <View style={styles.view}>
@@ -13,7 +15,7 @@ export const MainLogin = ({ navigation }) => {
           <SecundaryBtn
             width={146}
             text="INICIAR SESION"
-            onPress={() => navigation.navigate("Login")}
+            onPress={() => navigation.navigate("Login" as never)}
             marginTop={undefined}
             icon={undefined}
           />
@@ -21,7 +23,7 @@ export const MainLogin = ({ navigation }) => {
             text="REGISTRARME"
             width={146}
             marginTop={16}
-            onPress={() => navigation.navigate("Register1")}
+            onPress={() => navigation.navigate("Register1" as never)}
             icon={undefined}
           />
           <View
@@ -37,7 +39,7 @@ export const MainLogin = ({ navigation }) => {
               width={244}
               marginTop={24}
               text="REGISTRATE CON GOOGLE"
-              onPress={() => navigation.navigate("Register1")}
+              onPress={() => navigation.navigate("Register1" as never)}
             />
           </View>
         </View>

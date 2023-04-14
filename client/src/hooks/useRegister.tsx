@@ -3,48 +3,64 @@ import { Register } from "../utils/api/smartShopDB";
 import { UseRegisterStore } from "../store/RegisterStore";
 
 export interface Values {
-  email: string | null | undefined;
-  password: string | null | undefined;
-  firstname: string | null | undefined;
-  lastname: string | null | undefined;
-  documentType: string | null | undefined;
-  documentNumber: number | null | undefined;
-  gender: string | null | undefined;
-  mobile: number | null | undefined;
-  birthdate: string | null | undefined;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  documentType: string;
+  dni: string | number;
+  genre: string;
+  phNumber: string | number;
+  birthdate: Date;
 }
 
 export const useRegister = () => {
   const navigation = useNavigation();
-
   const setRegister = UseRegisterStore((state) => state.setRegister);
-  const setRegister2 = UseRegisterStore((state) => state.setRegister2);
 
-  const handleSubmit = async (values: Values) => {
-    const register = UseRegisterStore.getState().register;
-    console.log("values: " + values.email);
+  const handleSubmit1 = async (values: Values) => {
     setRegister(values);
-    console.log(register);
     navigation.navigate("Register2" as never);
   };
 
   const handleSubmit2 = async (values: Values) => {
     const register = UseRegisterStore.getState().register;
-    const register2 = UseRegisterStore.getState().register2;
-    console.log("values: " + values.firstname);
-    setRegister2(values);
-    console.log(register2);
-    console.log({ ...register, ...register2 });
-    // const res = await Register(values);
+    const valoresFinales = { ...register, ...values };
+    valoresFinales.dni = Number(valoresFinales.dni);
+    valoresFinales.phNumber = Number(valoresFinales.phNumber);
+    setRegister(valoresFinales);
+    const valores = {
+      firstName: "pepe",
+      lastName: "grillo",
+      dni: 12313123,
+      email: "pepe@grillo.com",
+      password: "1231233",
+      confirmPassword: "1231233",
+      phNumber: 123123123,
+      birthdate: "12-10-99",
+      documentType: "DNI",
+      genre: "Masculino",
+    };
 
-    // if (res && res.status === 200 && res.data) {
-    //   setUser(res.data.userResponse);
-    //   navigation.navigate("MyData" as never);
+    console.log("valores:");
+    console.log(valores);
+    console.log("values:");
+    console.log(valoresFinales);
+    // try {
+    //   const res = await Register(valoresFinales);
+
+    //   if (res && res.status === 200 && res.data) {
+    //     setRegister(valoresFinales);
+    //     navigation.navigate("MyData" as never);
+    //   }
+    // } catch (errores) {
+    //   console.log(errores);
     // }
   };
 
   return {
-    handleSubmit,
+    handleSubmit1,
     handleSubmit2,
   };
 };

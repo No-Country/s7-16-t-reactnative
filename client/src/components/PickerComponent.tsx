@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TextInputProps } from "react-native";
+import { View, Text } from "react-native";
 import { useField } from "formik";
 import { Picker, PickerProps } from "@react-native-picker/picker";
 
@@ -62,7 +62,7 @@ const PickerComponent: React.FC<MyPickerProps> = ({
             }}
             key={item.id}
             label={item.nombre}
-            value={item.id}
+            value={item.nombre}
           />
         ))}
       </Picker>

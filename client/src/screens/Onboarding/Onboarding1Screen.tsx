@@ -7,7 +7,7 @@ export const Onboarding1Screen = () => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate("Onboarding2Name")}
+      onPress={() => navigation.navigate("Onboarding2Screen" as never)}
     >
       <View style={styles.container}>
         <View style={styles.logo}>

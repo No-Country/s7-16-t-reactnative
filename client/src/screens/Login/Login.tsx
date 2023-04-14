@@ -59,8 +59,8 @@ export const Login = () => {
                 </View>
                 <View style={styles.buttons}>
                   <SecundaryBtn
-                    width={136}
-                    text="INICIAR SESION"
+                    width={146}
+                    text="INICIAR SESIÓN"
                     onPress={props.handleSubmit}
                     marginTop={undefined}
                     icon={undefined}

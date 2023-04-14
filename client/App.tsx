@@ -1,14 +1,12 @@
-<<<<<<< HEAD
 import { StackRoutes } from "./src/navigation/StackRoutes";
-import MyData from "./src/screens/Home/MyData";
-import { PerfilScreen } from "./src/screens/Home/PerfilScreen";
+import { NavigationContainer } from "@react-navigation/native";
 import { ScanScreen } from "./src/screens/ScanScreen";
-=======
-import { StatusBar } from "expo-status-bar";
-import { StackRoutes } from "./src/navigation/StackRoutes";
-import { ScanScreen } from "./src/screens/ScanScreen";
+import { HomeTabs } from "./src/navigation/HomeTabs";
 
->>>>>>> be2d70bcd89114b8a17ba885590fac070930b3fe
 export default function App() {
-  return <ScanScreen />;
+  return (
+    <NavigationContainer>
+      <StackRoutes />
+    </NavigationContainer>
+  );
 }

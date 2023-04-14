@@ -57,11 +57,15 @@ export const ScanScreen = () => {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <Text className="self-center top-52">
+        Requesting for camera permission
+      </Text>
+    );
   }
 
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text className="self-center top-52">No access to camera</Text>;
   }
 
   return (

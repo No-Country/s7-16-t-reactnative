@@ -129,7 +129,7 @@ export const Register2 = ({ navigation }) => {
                 <PrimaryBtn
                   width={135}
                   text="REGISTRARME"
-                  onPress={props.handleSubmit}
+                  onPress={() => navigation.navigate("Login")}
                 />
               </View>
             </>

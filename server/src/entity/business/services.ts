@@ -1,7 +1,11 @@
 import { Business, BusinessModel } from './model';
 
 export async function createBusiness(business: Business) {
-  return BusinessModel.create(business);
+  const responseBusiness = BusinessModel.create(business);
+  if (!responseBusiness) {
+    throw new Error(`Business with cuit ${business.cuit} already exists`);
+  }
+  return responseBusiness;
 }
 
 export async function getBusinessList() {

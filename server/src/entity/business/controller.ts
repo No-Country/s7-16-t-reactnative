@@ -8,9 +8,6 @@ export async function newBusinessHandler(req: Request<{}, {}, NewBusinessBody>, 
 
   try {
     const newBusiness = await createBusiness({ email, password, names, cuit, address, qrCode, photo });
-    if (!newBusiness) {
-      res.status(StatusCodes.CONFLICT).send(`Business with cuit ${cuit} already exists`);
-    }
     res.status(StatusCodes.CREATED).json({ business: newBusiness });
   } catch (e: any) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(e.message);

@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "SmartShop",
+    "slug": "SmartShop",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/logo.png",
+      "image": "./src/assets/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor":  "rgba(255, 255, 255, 1)"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./src/assets/logo.png",
+        "backgroundColor":  "white"
       }
     },
     "web": {
-      "favicon": "./src/assets/logo-sin-margenes.png"
+      "favicon": "./src/assets/logo.png"
     }
   }
 }

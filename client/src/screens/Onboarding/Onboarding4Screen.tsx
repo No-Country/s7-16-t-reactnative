@@ -1,21 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { TouchableOpacity, Text, View, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
+import { AntDesign } from "@expo/vector-icons";
 
 export const Onboarding4Screen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Image source={require("../../assets/Onboarding/screen4.png")} />
-      <View style={{ marginBottom: 150, width: 274, height: 32 }}>
-        <Text style={styles.textsubTitle}>
+    <View className="flex self-center bg-white w-full h-full">
+      <TouchableOpacity
+        className="top-12 left-5"
+        onPress={() => navigation.navigate("Onboarding3Name")}
+      >
+        <AntDesign name="arrowleft" size={24} color="rgba(151, 151, 151, 1)" />
+      </TouchableOpacity>
+      <Image
+        source={require("../../assets/Onboarding/screen4.png")}
+        className="self-center mt-60"
+      />
+
+      <View className="self-center mt-4">
+        <Text className="text-center w-[274]">
           En la salida del mercado solo
-          <Text style={{ fontWeight: "600" }}>
-            {" "}
-            compartís tu comprobante y listo{" "}
-          </Text>
+          <Text className="font-bold"> compartís tu comprobante y listo </Text>
         </Text>
+        <Image
+          source={require("../../assets/Onboarding/nav4.png")}
+          className="self-center top-7"
+        />
       </View>
-      <View>
+      <View className="self-center top-40">
         <AppButton
           text="Comenzar"
           onPress={() => navigation.navigate("MainLogin")}
@@ -24,43 +36,3 @@ export const Onboarding4Screen = ({ navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logo: {
-    borderWidth: 1,
-    backgroundColor: "#EBE9E9",
-    width: 200,
-    height: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
-  textLogo: {
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 23,
-    color: "#000000",
-    fontFamily: "Roboto",
-  },
-  textsubTitle: {
-    fontFamily: "Roboto",
-    fontSize: 14,
-    fontWeight: "400",
-    lineHeight: 16,
-    textAlign: "center",
-  },
-  textFooter: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 14,
-    lineHeight: 16,
-    color: "#000000",
-    textAlign: "center",
-    marginTop: 15,
-  },
-});

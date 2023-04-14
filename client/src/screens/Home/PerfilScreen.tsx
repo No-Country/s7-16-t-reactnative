@@ -5,7 +5,7 @@ import { NavigateButton } from "../../components/NavigateButton";
 export const PerfilScreen = ({ navigation }) => {
   return (
     <>
-      <View className="flex-1 container mx-auto py-10 items-center">
+      <View className="flex-1 container mx-auto py-10 items-center bg-white w-full h-full">
         <Image
           source={require("../../assets/logo.png")}
           className="w-[129] h-[61] mb-14"

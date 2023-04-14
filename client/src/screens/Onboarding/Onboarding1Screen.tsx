@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  Image,
-} from "react-native";
+import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
 import { useNavigation } from "@react-navigation/native";
 
@@ -16,73 +10,39 @@ export const Onboarding1Screen = () => {
     <TouchableWithoutFeedback
       onPress={() => navigation.navigate("Onboarding2Name")}
     >
-      <View style={styles.container}>
-        <Image source={require("../../assets/logo.png")} />
-        <View style={{ marginBottom: 10 }}>
-          <Text style={styles.textTitle}>
-            ¡Bienvenid@ a “Supermercado sin fila”!
+      <View className="flex self-center bg-white w-full h-full">
+        <Image
+          source={require("../../assets/logosmall.png")}
+          className="self-center mt-60 mb-20"
+        />
+        <View>
+          <Text className="text-center font-bold scale-150 top-6">
+            ¡Bienvenid@ a SmartShop!
           </Text>
         </View>
 
-        <View style={{ width: 222, height: 32, marginBottom: 50 }}>
-          <Text style={styles.textsubTitle}>
+        <View className="m-20">
+          <Text className="text-center w-[246] bottom-10">
             Te presentamos cómo funciona esta nueva experiencia de compra
           </Text>
+          <Image
+            source={require("../../assets/Onboarding/nav1.png")}
+            className="self-center bottom-6"
+          />
         </View>
-        <View>
+        <View className="self-center top-30 mt-5">
           <AppButton
             text="Siguiente"
-            onPress={() => navigation.navigate("Onboarding4Name")}
+            onPress={() => navigation.navigate("Onboarding2Name")}
           />
-          <Text style={styles.textFooter}>Saltar presentación</Text>
+          <Text
+            className="text-center m-3"
+            onPress={() => navigation.navigate("MainLogin")}
+          >
+            Saltar presentación
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logo: {
-    borderWidth: 1,
-    backgroundColor: "#EBE9E9",
-    width: 200,
-    height: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
-  textLogo: {
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 23,
-    color: "#000000",
-    fontFamily: "Roboto",
-  },
-  textTitle: {
-    fontSize: 16,
-    fontWeight: "700",
-    lineHeight: 19,
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  textsubTitle: {
-    fontFamily: "Roboto",
-    fontSize: 14,
-    fontWeight: "400",
-    lineHeight: 16,
-    textAlign: "center",
-  },
-  textFooter: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 14,
-    lineHeight: 16,
-    color: "#000000",
-    textAlign: "center",
-  },
-});

@@ -1,6 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import { Register } from "../utils/api/smartShopDB";
+import { Register, Login } from "../utils/api/smartShopDB";
 import { UseRegisterStore } from "../store/RegisterStore";
+import { UseUserStore } from "../store/UserStore";
+import { RegisterData } from "../utils/interfaces/api.interfaces";
 
 export interface Values {
   email: string;
@@ -18,6 +20,7 @@ export interface Values {
 export const useRegister = () => {
   const navigation = useNavigation();
   const setRegister = UseRegisterStore((state) => state.setRegister);
+  const setUser = UseUserStore((state) => state.setUser);
 
   const handleSubmit1 = async (values: Values) => {
     setRegister(values);
@@ -29,8 +32,10 @@ export const useRegister = () => {
     const valoresFinales = { ...register, ...values };
     valoresFinales.dni = Number(valoresFinales.dni);
     valoresFinales.phNumber = Number(valoresFinales.phNumber);
+    const birth = new Date();
     setRegister(valoresFinales);
-    const valores = {
+
+    const valores: RegisterData = {
       firstName: "pepe",
       lastName: "grillo",
       dni: 12313123,
@@ -38,25 +43,34 @@ export const useRegister = () => {
       password: "1231233",
       confirmPassword: "1231233",
       phNumber: 123123123,
-      birthdate: "12-10-99",
+      birthdate: birth,
       documentType: "DNI",
       genre: "Masculino",
     };
-
     console.log("valores:");
     console.log(valores);
     console.log("values:");
     console.log(valoresFinales);
-    // try {
-    //   const res = await Register(valoresFinales);
 
-    //   if (res && res.status === 200 && res.data) {
-    //     setRegister(valoresFinales);
-    //     navigation.navigate("MyData" as never);
-    //   }
-    // } catch (errores) {
-    //   console.log(errores);
-    // }
+    try {
+      const resRegister = await Register(valoresFinales);
+      console.log(resRegister);
+
+      if (resRegister && resRegister.data.error === false) {
+        setRegister(valores);
+        console.log("trying to login");
+        const resLogin = await Login({
+          email: valoresFinales.email,
+          password: valoresFinales.password,
+        });
+        if (resLogin && resLogin.status === 200 && resLogin.data) {
+          setUser(resLogin.data.userResponse);
+          navigation.navigate("StackNavigation" as never);
+        }
+      }
+    } catch (errores) {
+      console.log(errores);
+    }
   };
 
   return {

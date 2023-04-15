@@ -21,7 +21,7 @@ export class User {
   @prop({ required: true })
   public lastName!: string;
 
-  @prop({ required: true })
+  @prop({ required: true, default: process.env.DEF_PROFILE_PIC })
   public photo!: string;
 
   @prop({ required: true })
@@ -41,6 +41,9 @@ export class User {
 
   @prop({ required: true, unique: true })
   public dni!: number;
+
+  @prop({ required: false, default: false })
+  public isAdmin!: boolean;
 
   @prop({ ref: () => Cart })
   public carts: Ref<Cart>[];

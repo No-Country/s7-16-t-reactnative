@@ -12,7 +12,7 @@ export const MainLogin = ({ navigation }) => {
         <View style={styles.buttons}>
           <SecundaryBtn
             width={146}
-            text="INICIAR SESION"
+            text="INICIAR SESIÓN"
             onPress={() => navigation.navigate("Login")}
             marginTop={undefined}
             icon={undefined}

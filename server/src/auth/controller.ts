@@ -96,6 +96,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
           genre: user.genre,
           birthdate: user.birthdate,
           phNumber: user.phNumber,
+          isAdmin: user.isAdmin || false,
           createdAt: user.createdAt,
           updatedAt: user.updatedAt,
           __v: user.__v,

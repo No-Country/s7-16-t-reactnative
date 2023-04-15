@@ -1,71 +1,39 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Text, View, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
+import { useNavigation } from "@react-navigation/native";
 
-export const Onboarding3Screen = ({ navigation }) => {
+export const Onboarding3Screen = () => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <View style={styles.logo}>
-        <Text style={styles.textLogo}>ILUSTRACIÓN</Text>
-      </View>
-      <View style={{ marginBottom: 150, width: 274, height: 32 }}>
-        <Text style={styles.textsubTitle}>
-          Una vez cargados en la app, podrás
-          <Text style={{ fontWeight: "600" }}>
-            {" "}
-            pagar a través del carrito{" "}
-          </Text>
+    <View className="flex self-center bg-white w-full h-full">
+      <Image
+        source={require("../../assets/Onboarding/screen3.png")}
+        className="self-center mt-60"
+      />
+
+      <View className="self-center mt-4">
+        <Text className="text-center w-[274]">
+          Una vez cargador en la app, podrás
+          <Text className="font-bold"> pagar a través del carrito </Text>
         </Text>
+        <Image
+          source={require("../../assets/Onboarding/nav3.png")}
+          className="self-center top-7"
+        />
       </View>
-      <View>
+      <View className="self-center top-40">
         <AppButton
           text="Siguiente"
-          onPress={() => navigation.navigate("Onboarding4Name")}
+          onPress={() => navigation.navigate("Onboarding4Screen" as never)}
         />
-        <TouchableOpacity>
-          <Text style={styles.textFooter}>Saltar presentación</Text>
-        </TouchableOpacity>
+        <Text
+          className="text-center m-3"
+          onPress={() => navigation.navigate("LoginStack" as never)}
+        >
+          Saltar presentación
+        </Text>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logo: {
-    borderWidth: 1,
-    backgroundColor: "#EBE9E9",
-    width: 200,
-    height: 200,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 20,
-  },
-  textLogo: {
-    fontSize: 20,
-    fontWeight: "400",
-    lineHeight: 23,
-    color: "#000000",
-    fontFamily: "Roboto",
-  },
-  textsubTitle: {
-    fontFamily: "Roboto",
-    fontSize: 14,
-    fontWeight: "400",
-    lineHeight: 16,
-    textAlign: "center",
-  },
-  textFooter: {
-    fontFamily: "Roboto",
-    fontWeight: "400",
-    fontSize: 14,
-    lineHeight: 16,
-    color: "#000000",
-    textAlign: "center",
-    marginTop: 15,
-  },
-});

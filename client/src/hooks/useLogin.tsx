@@ -19,7 +19,7 @@ export const useLogin = () => {
 
     if (res && res.status === 200 && res.data) {
       setUser(res.data.userResponse);
-      navigation.navigate("MyData" as never);
+      navigation.navigate("StackNavigation" as never);
     }
   };
 

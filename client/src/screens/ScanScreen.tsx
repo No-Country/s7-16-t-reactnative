@@ -57,11 +57,15 @@ export const ScanScreen = () => {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return (
+      <Text className="self-center top-52">
+        Requesting for camera permission
+      </Text>
+    );
   }
 
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text className="self-center top-52">No access to camera</Text>;
   }
 
   return (
@@ -77,7 +81,7 @@ export const ScanScreen = () => {
         >
           <Image
             source={require("../assets/logo.png")}
-            style={{ width: 129, height: 61 }}
+            style={{ width: 129, height: 61, top: 6 }}
           />
         </View>
 

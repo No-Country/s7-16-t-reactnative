@@ -10,10 +10,11 @@ module.exports = {
         secundario: "rgba(2, 48, 71, 1)",
         acento: "rgba(251, 133, 0, 1)",
         counter: "rgba(2, 48, 71, 0.26)",
+        grayApp: "rgba(117, 117, 117, 1)",
       },
       fonts: {
         titulo: 24,
-        secundario: 16,
+        subtitulo: 16,
       },
     },
   },

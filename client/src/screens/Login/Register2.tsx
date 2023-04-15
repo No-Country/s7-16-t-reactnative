@@ -59,7 +59,7 @@ export const Register2 = () => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <AntDesign
           style={styles.back}
           name="arrowleft"
@@ -90,11 +90,13 @@ export const Register2 = () => {
                   name="firstName"
                   style={styles.input}
                   placeholder="Nombre"
+                  inputMode="text"
                 />
                 <InputComponent
                   name="lastName"
                   style={styles.input}
                   placeholder="Apellido"
+                  inputMode="text"
                 />
                 <PickerComponent
                   name="documentType"
@@ -108,6 +110,7 @@ export const Register2 = () => {
                   name="dni"
                   style={styles.input}
                   placeholder="Numero de Documento"
+                  inputMode="decimal"
                 />
                 <PickerComponent
                   name="genre"
@@ -126,6 +129,7 @@ export const Register2 = () => {
                   name="phNumber"
                   style={styles.input}
                   placeholder="Numero de Celular"
+                  inputMode="decimal"
                 />
               </View>
               <View style={styles.buttons}>

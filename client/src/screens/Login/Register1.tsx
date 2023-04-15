@@ -7,7 +7,7 @@ import {
   Platform,
 } from "react-native";
 import { PrimaryBtn } from "../../components/LoginButton";
-import InputComponent2 from "../../components/InputComponent";
+import InputComponent from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
 import { AntDesign } from "@expo/vector-icons";
@@ -29,7 +29,7 @@ export const Register1 = () => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <AntDesign
           style={styles.back}
           name="arrowleft"
@@ -52,22 +52,25 @@ export const Register1 = () => {
                 Estamos felices de que seas parte
               </Text>
               <View style={styles.form}>
-                <InputComponent2
+                <InputComponent
                   name="email"
                   style={styles.input}
                   placeholder="Mail"
+                  inputMode="email"
                 />
-                <InputComponent2
+                <InputComponent
                   name="password"
                   style={styles.input}
                   placeholder="Contraseña"
                   type={true}
+                  inputMode="text"
                 />
-                <InputComponent2
+                <InputComponent
                   name="confirmPassword"
                   style={styles.input}
                   placeholder="Repite tu contraseña"
                   type={true}
+                  inputMode="text"
                 />
               </View>
               <View style={styles.buttons}>

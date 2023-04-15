@@ -42,6 +42,9 @@ export class User {
   @prop({ required: true, unique: true })
   public dni!: number;
 
+  @prop({ required: false, default: false })
+  public isAdmin!: boolean;
+
   @prop({ ref: () => Cart })
   public carts: Ref<Cart>[];
 

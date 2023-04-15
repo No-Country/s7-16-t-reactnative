@@ -3,8 +3,6 @@ import { PerfilScreen } from "../screens/Home/PerfilScreen";
 import { ScanScreen } from "../screens/ScanScreen";
 import { HomeScreen } from "../screens/Home/Inicio";
 import { Image } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +21,7 @@ export const HomeTabs = () => {
         component={HomeScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image source={require("../assets/Navbar/home.png")} />
           ),
         }}
@@ -34,7 +32,7 @@ export const HomeTabs = () => {
         options={{
           tabBarAccessibilityLabel: "Scan",
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image
               source={require("../assets/Navbar/scan.png")}
               className="scale-100 top-2"
@@ -47,7 +45,7 @@ export const HomeTabs = () => {
         component={PerfilScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image source={require("../assets/Navbar/profile.png")} />
           ),
         }}

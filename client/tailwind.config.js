@@ -14,7 +14,7 @@ module.exports = {
       },
       fonts: {
         titulo: 24,
-        secundario: 16,
+        subtitulo: 16,
       },
     },
   },

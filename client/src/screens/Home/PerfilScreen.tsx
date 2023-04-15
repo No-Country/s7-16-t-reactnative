@@ -53,27 +53,3 @@ export const PerfilScreen = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-  // blurContainer: {
-  //   width: "80%",
-  //   height: "50%",
-  //   backgroundColor: "white",
-  //   borderRadius: 20,
-  //   overflow: "hidden",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   ...StyleSheet.absoluteFillObject,
-  //   backdropFilter: "blur(10px)",
-  // },
-  // text: {
-  //   color: "black",
-  //   fontSize: 20,
-  //   fontWeight: "bold",
-  // },
-});

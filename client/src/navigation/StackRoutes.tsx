@@ -16,72 +16,75 @@ import { PerfilScreen } from "../screens/Home/PerfilScreen";
 import { ScanScreen } from "../screens/ScanScreen";
 //Tab
 import { HomeTabs } from "./HomeTabs";
+import { NavigationContainer } from "@react-navigation/native";
 const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
-    <Stack.Navigator initialRouteName="Onboarding1Name">
-      <Stack.Screen
-        name="MainLogin"
-        component={MainLogin}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Register1"
-        component={Register1}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Register2"
-        component={Register2}
-        options={{ headerShown: false }}
-      />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Onboarding1Name">
+        <Stack.Screen
+          name="MainLogin"
+          component={MainLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register1"
+          component={Register1}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register2"
+          component={Register2}
+          options={{ headerShown: false }}
+        />
 
-      <Stack.Screen
-        name="Onboarding1Name"
-        component={Onboarding1Screen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Onboarding2Name"
-        component={Onboarding2Screen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Onboarding3Name"
-        component={Onboarding3Screen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Onboarding4Name"
-        component={Onboarding4Screen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeTabs}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MyData"
-        component={MyData}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={PerfilScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Scan"
-        component={ScanScreen}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
+        <Stack.Screen
+          name="Onboarding1Name"
+          component={Onboarding1Screen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Onboarding2Name"
+          component={Onboarding2Screen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Onboarding3Name"
+          component={Onboarding3Screen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Onboarding4Name"
+          component={Onboarding4Screen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeTabs}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MyData"
+          component={MyData}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={PerfilScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Scan"
+          component={ScanScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };

@@ -18,7 +18,11 @@ interface Props {
 
 export const NavigateButton = ({ text, onPress, cancel, style }: Props) => {
   return (
-    <TouchableOpacity style={[styles.touchable, style]} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      style={[styles.touchable, style]}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{text}</Text>
 
       {cancel ? (

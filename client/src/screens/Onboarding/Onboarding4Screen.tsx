@@ -1,17 +1,12 @@
 import React from "react";
-import { TouchableOpacity, Text, View, Image } from "react-native";
+import { Text, View, Image } from "react-native";
 import { AppButton } from "../../components/AppButton";
-import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export const Onboarding4Screen = ({ navigation }) => {
+export const Onboarding4Screen = () => {
+  const navigation = useNavigation();
   return (
     <View className="flex self-center bg-white w-full h-full">
-      <TouchableOpacity
-        className="top-12 left-5"
-        onPress={() => navigation.navigate("Onboarding3Name")}
-      >
-        <AntDesign name="arrowleft" size={24} color="rgba(151, 151, 151, 1)" />
-      </TouchableOpacity>
       <Image
         source={require("../../assets/Onboarding/screen4.png")}
         className="self-center mt-60"
@@ -30,7 +25,7 @@ export const Onboarding4Screen = ({ navigation }) => {
       <View className="self-center top-40">
         <AppButton
           text="Comenzar"
-          onPress={() => navigation.navigate("MainLogin")}
+          onPress={() => navigation.navigate("LoginStack" as never)}
         />
       </View>
     </View>

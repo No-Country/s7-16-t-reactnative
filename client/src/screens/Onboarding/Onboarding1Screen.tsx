@@ -8,7 +8,7 @@ export const Onboarding1Screen = () => {
 
   return (
     <TouchableWithoutFeedback
-      onPress={() => navigation.navigate("Onboarding2Name")}
+      onPress={() => navigation.navigate("Onboarding2Screen" as never)}
     >
       <View className="flex self-center bg-white w-full h-full">
         <Image
@@ -33,11 +33,11 @@ export const Onboarding1Screen = () => {
         <View className="self-center top-30 mt-5">
           <AppButton
             text="Siguiente"
-            onPress={() => navigation.navigate("Onboarding2Name")}
+            onPress={() => navigation.navigate("Onboarding2Screen" as never)}
           />
           <Text
             className="text-center m-3"
-            onPress={() => navigation.navigate("MainLogin")}
+            onPress={() => navigation.navigate("LoginStack" as never)}
           >
             Saltar presentación
           </Text>

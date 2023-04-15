@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Text, View, ScrollView, Image, StyleSheet } from "react-native";
 import { NavigateButton } from "../../components/NavigateButton";
 import { ModalAlert } from "../../components/ModalAlert";
+import { useNavigation } from "@react-navigation/native";
 export const PerfilScreen = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  const navigation = useNavigation();
 
   return (
     <>
@@ -25,7 +28,7 @@ export const PerfilScreen = () => {
           <View>
             <NavigateButton
               text="Mis datos"
-              onPress={() => console.log("Mis datos")}
+              onPress={() => navigation.navigate("MyData" as never)}
             />
             <NavigateButton
               text="Mis compras"

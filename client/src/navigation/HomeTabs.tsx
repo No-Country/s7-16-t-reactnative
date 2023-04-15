@@ -4,7 +4,13 @@ import { ScanScreen } from "../screens/ScanScreen";
 import { HomeScreen } from "../screens/Home/Inicio";
 import { Image } from "react-native";
 
-const Tab = createBottomTabNavigator();
+export type RootTabParams = {
+  PerfilScreen: undefined;
+  ScanScreen: undefined;
+  HomeScreen: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootTabParams>();
 
 export const HomeTabs = () => {
   return (
@@ -17,20 +23,20 @@ export const HomeTabs = () => {
       }}
     >
       <Tab.Screen
-        name="Inicio"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           headerShown: false,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/home.png")} />
           ),
+          title: "Inicio",
         }}
       />
       <Tab.Screen
-        name=" "
+        name="ScanScreen"
         component={ScanScreen}
         options={{
-          tabBarAccessibilityLabel: "Scan",
           headerShown: false,
           tabBarIcon: () => (
             <Image
@@ -38,16 +44,18 @@ export const HomeTabs = () => {
               className="scale-100 top-2"
             />
           ),
+          title: "",
         }}
       />
       <Tab.Screen
-        name="Perfil"
+        name="PerfilScreen"
         component={PerfilScreen}
         options={{
           headerShown: false,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/profile.png")} />
           ),
+          title: "Perfil",
         }}
       />
     </Tab.Navigator>

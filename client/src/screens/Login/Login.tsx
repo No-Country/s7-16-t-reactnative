@@ -13,7 +13,6 @@ import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
 import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
 
 export const Login = () => {
   const { handleSubmit } = useLogin();
@@ -26,12 +25,6 @@ export const Login = () => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView>
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          onPress={() => navigation.goBack()}
-        />
         <Image style={styles.image} source={require("../../assets/logo.png")} />
         <View style={styles.form}>
           <Formik

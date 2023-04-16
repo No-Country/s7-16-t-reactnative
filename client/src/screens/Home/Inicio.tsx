@@ -3,10 +3,6 @@ import { Text, View, Image, TouchableOpacity } from "react-native";
 export const HomeScreen = () => {
   return (
     <View className="bg-white w-full h-full">
-      <Image
-        source={require("../../assets/logo.png")}
-        className="w-[129] h-[61] mt-10 self-center"
-      />
       <View className="relative">
         <TouchableOpacity>
           <Image

@@ -10,7 +10,6 @@ import { PrimaryBtn } from "../../components/LoginButton";
 import InputComponent from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
-import { AntDesign } from "@expo/vector-icons";
 import { useRegister } from "../../hooks/useRegister";
 import { useNavigation } from "@react-navigation/native";
 interface Values {
@@ -30,13 +29,6 @@ export const Register1 = () => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView keyboardShouldPersistTaps="always">
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
         <Formik
           validationSchema={registerValidationSchema}
           initialValues={{

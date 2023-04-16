@@ -17,7 +17,7 @@ export const OnboardingStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerTintColor: "#979797",
       }}
     >
       <Stack.Screen
@@ -28,17 +28,17 @@ export const OnboardingStack = () => {
       <Stack.Screen
         name="Onboarding2Screen"
         component={Onboarding2Screen}
-        options={{ headerShown: false }}
+        options={{ headerTransparent: true, headerTitle: "" }}
       />
       <Stack.Screen
         name="Onboarding3Screen"
         component={Onboarding3Screen}
-        options={{ headerShown: false }}
+        options={{ headerTransparent: true, headerTitle: "" }}
       />
       <Stack.Screen
         name="Onboarding4Screen"
         component={Onboarding4Screen}
-        options={{ headerShown: false }}
+        options={{ headerTransparent: true, headerTitle: "" }}
       />
     </Stack.Navigator>
   );

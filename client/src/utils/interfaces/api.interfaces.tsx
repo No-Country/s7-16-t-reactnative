@@ -41,6 +41,7 @@ export interface ProductResponse {
   product: Product;
 }
 
+// Login response
 export interface LoginResponse {
   message: string;
   userResponse: UserResponse;

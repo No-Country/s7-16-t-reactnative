@@ -48,7 +48,12 @@ export const Login = async ({ email, password }: LoginData) => {
 
 export const Register = async (data: RegisterData) => {
   try {
-    const res = await api.post<RegisterRes>(`/auth/register`, { data });
+    const res = await api.post<RegisterRes>(`/auth/register`, data, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
+    console.log(res);
     return res;
   } catch (error) {
     console.log(error);

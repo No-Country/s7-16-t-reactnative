@@ -7,22 +7,21 @@ import {
   Platform,
 } from "react-native";
 import { PrimaryBtn } from "../../components/LoginButton";
-import InputComponent2 from "../../components/InputComponent";
+import InputComponent from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
 import { AntDesign } from "@expo/vector-icons";
-
+import { useRegister } from "../../hooks/useRegister";
+import { useNavigation } from "@react-navigation/native";
 interface Values {
   email: string;
   password: string;
-  password2: string;
+  confirmPassword: string;
 }
 
-export const Register1 = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("Register2");
-  };
+export const Register1 = () => {
+  const navigation = useNavigation();
+  const { handleSubmit1 } = useRegister();
 
   return (
     <KeyboardAvoidingView
@@ -30,7 +29,7 @@ export const Register1 = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <AntDesign
           style={styles.back}
           name="arrowleft"
@@ -40,8 +39,12 @@ export const Register1 = ({ navigation }) => {
         />
         <Formik
           validationSchema={registerValidationSchema}
-          initialValues={{ email: "", password: "", password2: "" }}
-          onSubmit={handleSubmit}
+          initialValues={{
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          onSubmit={handleSubmit1 as never}
         >
           {(props: FormikProps<Values>) => (
             <>
@@ -49,22 +52,25 @@ export const Register1 = ({ navigation }) => {
                 Estamos felices de que seas parte
               </Text>
               <View style={styles.form}>
-                <InputComponent2
+                <InputComponent
                   name="email"
                   style={styles.input}
                   placeholder="Mail"
+                  inputMode="email"
                 />
-                <InputComponent2
+                <InputComponent
                   name="password"
                   style={styles.input}
                   placeholder="Contraseña"
                   type={true}
+                  inputMode="text"
                 />
-                <InputComponent2
-                  name="password2"
+                <InputComponent
+                  name="confirmPassword"
                   style={styles.input}
                   placeholder="Repite tu contraseña"
                   type={true}
+                  inputMode="text"
                 />
               </View>
               <View style={styles.buttons}>
@@ -72,13 +78,15 @@ export const Register1 = ({ navigation }) => {
                   width={135}
                   text="REGISTRARME"
                   onPress={props.handleSubmit}
+                  marginTop={undefined}
+                  icon={undefined}
                 />
                 <PrimaryBtn
                   icon="google"
                   width={244}
                   marginTop={24}
                   text="REGISTRATE CON GOOGLE"
-                  onPress={() => navigation.navigate("Register1")}
+                  onPress={() => navigation.navigate("Register1" as never)}
                 />
               </View>
             </>

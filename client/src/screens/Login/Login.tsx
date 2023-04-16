@@ -12,11 +12,9 @@ import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
-import { useNavigation } from "@react-navigation/native";
 
 export const Login = () => {
   const { handleSubmit } = useLogin();
-  const navigation = useNavigation();
 
   return (
     <KeyboardAvoidingView
@@ -39,12 +37,14 @@ export const Login = () => {
                     name="email"
                     style={styles.input}
                     placeholder="Mail"
+                    inputMode="email"
                   />
                   <InputComponent
                     name="password"
                     style={styles.input}
                     placeholder="Contraseña"
                     type={true}
+                    inputMode="text"
                   />
                   <Text style={styles.question}>
                     ¿Olvidaste tu constraseña?

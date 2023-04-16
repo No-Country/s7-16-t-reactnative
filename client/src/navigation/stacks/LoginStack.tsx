@@ -22,9 +22,21 @@ export const LoginStack = () => {
         component={MainLogin}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register1" component={Register1} />
-      <Stack.Screen name="Register2" component={Register2} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerTransparent: true, headerTitle: "" }}
+      />
+      <Stack.Screen
+        name="Register1"
+        component={Register1}
+        options={{ headerTransparent: true, headerTitle: "" }}
+      />
+      <Stack.Screen
+        name="Register2"
+        component={Register2}
+        options={{ headerTransparent: true, headerTitle: "" }}
+      />
     </Stack.Navigator>
   );
 };

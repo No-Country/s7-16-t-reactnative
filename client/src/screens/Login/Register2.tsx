@@ -60,13 +60,6 @@ export const Register2 = () => {
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
       <ScrollView keyboardShouldPersistTaps="always">
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
         <Formik
           validationSchema={registerValidationSchema2}
           initialValues={{

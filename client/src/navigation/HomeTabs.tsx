@@ -3,6 +3,7 @@ import { PerfilScreen } from "../screens/Home/PerfilScreen";
 import { ScanScreen } from "../screens/ScanScreen";
 import { HomeScreen } from "../screens/Home/Inicio";
 import { Image } from "react-native";
+import { useStack } from "../hooks/useStack";
 
 export type RootTabParams = {
   PerfilScreen: undefined;
@@ -13,6 +14,8 @@ export type RootTabParams = {
 const Tab = createBottomTabNavigator<RootTabParams>();
 
 export const HomeTabs = () => {
+  const { headerTitleSinBack } = useStack();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -26,10 +29,11 @@ export const HomeTabs = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerShown: false,
+          headerTransparent: true,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/home.png")} />
           ),
+          headerTitle: headerTitleSinBack,
           title: "Inicio",
         }}
       />
@@ -51,10 +55,11 @@ export const HomeTabs = () => {
         name="PerfilScreen"
         component={PerfilScreen}
         options={{
-          headerShown: false,
+          headerTransparent: true,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/profile.png")} />
           ),
+          headerTitle: headerTitleSinBack,
           title: "Perfil",
         }}
       />

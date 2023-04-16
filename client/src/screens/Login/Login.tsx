@@ -12,9 +12,10 @@ import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
+import { Loader } from "../../components/Loader";
 
 export const Login = () => {
-  const { handleSubmit } = useLogin();
+  const { handleSubmit, isLoading } = useLogin();
 
   return (
     <KeyboardAvoidingView
@@ -64,6 +65,7 @@ export const Login = () => {
           </Formik>
         </View>
       </ScrollView>
+      <Loader isLoading={isLoading} />
     </KeyboardAvoidingView>
   );
 };

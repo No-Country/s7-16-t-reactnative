@@ -6,7 +6,7 @@ import { HomeTabs } from "./src/navigation/HomeTabs";
 export default function App() {
   return (
     <NavigationContainer>
-      <StackRoutes />
+      <ScanScreen />
     </NavigationContainer>
   );
 }

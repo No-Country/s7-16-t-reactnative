@@ -41,7 +41,10 @@ export const ScanScreen = () => {
     if (scanning || scanned) {
       return;
     }
-
+    if (products.some((p) => p._id === p._id)) {
+      alert("Este producto ya fue escaneado");
+      setModalVisible(false);
+    }
     setScanning(true);
 
     const res = await getOneProduct(Number(result.data));

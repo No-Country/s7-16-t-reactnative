@@ -40,9 +40,7 @@ export const Login = async ({ email, password }: LoginData) => {
 
     return res;
   } catch (error) {
-    alert(
-      "Hubo un error en el servidor. Por favor, inténtelo de nuevo más tarde o contáctese con el soporte técnico."
-    );
+    console.log(error);
   }
 };
 

@@ -3,10 +3,18 @@ import { Text, View, Image } from "react-native";
 import { NavigateButton } from "../../components/NavigateButton";
 import { ModalAlert } from "../../components/ModalAlert";
 import { useNavigation } from "@react-navigation/native";
+import { UseUserStore } from "../../store/UserStore";
 export const PerfilScreen = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation();
+
+  const confirm = () => {
+    UseUserStore.getState().logout();
+    UseUserStore.getState().setUser(null);
+    navigation.navigate("LoginStack" as never);
+    setModalVisible(false);
+  };
 
   return (
     <>
@@ -44,6 +52,9 @@ export const PerfilScreen = () => {
         <ModalAlert
           modalVisible={modalVisible}
           closeModal={() => setModalVisible(false)}
+          title="¡Atención!"
+          body="¿Estás seguro que deseas cerrar sesión en “SmartShop?"
+          confirm={confirm}
         />
       )}
     </>

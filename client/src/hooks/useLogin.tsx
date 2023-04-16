@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import { Login } from "../utils/api/smartShopDB";
 import { UseUserStore } from "../store/UserStore";
-import { useState } from "react";
 import { useLoader } from "./useLoader";
+import { useState } from "react";
 
 export interface Values {
   email: string;
@@ -16,6 +16,8 @@ export const useLogin = () => {
 
   const setUser = UseUserStore((state) => state.setUser);
 
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
   const handleSubmit = async (values: Values) => {
     openLoader();
     console.log(values);
@@ -25,6 +27,8 @@ export const useLogin = () => {
     if (res && res.status === 200 && res.data) {
       setUser(res.data.userResponse);
       navigation.navigate("StackNavigation" as never);
+    } else {
+      setModalVisible(true);
     }
 
     closeLoader();
@@ -33,5 +37,7 @@ export const useLogin = () => {
   return {
     handleSubmit,
     isLoading,
+    modalVisible,
+    setModalVisible,
   };
 };

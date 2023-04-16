@@ -113,4 +113,9 @@ const styles = StyleSheet.create({
     height: 142,
     width: 226,
   },
+  eye: {
+    position: "absolute",
+    right: 35,
+    top: -57,
+  },
 });

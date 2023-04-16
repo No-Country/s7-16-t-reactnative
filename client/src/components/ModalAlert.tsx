@@ -1,6 +1,8 @@
 import React from "react";
 import { Modal, Text, View, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
+import { UseUserStore } from "../store/UserStore";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   modalVisible: boolean;
@@ -8,9 +10,13 @@ interface Props {
 }
 
 export const ModalAlert = ({ modalVisible, closeModal }: Props) => {
-  const confirm = () => {
-    console.log("confirm");
+  const navigation = useNavigation();
 
+  const confirm = () => {
+    UseUserStore.getState().logout();
+    UseUserStore.getState().setUser(null);
+
+    navigation.navigate("LoginStack" as never);
     closeModal();
   };
 

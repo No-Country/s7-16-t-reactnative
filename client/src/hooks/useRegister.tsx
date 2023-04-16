@@ -2,8 +2,17 @@ import { useNavigation } from "@react-navigation/native";
 import { Register, Login } from "../utils/api/smartShopDB";
 import { UseRegisterStore } from "../store/RegisterStore";
 import { UseUserStore } from "../store/UserStore";
-import { RegisterData } from "../utils/interfaces/api.interfaces";
+import { useLoader } from "./useLoader";
 
+export interface PartialValues {
+  firstName: string;
+  lastName: string;
+  documentType: string;
+  dni: string;
+  genre: string;
+  phNumber: string;
+  birthdate: string;
+}
 export interface Values {
   email: string;
   password: string;
@@ -21,6 +30,7 @@ export const useRegister = () => {
   const navigation = useNavigation();
   const setRegister = UseRegisterStore((state) => state.setRegister);
   const setUser = UseUserStore((state) => state.setUser);
+  const { closeLoader, openLoader, isLoading } = useLoader();
 
   const handleSubmit1 = async (values: Values) => {
     setRegister(values);
@@ -32,33 +42,15 @@ export const useRegister = () => {
     const valoresFinales = { ...register, ...values };
     valoresFinales.dni = Number(valoresFinales.dni);
     valoresFinales.phNumber = Number(valoresFinales.phNumber);
-    const birth = new Date();
+
     setRegister(valoresFinales);
 
-    const valores: RegisterData = {
-      firstName: "pepe",
-      lastName: "grillo",
-      dni: 12313123,
-      email: "pepe@grillo.com",
-      password: "1231233",
-      confirmPassword: "1231233",
-      phNumber: 123123123,
-      birthdate: birth,
-      documentType: "DNI",
-      genre: "Masculino",
-    };
-    console.log("valores:");
-    console.log(valores);
-    console.log("values:");
-    console.log(valoresFinales);
-
     try {
+      openLoader();
       const resRegister = await Register(valoresFinales);
       console.log(resRegister);
-
       if (resRegister && resRegister.data.error === false) {
-        setRegister(valores);
-        console.log("trying to login");
+        setRegister(valoresFinales);
         const resLogin = await Login({
           email: valoresFinales.email,
           password: valoresFinales.password,
@@ -68,6 +60,7 @@ export const useRegister = () => {
           navigation.navigate("StackNavigation" as never);
         }
       }
+      closeLoader();
     } catch (errores) {
       console.log(errores);
     }
@@ -76,5 +69,6 @@ export const useRegister = () => {
   return {
     handleSubmit1,
     handleSubmit2,
+    isLoading,
   };
 };

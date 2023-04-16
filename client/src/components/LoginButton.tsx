@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { AntDesign } from "@expo/vector-icons";
+
 interface Props {
   width: number | undefined;
   marginTop: number | undefined;
@@ -52,10 +53,7 @@ export const PrimaryBtn = ({
         }}
       >
         {icon === "google" && (
-          <Icon name="google" size={23} color="rgba(10, 76, 134, 1)" />
-        )}
-        {icon === "facebook" && (
-          <Icon name="facebook" size={23} color="rgba(10, 76, 134, 1)" />
+          <AntDesign name="google" size={23} color="rgba(10, 76, 134, 1)" />
         )}
         <Text className={"color-secundario"} style={styles.primaryBtnText}>
           {text}

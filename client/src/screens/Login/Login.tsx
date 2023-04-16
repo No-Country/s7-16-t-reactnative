@@ -12,66 +12,77 @@ import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
-import { useNavigation } from "@react-navigation/native";
-import { AntDesign } from "@expo/vector-icons";
+import { Loader } from "../../components/Loader";
+import { ModalAlert } from "../../components/ModalAlert";
 
 export const Login = () => {
-  const { handleSubmit } = useLogin();
-  const navigation = useNavigation();
+  const { handleSubmit, isLoading, modalVisible, setModalVisible } = useLogin();
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      <ScrollView>
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          onPress={() => navigation.goBack()}
+    <>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      >
+        <ScrollView>
+          <Image
+            style={styles.image}
+            source={require("../../assets/logo.png")}
+          />
+          <View style={styles.form}>
+            <Formik
+              validationSchema={loginValidationSchema}
+              initialValues={{ email: "", password: "" }}
+              onSubmit={(values) => handleSubmit(values)}
+            >
+              {(props: FormikProps<Values>) => (
+                <>
+                  <View>
+                    <InputComponent
+                      name="email"
+                      style={styles.input}
+                      placeholder="Mail"
+                      inputMode="email"
+                    />
+                    <InputComponent
+                      name="password"
+                      style={styles.input}
+                      placeholder="Contraseña"
+                      type={true}
+                      inputMode="text"
+                    />
+                    <Text style={styles.question}>
+                      ¿Olvidaste tu constraseña?
+                    </Text>
+                  </View>
+                  <View style={styles.buttons}>
+                    <SecundaryBtn
+                      width={146}
+                      text="INICIAR SESIÓN"
+                      onPress={props.handleSubmit}
+                      marginTop={undefined}
+                      icon={undefined}
+                    />
+                  </View>
+                </>
+              )}
+            </Formik>
+          </View>
+        </ScrollView>
+        <Loader isLoading={isLoading} />
+      </KeyboardAvoidingView>
+
+      {modalVisible && (
+        <ModalAlert
+          title="¡Atención!"
+          body="Mail o contraseña incorrecta, intente nuevamente"
+          modalVisible={modalVisible}
+          closeModal={() => setModalVisible(false)}
+          confirm={() => setModalVisible(false)}
         />
-        <Image style={styles.image} source={require("../../assets/logo.png")} />
-        <View style={styles.form}>
-          <Formik
-            validationSchema={loginValidationSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => handleSubmit(values)}
-          >
-            {(props: FormikProps<Values>) => (
-              <>
-                <View>
-                  <InputComponent
-                    name="email"
-                    style={styles.input}
-                    placeholder="Mail"
-                  />
-                  <InputComponent
-                    name="password"
-                    style={styles.input}
-                    placeholder="Contraseña"
-                    type={true}
-                  />
-                  <Text style={styles.question}>
-                    ¿Olvidaste tu constraseña?
-                  </Text>
-                </View>
-                <View style={styles.buttons}>
-                  <SecundaryBtn
-                    width={146}
-                    text="INICIAR SESIÓN"
-                    onPress={props.handleSubmit}
-                    marginTop={undefined}
-                    icon={undefined}
-                  />
-                </View>
-              </>
-            )}
-          </Formik>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      )}
+    </>
   );
 };
 
@@ -119,5 +130,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     height: 142,
     width: 226,
+  },
+  eye: {
+    position: "absolute",
+    right: 35,
+    top: -57,
   },
 });

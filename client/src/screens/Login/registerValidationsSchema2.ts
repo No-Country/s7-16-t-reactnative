@@ -1,23 +1,23 @@
 import * as yup from "yup";
 
 export const registerValidationSchema2 = yup.object().shape({
-  firstname: yup
+  firstName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, "· El campo debe contener solo letras")
     .min(3, ({ min }) => `· Ingresa al menos ${min} caracteres!`)
     .required("· El campo no debe estar vacío"),
-  lastname: yup
+  lastName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, "· El campo debe contener unicamente letras")
     .min(3, ({ min }) => `· Ingresa al menos ${min} caracteres!`)
     .required("· El campo no debe estar vacío"),
-  gender: yup.string().required("· El campo no debe estar vacío"),
+  genre: yup.string().required("· El campo no debe estar vacío"),
   documentType: yup.string().required("· El campo no debe estar vacío"),
-  documentNumber: yup
+  dni: yup
     .string()
     .matches(/^[0-9]+$/, "· El campo debe contener solo números")
     .required("· El campo no debe estar vacío"),
-  mobile: yup
+  phNumber: yup
     .string()
     .matches(/^[0-9]+$/, "· El campo debe contener solo números")
     .min(7, "· El número debe tener al menos 7 dígitos")
@@ -35,7 +35,6 @@ export const registerValidationSchema2 = yup.object().shape({
       const date = new Date(originalValue);
       return isNaN(date.getTime()) ? undefined : date;
     })
-    .nullable(true)
     .max(new Date(), "· No puede ser posterior a la fecha actual")
     .required("· La fecha de nacimiento es obligatoria")
     .test(

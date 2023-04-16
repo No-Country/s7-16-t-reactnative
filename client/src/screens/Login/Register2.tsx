@@ -11,44 +11,13 @@ import InputComponent from "../../components/InputComponent";
 import PickerComponent from "../../components/PickerComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema2 } from "./registerValidationsSchema2";
-import { AntDesign } from "@expo/vector-icons";
 import DateTimePickerComponent from "../../components/DatePickerComponent";
+import { useRegister, PartialValues } from "../../hooks/useRegister";
+import { documentTypes, genres } from "../../utils/helpers/pickerItems";
+import { Loader } from "../../components/Loader";
 
-const documentTypes: object[] = [
-  { id: 1, nombre: "DNI-Argentina" },
-  { id: 2, nombre: "CURP-México" },
-  { id: 3, nombre: "RUT-Chile" },
-  { id: 4, nombre: "CI-Uruguay" },
-  { id: 5, nombre: "DPI-Guatemala" },
-  { id: 6, nombre: "CPF-Brasil" },
-  { id: 7, nombre: "INE-Honduras" },
-  { id: 8, nombre: "DUI-El Salvador" },
-  { id: 9, nombre: "IFE-México" },
-  { id: 10, nombre: "DNI-Perú" },
-];
-
-const genres: object[] = [
-  { id: 1, nombre: "Masculino" },
-  { id: 2, nombre: "Femenino" },
-  { id: 3, nombre: "No binario" },
-  { id: 4, nombre: "Género fluido" },
-  { id: 5, nombre: "Otro" },
-];
-interface Values {
-  firstname: string;
-  lastname: string;
-  gender: string;
-  documentType: string;
-  documentNumber: string;
-  mobile: string;
-  birthdate: string;
-}
-
-export const Register2 = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("MyData");
-  };
+export const Register2 = () => {
+  const { handleSubmit2, isLoading } = useRegister();
 
   return (
     <KeyboardAvoidingView
@@ -56,42 +25,37 @@ export const Register2 = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
+      <ScrollView keyboardShouldPersistTaps="always">
         <Formik
           validationSchema={registerValidationSchema2}
           initialValues={{
-            firstname: "",
-            lastname: "",
-            gender: "",
-            documentNumber: "",
+            firstName: "",
+            lastName: "",
+            genre: "",
+            dni: "",
             documentType: "",
-            mobile: "",
+            phNumber: "",
             birthdate: "",
           }}
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit2 as never}
         >
-          {(props: FormikProps<Values>) => (
+          {(props: FormikProps<PartialValues>) => (
             <>
               <Text style={styles.title}>
                 Estamos felices de que seas parte
               </Text>
               <View>
                 <InputComponent
-                  name="firstname"
+                  name="firstName"
                   style={styles.input}
                   placeholder="Nombre"
+                  inputMode="text"
                 />
                 <InputComponent
-                  name="lastname"
+                  name="lastName"
                   style={styles.input}
                   placeholder="Apellido"
+                  inputMode="text"
                 />
                 <PickerComponent
                   name="documentType"
@@ -102,15 +66,16 @@ export const Register2 = ({ navigation }) => {
                   isSubmmiting={props.submitCount}
                 />
                 <InputComponent
-                  name="documentNumber"
+                  name="dni"
                   style={styles.input}
                   placeholder="Numero de Documento"
+                  inputMode="decimal"
                 />
                 <PickerComponent
-                  name="gender"
+                  name="genre"
                   style={styles.input}
                   placeholder="Sexo"
-                  label="Género"
+                  label="Sexo"
                   list={genres}
                   isSubmmiting={props.submitCount}
                 />
@@ -120,22 +85,26 @@ export const Register2 = ({ navigation }) => {
                   mode="date"
                 />
                 <InputComponent
-                  name="mobile"
+                  name="phNumber"
                   style={styles.input}
                   placeholder="Numero de Celular"
+                  inputMode="decimal"
                 />
               </View>
               <View style={styles.buttons}>
                 <PrimaryBtn
                   width={135}
                   text="REGISTRARME"
-                  onPress={() => navigation.navigate("Login")}
+                  onPress={props.handleSubmit}
+                  marginTop={undefined}
+                  icon={undefined}
                 />
               </View>
             </>
           )}
         </Formik>
       </ScrollView>
+      <Loader isLoading={isLoading} />
     </KeyboardAvoidingView>
   );
 };

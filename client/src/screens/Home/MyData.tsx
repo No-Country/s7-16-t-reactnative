@@ -3,7 +3,6 @@ import InputComponent from "../../components/InputComponent";
 import { Formik } from "formik";
 import { AppButton } from "../../components/AppButton";
 import TextTitle from "../../components/TextTitle";
-import { Ionicons } from "@expo/vector-icons";
 import { UseUserStore } from "../../store/UserStore";
 
 interface MyDataValues {
@@ -31,15 +30,8 @@ const MyData = () => {
 
   return (
     <>
-      <ScrollView className="w-full pb-5">
-        <View className="pb-5">
-          <View className="flex flex-row py-14 gap-28 w-full justify-start">
-            <Ionicons name="chevron-back" size={24} color="black" />
-            <Image
-              className="flex w-32 h-14 justify-center"
-              source={require("../../assets/logo.png")}
-            />
-          </View>
+      <ScrollView className="bg-white">
+        <View className="w-ful mt-32">
           {/* VIEW PARA LAS IMAGENES */}
           <View className="flex flex-col gap-4 justify-center items-center">
             <Image
@@ -55,7 +47,7 @@ const MyData = () => {
             onSubmit={(values) => console.log(values)}
           >
             {({ values, handleChange, handleBlur, handleSubmit }) => (
-              <View className="bg-white flex flex-col gap-5 justify-center">
+              <View className="flex flex-col gap-5 justify-center">
                 {/* VIEW PARA LOS INPUTS */}
                 <View className="flex pl-5 pr-5">
                   <InputComponent

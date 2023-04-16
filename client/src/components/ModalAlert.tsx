@@ -1,25 +1,22 @@
 import React from "react";
 import { Modal, Text, View, TouchableOpacity } from "react-native";
 import { BlurView } from "expo-blur";
-import { UseUserStore } from "../store/UserStore";
-import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   modalVisible: boolean;
-  closeModal: () => void;
+  closeModal: () => void; // cierra el modal
+  title: string; // titulo de la alerta
+  body: string; // cuerpo de la alerta
+  confirm: () => void; // funcion que se ejecuta al tocar aceptar
 }
 
-export const ModalAlert = ({ modalVisible, closeModal }: Props) => {
-  const navigation = useNavigation();
-
-  const confirm = () => {
-    UseUserStore.getState().logout();
-    UseUserStore.getState().setUser(null);
-
-    navigation.navigate("LoginStack" as never);
-    closeModal();
-  };
-
+export const ModalAlert = ({
+  modalVisible,
+  closeModal,
+  title,
+  body,
+  confirm,
+}: Props) => {
   return (
     <Modal
       animationType="fade"
@@ -42,11 +39,9 @@ export const ModalAlert = ({ modalVisible, closeModal }: Props) => {
             },
           }}
         >
-          <Text className="text-xl font-medium text-center mb-3">
-            ¡Atención!
-          </Text>
+          <Text className="text-xl font-medium text-center mb-3">{title}</Text>
           <Text className="text-grayApp text-center mx-5 text-base mb-5">
-            ¿Estás seguro que deseas cerrar sesión en “SmartShop?
+            {body}
           </Text>
 
           <View className="items-end">

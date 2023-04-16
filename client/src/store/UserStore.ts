@@ -3,7 +3,7 @@ import { UserResponse } from "../utils/interfaces/api.interfaces";
 
 export interface UserState {
   user: null | UserResponse;
-  setUser: (user: UserResponse) => void;
+  setUser: (user: UserResponse | null) => void;
   logout: () => void;
 }
 

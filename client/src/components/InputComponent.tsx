@@ -48,7 +48,7 @@ const InputComponent: React.FC<InputProps> = ({
       />
       {type && (
         <TouchableWithoutFeedback onPress={handleClickEyeIcon}>
-          <View style={{ position: "relative" }}>
+          <View style={styles.eyeContainer}>
             {showPassword ? (
               <Ionicons
                 style={styles.eye}
@@ -94,10 +94,17 @@ export default InputComponent;
 
 const styles = StyleSheet.create({
   eye: {
-    position: "absolute",
-    right: 25,
-    top: -63,
     backgroundColor: "white",
     padding: 5,
+    zIndex: 9999,
+  },
+  eyeContainer: {
+    position: "absolute",
+    top: 8,
+    right: 25,
+    width: 34,
+    height: 34,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

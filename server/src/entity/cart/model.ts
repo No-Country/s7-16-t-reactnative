@@ -1,4 +1,5 @@
 import { prop, Ref, getModelForClass, mongoose } from '@typegoose/typegoose';
+import { Product } from '../products/model';
 
 export class Cart {
   @prop({ required: true })
@@ -7,20 +8,20 @@ export class Cart {
     ref: 'User';
   };
 
-  @prop()
+  @prop({ required: false })
   public products?: [
     {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId;
-        ref: 'Product';
-        required: true;
-      };
-      quantity: {
-        type: Number;
-        required: true;
-      };
+      productId: Ref<Product>;
+      quantity: Number;
     },
   ];
+
+  @prop({ required: true, default: 0 })
+  public totalPrice!: Number;
+
+  @prop({ required: true, default: "open" })
+  public status!: string;
+
 }
 
 export const CartModel = getModelForClass(Cart, {

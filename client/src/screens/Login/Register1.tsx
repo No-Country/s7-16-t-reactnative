@@ -1,6 +1,7 @@
 import {
   Text,
   View,
+  Image,
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
@@ -43,6 +44,10 @@ export const Register1 = () => {
               <Text style={styles.title}>
                 Estamos felices de que seas parte
               </Text>
+              <Image
+                style={styles.image}
+                source={require("../../assets/logo.png")}
+              />
               <View style={styles.form}>
                 <InputComponent
                   name="email"
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 19,
   },
   form: {
-    marginTop: 130,
+    marginTop: 12,
   },
   input: {
     width: "88%",
@@ -116,5 +121,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 118,
     marginBottom: 100,
+  },
+  image: {
+    marginTop: 10,
+    alignSelf: "center",
+    height: 142,
+    width: 150,
   },
 });

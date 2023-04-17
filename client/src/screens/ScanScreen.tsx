@@ -41,7 +41,6 @@ export const ScanScreen = () => {
     if (scanning || scanned) {
       return;
     }
-
     setScanning(true);
 
     const res = await getOneProduct(Number(result.data));
@@ -127,6 +126,9 @@ export const ScanScreen = () => {
           </View>
           {/* Productos */}
           <ScrollView className="bg-white">
+            <Text className="text-center text-acento">
+              Deslizá para eliminar productos de tu carrito
+            </Text>
             {products.length > 0 &&
               products.map((prod: Product) => (
                 <CardProduct key={prod._id} product={prod} />

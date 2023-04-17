@@ -27,7 +27,7 @@ export const getOneProduct = async (barcode: number) => {
     return res;
   } catch (error) {
     console.log(error);
-    alert("Error al buscar el producto en la base de datos");
+    alert("No se encontró el producto. Vuelve a intentarlo");
   }
 };
 

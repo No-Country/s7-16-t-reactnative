@@ -16,13 +16,13 @@ export const registerValidationSchema = yup.object().shape({
       ({ min }) => `· Tu contraseña debe tener al menos ${min} caracteres`
     )
     .required("· El campo no debe estar vacío"),
-  password2: yup
+  confirmPassword: yup
     .string()
     .min(
       7,
       ({ min }) => `· Tu contraseña debe tener al menos ${min} caracteres`
     )
     .required("· El campo no debe estar vacío")
-    .oneOf([yup.ref("password"), null], "· Las contraseñas no coinciden")
+    .oneOf([yup.ref("password"), ""], "· Las contraseñas no coinciden")
     .required("· El campo no debe estar vacío"),
 });

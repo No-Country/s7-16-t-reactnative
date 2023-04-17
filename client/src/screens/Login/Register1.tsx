@@ -1,28 +1,27 @@
 import {
   Text,
   View,
+  Image,
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
   Platform,
 } from "react-native";
 import { PrimaryBtn } from "../../components/LoginButton";
-import InputComponent2 from "../../components/InputComponent";
+import InputComponent from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
-import { AntDesign } from "@expo/vector-icons";
-
+import { useRegister } from "../../hooks/useRegister";
+import { useNavigation } from "@react-navigation/native";
 interface Values {
   email: string;
   password: string;
-  password2: string;
+  confirmPassword: string;
 }
 
-export const Register1 = ({ navigation }) => {
-  const handleSubmit = () => {
-    console.log("No hay errores");
-    navigation.navigate("Register2");
-  };
+export const Register1 = () => {
+  const navigation = useNavigation();
+  const { handleSubmit1 } = useRegister();
 
   return (
     <KeyboardAvoidingView
@@ -30,41 +29,45 @@ export const Register1 = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
     >
-      <ScrollView>
-        <AntDesign
-          style={styles.back}
-          name="arrowleft"
-          size={24}
-          color="black"
-          onPress={() => navigation.goBack()}
-        />
+      <ScrollView keyboardShouldPersistTaps="always">
         <Formik
           validationSchema={registerValidationSchema}
-          initialValues={{ email: "", password: "", password2: "" }}
-          onSubmit={handleSubmit}
+          initialValues={{
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          onSubmit={handleSubmit1 as never}
         >
           {(props: FormikProps<Values>) => (
             <>
               <Text style={styles.title}>
                 Estamos felices de que seas parte
               </Text>
+              <Image
+                style={styles.image}
+                source={require("../../assets/logo.png")}
+              />
               <View style={styles.form}>
-                <InputComponent2
+                <InputComponent
                   name="email"
                   style={styles.input}
                   placeholder="Mail"
+                  inputMode="email"
                 />
-                <InputComponent2
+                <InputComponent
                   name="password"
                   style={styles.input}
                   placeholder="Contraseña"
                   type={true}
+                  inputMode="text"
                 />
-                <InputComponent2
-                  name="password2"
+                <InputComponent
+                  name="confirmPassword"
                   style={styles.input}
                   placeholder="Repite tu contraseña"
                   type={true}
+                  inputMode="text"
                 />
               </View>
               <View style={styles.buttons}>
@@ -72,13 +75,15 @@ export const Register1 = ({ navigation }) => {
                   width={135}
                   text="REGISTRARME"
                   onPress={props.handleSubmit}
+                  marginTop={undefined}
+                  icon={undefined}
                 />
                 <PrimaryBtn
                   icon="google"
                   width={244}
                   marginTop={24}
                   text="REGISTRATE CON GOOGLE"
-                  onPress={() => navigation.navigate("Register1")}
+                  onPress={() => navigation.navigate("Register1" as never)}
                 />
               </View>
             </>
@@ -99,7 +104,7 @@ const styles = StyleSheet.create({
     marginLeft: 19,
   },
   form: {
-    marginTop: 130,
+    marginTop: 12,
   },
   input: {
     width: "88%",
@@ -116,5 +121,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 118,
     marginBottom: 100,
+  },
+  image: {
+    marginTop: 10,
+    alignSelf: "center",
+    height: 142,
+    width: 150,
   },
 });

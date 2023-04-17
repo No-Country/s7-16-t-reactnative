@@ -3,10 +3,19 @@ import { PerfilScreen } from "../screens/Home/PerfilScreen";
 import { ScanScreen } from "../screens/ScanScreen";
 import { HomeScreen } from "../screens/Home/Inicio";
 import { Image } from "react-native";
+import { useStack } from "../hooks/useStack";
 
-const Tab = createBottomTabNavigator();
+export type RootTabParams = {
+  PerfilScreen: undefined;
+  ScanScreen: undefined;
+  HomeScreen: undefined;
+};
+
+const Tab = createBottomTabNavigator<RootTabParams>();
 
 export const HomeTabs = () => {
+  const { headerTitleSinBack } = useStack();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -17,20 +26,21 @@ export const HomeTabs = () => {
       }}
     >
       <Tab.Screen
-        name="Inicio"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
-          headerShown: false,
+          headerTransparent: true,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/home.png")} />
           ),
+          headerTitle: headerTitleSinBack,
+          title: "Inicio",
         }}
       />
       <Tab.Screen
-        name=" "
+        name="ScanScreen"
         component={ScanScreen}
         options={{
-          tabBarAccessibilityLabel: "Scan",
           headerShown: false,
           tabBarIcon: () => (
             <Image
@@ -38,16 +48,19 @@ export const HomeTabs = () => {
               className="scale-100 top-2"
             />
           ),
+          title: "",
         }}
       />
       <Tab.Screen
-        name="Perfil"
+        name="PerfilScreen"
         component={PerfilScreen}
         options={{
-          headerShown: false,
+          headerTransparent: true,
           tabBarIcon: () => (
             <Image source={require("../assets/Navbar/profile.png")} />
           ),
+          headerTitle: headerTitleSinBack,
+          title: "Perfil",
         }}
       />
     </Tab.Navigator>

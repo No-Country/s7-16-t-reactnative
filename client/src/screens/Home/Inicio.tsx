@@ -1,10 +1,11 @@
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 export const HomeScreen = () => {
   const navigation = useNavigation();
   return (
     <View className="bg-white w-full h-full">
-      <View className="relative">
+      <View className="top-20">
         <TouchableOpacity>
           <Image
             source={require("../../assets/qr.png")}

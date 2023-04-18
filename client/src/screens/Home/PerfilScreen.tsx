@@ -8,7 +8,7 @@ export const PerfilScreen = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
   const navigation = useNavigation();
-
+  const user = UseUserStore.getState().user;
   const confirm = () => {
     UseUserStore.getState().logout();
     UseUserStore.getState().setUser(null);
@@ -21,7 +21,7 @@ export const PerfilScreen = () => {
       <View className="flex-1 container mx-auto pt-20 items-center bg-white">
         <View className="justify-center items-center my-14">
           <Image
-            source={require("../../assets/perfil.png")}
+            source={{ uri: user?.profilePic }}
             className="w-[84] h-[84] rounded-full mb-3"
           />
           <Text className="uppercase tracking-widest font">Perfil</Text>

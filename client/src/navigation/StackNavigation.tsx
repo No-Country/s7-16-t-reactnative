@@ -8,7 +8,7 @@ import { QrScreen } from "../screens/Scanners/QrScreen";
 export type RootStackParams = {
   HomeTabs: undefined;
   MyData: undefined;
-  QrScreen: undefinned;
+  QrScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();

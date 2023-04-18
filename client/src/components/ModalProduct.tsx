@@ -81,7 +81,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
               </View>
               <View className="items-end w-1/2">
                 <Text className="text-xl font-bold">
-                  $ {product!.price * counter}
+                  $ {(product!.price * counter).toFixed(2)}
                 </Text>
               </View>
             </View>

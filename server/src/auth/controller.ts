@@ -6,6 +6,8 @@ import { sendEmail } from '../providers/email.service';
 import welcome from '../providers/templates/welcome';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { generateToken } from '../middleware/jwt';
+import { createCart } from '../entity/cart/services';
+import { mongoose } from '@typegoose/typegoose';
 
 passport.use(
   'login',
@@ -60,7 +62,10 @@ export const register = async (req: Request, res: Response) => {
       password,
       dni,
     });
-    await newUser.save();
+
+    const userAdded = await newUser.save();
+
+    await createCart(new mongoose.Types.ObjectId(userAdded._id.toString()));
 
     let welcomeTemplate = welcome(firstName, lastName);
     sendEmail(email, 'Bienvenido a SmartShop', welcomeTemplate);

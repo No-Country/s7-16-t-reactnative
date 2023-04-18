@@ -7,7 +7,7 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
-import { PrimaryBtn } from "../../components/LoginButton";
+import { PrimaryBtn, IconBtn } from "../../components/LoginButton";
 import InputComponent from "../../components/InputComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema } from "./registerValidationsSchema";
@@ -78,7 +78,7 @@ export const Register1 = () => {
                   marginTop={undefined}
                   icon={undefined}
                 />
-                <PrimaryBtn
+                <IconBtn
                   icon="google"
                   width={244}
                   marginTop={24}

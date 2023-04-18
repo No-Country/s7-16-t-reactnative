@@ -1,5 +1,9 @@
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
-import { PrimaryBtn, SecundaryBtn } from "../../components/LoginButton";
+import {
+  PrimaryBtn,
+  SecondaryBtn,
+  IconBtn,
+} from "../../components/LoginButton";
 import { useNavigation } from "@react-navigation/native";
 
 export const MainLogin = () => {
@@ -12,36 +16,27 @@ export const MainLogin = () => {
       <View>
         <Image style={styles.image} source={require("../../assets/logo.png")} />
         <View style={styles.buttons}>
-          <SecundaryBtn
-            width={146}
+          <SecondaryBtn
             text="INICIAR SESIÓN"
             onPress={() => navigation.navigate("Login" as never)}
             marginTop={undefined}
             icon={undefined}
+            width={undefined}
           />
           <PrimaryBtn
             text="REGISTRARME"
-            width={146}
             marginTop={16}
             onPress={() => navigation.navigate("Register1" as never)}
             icon={undefined}
+            width={undefined}
           />
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 16,
-            }}
-          >
-            <PrimaryBtn
-              icon="google"
-              width={244}
-              marginTop={24}
-              text="REGISTRATE CON GOOGLE"
-              onPress={() => navigation.navigate("Register1" as never)}
-            />
-          </View>
+          <IconBtn
+            icon="google"
+            marginTop={24}
+            text="REGISTRATE CON GOOGLE"
+            onPress={() => navigation.navigate("Register1" as never)}
+            width={undefined}
+          />
         </View>
       </View>
     </ScrollView>

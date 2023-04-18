@@ -4,7 +4,7 @@
     "slug": "SmartShop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/logo.png",
+    "icon": "./src/assets/icono.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/assets/splashscreen.png",
@@ -19,12 +19,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/logo.png",
+        "foregroundImage": "./src/assets/icono.png",
         "backgroundColor":  "white"
       }
     },
     "web": {
-      "favicon": "./src/assets/logo.png"
+      "favicon": "./src/assets/icono.png"
     }
   }
 }

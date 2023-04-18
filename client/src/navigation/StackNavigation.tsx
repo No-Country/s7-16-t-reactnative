@@ -3,10 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MyData from "../screens/Home/MyData";
 import { HomeTabs } from "./HomeTabs";
 import { useStack } from "../hooks/useStack";
+import { QrScreen } from "../screens/Scanners/QrScreen";
 
 export type RootStackParams = {
   HomeTabs: undefined;
   MyData: undefined;
+  QrScreen: undefinned;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();
@@ -30,6 +32,11 @@ export const StackNavigation = () => {
           headerTransparent: true,
           headerTitle: headerTitleConBack,
         }}
+      />
+      <Stack.Screen
+        name="QrScreen"
+        component={QrScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

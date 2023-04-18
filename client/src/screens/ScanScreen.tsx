@@ -15,9 +15,11 @@ import CardProduct from "../components/CardProduct";
 import { ScrollView } from "react-native";
 import { useCartStore } from "../store/CartStore";
 import { OrangeButton } from "../components/OrangeButton";
+import { Loader } from "../components/Loader";
+import { useLoader } from "../hooks/useLoader";
+import { useHasPermission } from "../hooks/useHasPermission";
 
 export const ScanScreen = () => {
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
   const [scanning, setScanning] = useState<boolean>(false);
 
@@ -25,14 +27,14 @@ export const ScanScreen = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
+  const { openLoader, closeLoader, isLoading } = useLoader(true);
+
+  const { hasPermission } = useHasPermission();
+
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-
-      setHasPermission(status === "granted");
-    };
-
-    getBarCodeScannerPermissions();
+    setTimeout(() => {
+      closeLoader();
+    }, 1200);
   }, []);
 
   const products = useCartStore((state) => state.products);
@@ -42,6 +44,8 @@ export const ScanScreen = () => {
       return;
     }
     setScanning(true);
+
+    openLoader();
 
     const res = await getOneProduct(Number(result.data));
 
@@ -53,6 +57,7 @@ export const ScanScreen = () => {
     }
 
     setScanning(false);
+    closeLoader();
   };
 
   if (hasPermission === null) {
@@ -90,37 +95,41 @@ export const ScanScreen = () => {
         </View>
 
         <View style={{ flex: 2, backgroundColor: "white", width: "100%" }}>
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={[StyleSheet.absoluteFillObject, styles.scanbar]}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
-            type={BarCodeScanner.Constants.Type.back}
-          />
-
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: "white",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "90%",
-                height: "70%",
-              }}
-            ></View>
-            {scanned && (
-              <Button
-                title={"Tap to Scan Again"}
-                onPress={() => setScanned(false)}
+          {!isLoading && (
+            <>
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={[StyleSheet.absoluteFillObject, styles.scanbar]}
+                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
+                type={BarCodeScanner.Constants.Type.back}
               />
-            )}
-          </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View
+                  style={{
+                    borderWidth: 2,
+                    borderColor: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "90%",
+                    height: "70%",
+                  }}
+                ></View>
+                {scanned && (
+                  <Button
+                    title={"Tap to Scan Again"}
+                    onPress={() => setScanned(false)}
+                  />
+                )}
+              </View>
+            </>
+          )}
         </View>
 
         <View style={{ flex: 3, backgroundColor: "white" }}>
@@ -151,7 +160,9 @@ export const ScanScreen = () => {
                 <Text className="text-grayApp font-semibold text-xl">
                   Total:
                 </Text>
-                <Text className="font-semibold text-2xl">$ {totalPrice}</Text>
+                <Text className="font-semibold text-2xl">
+                  $ {totalPrice.toFixed(2)}
+                </Text>
               </View>
             )}
             <OrangeButton
@@ -170,6 +181,7 @@ export const ScanScreen = () => {
           />
         )}
       </View>
+      <Loader isLoading={isLoading} />
     </>
   );
 };

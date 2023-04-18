@@ -61,3 +61,21 @@ export interface UserResponse {
   updatedAt: string;
   __v: number;
 }
+
+// Business response
+export interface BusinessResponse {
+  business: Business;
+}
+
+export interface Business {
+  _id: string;
+  names: string;
+  email: string;
+  password: string;
+  cuit: string;
+  address: string;
+  qrCode: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}

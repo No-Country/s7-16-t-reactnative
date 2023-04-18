@@ -14,7 +14,7 @@ export const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           className="self-center top-48"
-          onPress={() => navigation.navigate("QrScreen")}
+          onPress={() => navigation.navigate("QrScreen" as never)}
         >
           <Image source={require("../../assets/qr-background.png")} />
         </TouchableOpacity>

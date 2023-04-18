@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import {
   StyleSheet,
   Text,
@@ -39,26 +40,29 @@ export const ScanScreen = () => {
 
   const products = useCartStore((state) => state.products);
 
-  const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (scanning || scanned) {
-      return;
-    }
-    setScanning(true);
+  const handleBarCodeScannedDebounced = debounce(
+    (handleBarCodeScanned = async (result: BarCodeScannerResult) => {
+      if (scanning || scanned) {
+        return;
+      }
+      setScanning(true);
 
-    openLoader();
+      openLoader();
 
-    const res = await getOneProduct(Number(result.data));
+      const res = await getOneProduct(Number(result.data));
 
-    if (res && res.status === 200 && res.data) {
-      setScanned(true);
-      setProduct(res.data.product);
+      if (res && res.status === 200 && res.data) {
+        setScanned(true);
+        setProduct(res.data.product);
 
-      setModalVisible(true);
-    }
+        setModalVisible(true);
+      }
 
-    setScanning(false);
-    closeLoader();
-  };
+      setScanning(false);
+      closeLoader();
+    }),
+    750
+  );
 
   if (hasPermission === null) {
     return (
@@ -98,7 +102,9 @@ export const ScanScreen = () => {
           {!isLoading && (
             <>
               <BarCodeScanner
-                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                onBarCodeScanned={
+                  scanned ? undefined : handleBarCodeScannedDebounced
+                }
                 style={[StyleSheet.absoluteFillObject, styles.scanbar]}
                 barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
                 type={BarCodeScanner.Constants.Type.back}

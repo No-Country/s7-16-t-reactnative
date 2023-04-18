@@ -62,7 +62,26 @@ export const PrimaryBtn = ({
     </TouchableOpacity>
   );
 };
-
+export const GuardarBtn = ({
+  marginTop = 0,
+  width = 328,
+  text,
+  onPress,
+}: Props) => {
+  return (
+    <TouchableOpacity
+      className={"bg-acento"}
+      style={styles.primaryBtn(width, marginTop)}
+      onPress={onPress}
+    >
+      <View>
+        <Text className={"text-white"} style={styles.secundaryBtnText}>
+          {text}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 const styles = StyleSheet.create({
   secundaryBtn: (width, marginTop) => ({
     width: width,

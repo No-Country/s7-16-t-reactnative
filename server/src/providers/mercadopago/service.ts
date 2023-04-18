@@ -6,10 +6,10 @@ const clientId = process.env.CLIENT_ID;
 
 export const generatePaymentLink = async (items: any, payer: any, external_reference: any, req: Request) => {
 
-    const server = 'https://localhost/4000';
-    const success = `${server}/success`;
-    const failure = `${server}/failure`;
-    const pending = `${server}/pending`;
+    const server = 'https://localhost:4000/api';
+    const success = `${server}/cart/success`;
+    const failure = `${server}/cart/failure`;
+    const pending = `${server}/cart/pending`;
 
     try {
 

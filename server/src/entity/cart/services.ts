@@ -12,7 +12,7 @@ interface IProducts {
   totalPrice: Number;
 }
 
-export async function createCart(userId: mongoose.Schema.Types.ObjectId) {
+export async function createCart(userId: mongoose.Types.ObjectId) {
   const user = await UserModel.findById(userId);
 
   const newCart = new CartModel({

@@ -3,7 +3,7 @@ import { decodeToken } from './jwt';
 
 export interface IDecoded {
   user: {
-    carts:Array<any>;
+    carts:Array<string>;
     _id: string;
     email:string;
     firstName: string;

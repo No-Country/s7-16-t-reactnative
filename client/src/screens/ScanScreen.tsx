@@ -156,12 +156,17 @@ export const ScanScreen = () => {
     </>
   );
 };
+
+const { width } = Dimensions.get("window");
+const height = width * 1.33; // aspect ratio 4:3
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
   },
   scanbar: {
-    height: Dimensions.get("window").height - 100,
+    height: height,
+    width: width,
   },
 });

@@ -7,7 +7,7 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { SecundaryBtn } from "../../components/LoginButton";
+import { SecondaryBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
@@ -57,12 +57,12 @@ export const Login = () => {
                     </Text>
                   </View>
                   <View style={styles.buttons}>
-                    <SecundaryBtn
-                      width={146}
+                    <SecondaryBtn
                       text="INICIAR SESIÓN"
                       onPress={props.handleSubmit}
                       marginTop={undefined}
                       icon={undefined}
+                      width={undefined}
                     />
                   </View>
                 </>
@@ -120,6 +120,8 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   buttons: {
+    width: "auto",
+    height: 80,
     alignSelf: "center",
     alignItems: "center",
     marginTop: 209 - 18,

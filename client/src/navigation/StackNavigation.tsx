@@ -36,7 +36,10 @@ export const StackNavigation = () => {
       <Stack.Screen
         name="QrScreen"
         component={QrScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerTransparent: true,
+          headerTitle: headerTitleConBack,
+        }}
       />
     </Stack.Navigator>
   );

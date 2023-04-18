@@ -45,7 +45,7 @@ const CardProduct = ({ product }: Props) => {
             decrementCounter={decrementCounter}
             incrementCounter={incrementCounter}
           />
-          <Text>$ {(item.price * item.amount).toFixed(2)}</Text>
+          <Text>$ {item.price * counter}</Text>
         </View>
       </View>
     );

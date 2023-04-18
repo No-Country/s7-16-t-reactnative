@@ -45,7 +45,7 @@ const CardProduct = ({ product }: Props) => {
             decrementCounter={decrementCounter}
             incrementCounter={incrementCounter}
           />
-          <Text>$ {item.price * item.amount}</Text>
+          <Text>$ {item.price * counter}</Text>
         </View>
       </View>
     );

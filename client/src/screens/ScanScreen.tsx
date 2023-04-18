@@ -125,10 +125,14 @@ export const ScanScreen = () => {
             </Text>
           </View>
           {/* Productos */}
+
           <ScrollView className="bg-white">
-            <Text className="text-center text-acento">
-              Deslizá para eliminar productos de tu carrito
-            </Text>
+            {products.length > 0 && (
+              <Text className="text-center text-acento">
+                Deslizá para eliminar productos de tu carrito
+              </Text>
+            )}
+
             {products.length > 0 &&
               products.map((prod: Product) => (
                 <CardProduct key={prod._id} product={prod} />

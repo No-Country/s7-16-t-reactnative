@@ -36,9 +36,10 @@ export async function updateCartHandler(req: Request, res: Response) {
   try {
     const { id } = req.params;
     const { body } = req;
-    //const cart = await updateCart(id, body); add pruducts
-    //res.status(StatusCodes.OK).json({ cart });
-    res.status(StatusCodes.OK).json({ "message": "Cart just updated" });
+    console.log(id);
+
+    const cart = await updateCart(id, body);
+    res.status(StatusCodes.OK).json({ cart });
   } catch (error: any) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
   }

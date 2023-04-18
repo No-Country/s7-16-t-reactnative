@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import {
+  BusinessResponse,
   LoginData,
   LoginResponse,
   ProductResponse,
@@ -55,5 +56,16 @@ export const Register = async (data: RegisterData) => {
     return res;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getOneTienda = async (qrcode: string) => {
+  console.log(qrcode);
+  try {
+    const res = await api.get<BusinessResponse>(`/business/${qrcode}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    alert("No se encontró la tienda. Vuelve a intentarlo");
   }
 };

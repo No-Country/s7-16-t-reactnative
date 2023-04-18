@@ -8,13 +8,13 @@ import {
   Dimensions,
 } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
-import { getOneProduct } from "../utils/api/smartShopDB";
-import { ModalProduct } from "../components/ModalProduct";
-import { Product } from "../utils/interfaces/api.interfaces";
-import CardProduct from "../components/CardProduct";
+import { getOneProduct } from "../../utils/api/smartShopDB";
+import { ModalProduct } from "../../components/ModalProduct";
+import { Product } from "../../utils/interfaces/api.interfaces";
+import CardProduct from "../../components/CardProduct";
 import { ScrollView } from "react-native";
-import { useCartStore } from "../store/CartStore";
-import { OrangeButton } from "../components/OrangeButton";
+import { useCartStore } from "../../store/CartStore";
+import { OrangeButton } from "../../components/OrangeButton";
 
 export const ScanScreen = () => {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -79,7 +79,7 @@ export const ScanScreen = () => {
           }}
         >
           <Image
-            source={require("../assets/logo.png")}
+            source={require("../../assets/logo.png")}
             style={{ width: 129, height: 61, top: 6 }}
           />
         </View>

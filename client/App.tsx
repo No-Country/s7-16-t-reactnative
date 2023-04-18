@@ -1,5 +1,6 @@
 import { StackRoutes } from "./src/navigation/StackRoutes";
-import { ScanScreen } from "./src/screens/ScanScreen";
+import { HomeScreen } from "./src/screens/Home/Inicio";
+import { HomeTabs } from "./src/navigation/HomeTabs";
 export default function App() {
-  return <ScanScreen />;
+  return <StackRoutes />;
 }

@@ -67,6 +67,11 @@ export const ScanScreen = () => {
     return <Text className="self-center top-52">No access to camera</Text>;
   }
 
+  const totalPrice = products.reduce(
+    (total, product) => total + product.price * product.amount,
+    0
+  );
+
   return (
     <>
       <View style={styles.container}>
@@ -119,7 +124,7 @@ export const ScanScreen = () => {
         </View>
 
         <View style={{ flex: 3, backgroundColor: "white" }}>
-          <View className="bg-gray-300 py-2 mb-3">
+          <View className="bg-gray-300 py-2">
             <Text className="text-center font-medium text-base">
               Escanea el producto
             </Text>
@@ -136,7 +141,15 @@ export const ScanScreen = () => {
           </ScrollView>
 
           {/* Terminar compra */}
-          <View className="justify-center items-center my-2">
+          <View className="justify-center items-center my-2 py-1">
+            {products.length > 0 && (
+              <View className="container mx-auto flex-row justify-around mb-3">
+                <Text className="text-grayApp font-semibold text-xl">
+                  Total:
+                </Text>
+                <Text className="font-semibold text-2xl">$ {totalPrice}</Text>
+              </View>
+            )}
             <OrangeButton
               text="Terminar compra"
               onPress={() => alert("terminar compra")}

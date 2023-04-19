@@ -9,11 +9,12 @@ import { useLoader } from "../../hooks/useLoader";
 import { Loader } from "../../components/Loader";
 import { useNavigation } from "@react-navigation/native";
 import { useHasPermission } from "../../hooks/useHasPermission";
+import { ModalAlert } from "../../components/ModalAlert";
 
 export const QrScreen = () => {
   const [scanned, setScanned] = useState<boolean>(false);
-  const [scanning, setScanning] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalAlertVisible, setModalAlertVisible] = useState<boolean>(false);
   const [tienda, setTienda] = useState<Business | null>(null);
   const { openLoader, closeLoader, isLoading } = useLoader();
   const navigation = useNavigation();
@@ -22,11 +23,9 @@ export const QrScreen = () => {
   const { hasPermission } = useHasPermission();
 
   const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (scanning || scanned) {
+    if (scanned) {
       return;
     }
-
-    setScanning(true);
 
     openLoader();
 
@@ -34,11 +33,13 @@ export const QrScreen = () => {
 
     if (res && res.status === 200 && res.data) {
       setScanned(true);
-
       setTienda(res.data.business);
+
       setModalVisible(true);
+    } else {
+      setScanned(true);
+      setModalAlertVisible(true);
     }
-    setScanning(false);
 
     closeLoader();
   };
@@ -95,6 +96,15 @@ export const QrScreen = () => {
           modalVisible={modalVisible}
           confirm={confirm}
           tienda={tienda!}
+        />
+      )}
+      {modalAlertVisible && (
+        <ModalAlert
+          title="¡Atención!"
+          modalVisible={modalAlertVisible}
+          body="No fue posible encontrar la tienda scaneada, por favor intente nuevamente."
+          closeModal={() => setModalAlertVisible(false)}
+          confirm={() => setModalAlertVisible(false)}
         />
       )}
       <Loader isLoading={isLoading} />

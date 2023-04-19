@@ -16,7 +16,7 @@ export const Onboarding2Screen = () => {
         <View className="self-center mt-4">
           <Text className="text-center w-[274]">
             Cuando ingreses al mercado vas a poder
-            <Text className="font-bold"> escanear el código de barra </Text>de
+            <Text className="font-bold"> escanear el código de barras </Text>de
             tus productos
           </Text>
           <Image

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { debounce } from "lodash";
 import {
   StyleSheet,
   Text,
@@ -19,14 +18,16 @@ import { OrangeButton } from "../components/OrangeButton";
 import { Loader } from "../components/Loader";
 import { useLoader } from "../hooks/useLoader";
 import { useHasPermission } from "../hooks/useHasPermission";
+import { ModalAlert } from "../components/ModalAlert";
 
 export const ScanScreen = () => {
   const [scanned, setScanned] = useState<boolean>(false);
-  const [scanning, setScanning] = useState<boolean>(false);
 
   // Modal
   const [product, setProduct] = useState<Product | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  const [modalAlertVisible, setModalAlertVisible] = useState<boolean>(false);
 
   const { openLoader, closeLoader, isLoading } = useLoader(true);
 
@@ -40,29 +41,31 @@ export const ScanScreen = () => {
 
   const products = useCartStore((state) => state.products);
 
-  const handleBarCodeScannedDebounced = debounce(
-    (handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-      if (scanning || scanned) {
-        return;
-      }
-      setScanning(true);
+  const handleBarCodeScannedDebounced = async (
+    result: BarCodeScannerResult
+  ) => {
+    if (scanned) {
+      return;
+    }
 
-      openLoader();
+    openLoader();
 
-      const res = await getOneProduct(Number(result.data));
+    const res = await getOneProduct(Number(result.data));
 
-      if (res && res.status === 200 && res.data) {
-        setScanned(true);
-        setProduct(res.data.product);
+    // SI scanned ES TRUE, NO ME DEJA SCANEAR
 
-        setModalVisible(true);
-      }
+    if (res && res.status === 200 && res.data) {
+      setScanned(true);
+      setProduct(res.data.product);
 
-      setScanning(false);
-      closeLoader();
-    }),
-    750
-  );
+      setModalVisible(true); // muestra la vista previa del producto encontrado
+    } else {
+      setScanned(true);
+      setModalAlertVisible(true);
+    }
+
+    closeLoader();
+  };
 
   if (hasPermission === null) {
     return (
@@ -184,6 +187,15 @@ export const ScanScreen = () => {
             modalVisible={modalVisible}
             product={product}
             closeModal={() => setModalVisible(!modalVisible)}
+          />
+        )}
+        {modalAlertVisible && (
+          <ModalAlert
+            title="¡Atención!"
+            modalVisible={modalAlertVisible}
+            body="No fue posible encontrar el producto scaneado, por favor intente nuevamente."
+            closeModal={() => setModalAlertVisible(false)}
+            confirm={() => setModalAlertVisible(false)}
           />
         )}
       </View>

@@ -4,11 +4,13 @@ import MyData from "../screens/Home/MyData";
 import { HomeTabs } from "./HomeTabs";
 import { useStack } from "../hooks/useStack";
 import { QrScreen } from "../screens/Scanners/QrScreen";
+import { MisComprasScreen } from "../screens/Home/MisComprasScreen";
 
 export type RootStackParams = {
   HomeTabs: undefined;
   MyData: undefined;
   QrScreen: undefined;
+  MisComprasScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();
@@ -19,7 +21,13 @@ export const StackNavigation = () => {
   const { headerTitleConBack } = useStack();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#ffffff",
+        },
+      }}
+    >
       <Stack.Screen
         name="HomeTabs"
         component={HomeTabs}
@@ -36,6 +44,15 @@ export const StackNavigation = () => {
       <Stack.Screen
         name="QrScreen"
         component={QrScreen}
+        options={{
+          headerTransparent: true,
+          headerTitle: headerTitleConBack,
+        }}
+      />
+
+      <Stack.Screen
+        name="MisComprasScreen"
+        component={MisComprasScreen}
         options={{
           headerTransparent: true,
           headerTitle: headerTitleConBack,

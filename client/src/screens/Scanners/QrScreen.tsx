@@ -34,6 +34,7 @@ export const QrScreen = () => {
     if (res && res.status === 200 && res.data) {
       setScanned(true);
       setTienda(res.data.business);
+
       setModalVisible(true);
     } else {
       showMessage({

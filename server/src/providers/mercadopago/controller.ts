@@ -1,15 +1,20 @@
 import { Business } from '../../entity/business/model';
 import { Cart, CartModel } from '../../entity/cart/model';
-import { getCart } from '../../entity/cart/services';
+import { getCart, getOpenCart } from '../../entity/cart/services';
 import { User, UserModel } from '../../entity/user/model';
 import { generatePaymentLink } from './service';
 import { Request, Response } from 'express';
 
 export const createCheckout = async (req: Request, res: Response) => {
   try {
-    const tokenCartId = res.locals.user.carts[0];
+    const tokenCartId = res.locals.lastCartId.toString();
+
     const userId = res.locals.user?._id;
+<<<<<<< HEAD
     const cart = await getCart(userId);
+=======
+    const cart = await getOpenCart(userId);
+>>>>>>> a1893468f3ccbdc46a3dbe7fae9c15b7ba24e566
     const customer = res.locals.user;
 
     const items = [

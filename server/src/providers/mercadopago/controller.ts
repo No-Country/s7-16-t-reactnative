@@ -10,7 +10,7 @@ export const createCheckout = async (req: Request, res: Response) => {
     const tokenCartId = res.locals.user.carts[0];
     const userId = res.locals.user?._id;
     const cart = await getCart(userId);
-    const customer =  res.locals.user;
+    const customer = res.locals.user;
 
     const items = [
       {
@@ -49,7 +49,7 @@ export const handlePayment = async (req: Request, res: Response) => {
     }
     const responseCarts = await CartModel.findOneAndUpdate(
       { _id: external_reference },
-      { status },
+      { status, payment_id },
       {
         new: true,
       },

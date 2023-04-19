@@ -12,7 +12,8 @@ interface Props {
 
 const CardProduct = ({ product }: Props) => {
   const { counter, decrementCounter, incrementCounter } = useCounter(
-    product.amount
+    product.amount,
+    product._id
   );
   const deleteProduct = useCartStore((state) => state.removeProduct);
 
@@ -31,26 +32,25 @@ const CardProduct = ({ product }: Props) => {
 
   const renderItem = ({ item }: { item: Product }) => {
     return (
-      <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2  ">
+      <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2">
         <View className="">
-          <Image className="w-16 h-24 m-2" source={{ uri: item.photo }} />
+          <Image className="w-16 h-24" source={{ uri: product.photo }} />
         </View>
         <View className="flex flex-col w-36 justify-center">
-          <Text className="text-xl">{item.name}</Text>
-          <Text className="text-base">{item.brand}</Text>
+          <Text className="text-xl">{product.name}</Text>
+          <Text className="text-base">{product.brand}</Text>
         </View>
         <View className="flex flex-col justify-center items-center w-20 gap-4">
           <CounterComponent
             counter={counter}
-            decrementCounter={decrementCounter}
-            incrementCounter={incrementCounter}
+            decrementCounter={() => decrementCounter(product.price)}
+            incrementCounter={() => incrementCounter(product.price)}
           />
-          <Text>$ {(item.price * counter).toFixed(2)}</Text>
+          <Text>$ {product.price * counter}</Text>
         </View>
       </View>
     );
   };
-
   return (
     <SwipeListView
       data={[product]}
@@ -65,5 +65,4 @@ const CardProduct = ({ product }: Props) => {
     />
   );
 };
-
 export default CardProduct;

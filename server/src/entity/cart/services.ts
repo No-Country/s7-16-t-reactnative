@@ -7,6 +7,13 @@ const ObjectId = mongoose.Types.ObjectId;
 interface IProducts {
   products: {
     productId: mongoose.Types.ObjectId;
+    name: string;
+    brand: string;
+    description: string;
+    expiryDate: Date;
+    price: number;
+    barCode: number;
+    photo: string;
     quantity: Number;
   };
   totalPrice: Number;

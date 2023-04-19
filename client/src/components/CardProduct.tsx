@@ -9,7 +9,8 @@ interface Props {
 
 const CardProduct = ({ product }: Props) => {
   const { counter, decrementCounter, incrementCounter } = useCounter(
-    product.amount
+    product.amount,
+    product._id
   );
   return (
     <View className="flex flex-row h-28 shadow-2xl shadow-gray-800 rounded-2xl w-full justify-evenly bg-white my-2">
@@ -23,8 +24,8 @@ const CardProduct = ({ product }: Props) => {
       <View className="flex flex-col justify-center items-center w-20 gap-4">
         <CounterComponent
           counter={counter}
-          decrementCounter={decrementCounter}
-          incrementCounter={incrementCounter}
+          decrementCounter={() => decrementCounter(product.price)}
+          incrementCounter={() => incrementCounter(product.price)}
         />
         <Text>$ {product.price * counter}</Text>
       </View>

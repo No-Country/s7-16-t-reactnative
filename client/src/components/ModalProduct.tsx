@@ -22,13 +22,22 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
   const addToCart = useCartStore((state) => state.addProduct); // zustand
   const updateProd = useCartStore((state) => state.updateProduct); // zustand
 
-  const { counter, decrementCounter, incrementCounter } = useCounter();
+  const { counter, decrementCounter, incrementCounter } = useCounter(
+    product?.amount,
+    product?._id
+  );
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalProductPrice = useCartStore((state) => state.totalAmount);
 
   const confirm = (product: Product, amount: number) => {
+    const newTotalPrice = totalPrice + product.price * amount;
+
+    // const newTotalPrice = totalProductPrice + totalProductPrice * amount;
+
     addToCart(product);
 
     updateProd(product._id, amount);
-
+    useCartStore.setState({ totalPrice: newTotalPrice });
     closeModal();
   };
 
@@ -64,11 +73,15 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
             <View className="w-3/4 flex-row items-center justify-center mb-4">
               {/* Contador */}
               <View className=" flex-row w-1/2 items-center justify-between">
-                <TouchableOpacity onPress={decrementCounter}>
+                <TouchableOpacity
+                  onPress={() => decrementCounter(product!.price)}
+                >
                   <MaterialIcons name="delete" size={24} color="black" />
                 </TouchableOpacity>
                 <Text className="text-lg">{counter}</Text>
-                <TouchableOpacity onPress={incrementCounter}>
+                <TouchableOpacity
+                  onPress={() => incrementCounter(product!.price)}
+                >
                   <MaterialIcons name="add-circle" size={24} color="black" />
                 </TouchableOpacity>
               </View>

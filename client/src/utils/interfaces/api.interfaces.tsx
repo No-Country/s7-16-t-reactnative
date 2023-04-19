@@ -13,6 +13,10 @@ export interface Product {
   photo: string;
   amount: number;
 }
+// export interface CheckoutData {
+//   products: Product[];
+//   totalPrice: number;
+// }
 
 export interface LoginData {
   email: string;

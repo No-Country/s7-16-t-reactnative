@@ -9,22 +9,29 @@
     "splash": {
       "image": "./src/assets/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor":  "rgba(255, 255, 255, 1)"
+      "backgroundColor": "rgba(255, 255, 255, 1)"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vmrj.smartshop"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/logo.png",
-        "backgroundColor":  "white"
-      }
+        "backgroundColor": "white"
+      },
+      "package": "com.vmrj.smartshop"
     },
     "web": {
       "favicon": "./src/assets/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "30f615c8-ab1d-41f3-97d5-e625e86d09d8"
+      }
     }
   }
 }

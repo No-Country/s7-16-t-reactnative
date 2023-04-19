@@ -12,6 +12,13 @@ export class Cart {
   public products?: [
     {
       productId: Ref<Product>;
+      name: string;
+      brand: string;
+      description: string;
+      expiryDate: Date;
+      price: number;
+      barCode: number;
+      photo: string;
       quantity: Number;
     },
   ];
@@ -19,9 +26,11 @@ export class Cart {
   @prop({ required: true, default: 0 })
   public totalPrice!: Number;
 
-  @prop({ required: true, default: "open" })
+  @prop({ required: true, default: 'open' })
   public status!: string;
 
+  @prop({ required: true, default: null })
+  public payment_id!: string;
 }
 
 export const CartModel = getModelForClass(Cart, {

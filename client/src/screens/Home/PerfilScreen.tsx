@@ -34,7 +34,7 @@ export const PerfilScreen = () => {
           />
           <NavigateButton
             text="Mis compras"
-            onPress={() => console.log("Mis compras")}
+            onPress={() => navigation.navigate("MisComprasScreen" as never)}
           />
           <NavigateButton
             text="Privacidad y seguridad"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export const useLoader = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export const useLoader = (initialValue?: boolean) => {
+  const [isLoading, setIsLoading] = useState<boolean>(initialValue ?? false);
 
   const openLoader = () => {
     setIsLoading(true);

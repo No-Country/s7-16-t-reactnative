@@ -21,6 +21,8 @@ interface Props {
 export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
   const addToCart = useCartStore((state) => state.addProduct); // zustand
   const updateProd = useCartStore((state) => state.updateProduct); // zustand
+  const removeProduct = useCartStore((state) => state.removeProduct);
+  const products = useCartStore((state) => state.products);
 
   const { counter, decrementCounter, incrementCounter } = useCounter(
     product?.amount,
@@ -39,6 +41,11 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
     updateProd(product._id, amount);
     useCartStore.setState({ totalPrice: newTotalPrice });
     closeModal();
+
+    if (products.some((p) => p._id === product._id)) {
+      alert("Producto duplicado. Vuelve a intentarlo");
+      removeProduct(product._id);
+    }
   };
 
   return (
@@ -87,7 +94,7 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
               </View>
               <View className="items-end w-1/2">
                 <Text className="text-xl font-bold">
-                  $ {product!.price * counter}
+                  $ {(product!.price * counter).toFixed(2)}
                 </Text>
               </View>
             </View>

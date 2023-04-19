@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import {
+  BusinessResponse,
   LoginData,
   LoginResponse,
   ProductResponse,
@@ -27,7 +28,6 @@ export const getOneProduct = async (barcode: number) => {
     return res;
   } catch (error) {
     console.log(error);
-    alert("Error al buscar el producto en la base de datos");
   }
 };
 
@@ -40,9 +40,7 @@ export const Login = async ({ email, password }: LoginData) => {
 
     return res;
   } catch (error) {
-    alert(
-      "Hubo un error en el servidor. Por favor, inténtelo de nuevo más tarde o contáctese con el soporte técnico."
-    );
+    console.log(error);
   }
 };
 
@@ -54,6 +52,16 @@ export const Register = async (data: RegisterData) => {
       },
     });
     console.log(res);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getOneTienda = async (qrcode: string) => {
+  console.log(qrcode);
+  try {
+    const res = await api.get<BusinessResponse>(`/business/${qrcode}`);
     return res;
   } catch (error) {
     console.log(error);

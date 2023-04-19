@@ -4,7 +4,7 @@
     "slug": "SmartShop",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/logo.png",
+    "icon": "./src/assets/icono.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/assets/splashscreen.png",
@@ -20,6 +20,7 @@
     },
     "android": {
       "adaptiveIcon": {
+<<<<<<< HEAD
         "foregroundImage": "./src/assets/logo.png",
         "backgroundColor": "white"
       },
@@ -32,6 +33,14 @@
       "eas": {
         "projectId": "30f615c8-ab1d-41f3-97d5-e625e86d09d8"
       }
+=======
+        "foregroundImage": "./src/assets/icono.png",
+        "backgroundColor":  "white"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/icono.png"
+>>>>>>> c3f8530fe9193ec52ef7094718db606052a65a39
     }
   }
 }

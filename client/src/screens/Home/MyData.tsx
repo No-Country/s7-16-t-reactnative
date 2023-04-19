@@ -1,9 +1,9 @@
-import { Image, ScrollView, View } from "react-native";
+import { Image, ScrollView, View, StyleSheet } from "react-native";
 import InputComponent from "../../components/InputComponent";
 import { Formik } from "formik";
-import { AppButton } from "../../components/AppButton";
 import TextTitle from "../../components/TextTitle";
 import { UseUserStore } from "../../store/UserStore";
+import { GuardarBtn } from "../../components/LoginButton";
 
 interface MyDataValues {
   img?: string;
@@ -47,53 +47,59 @@ const MyData = () => {
             onSubmit={(values) => console.log(values)}
           >
             {({ values, handleChange, handleBlur, handleSubmit }) => (
-              <View className="flex flex-col gap-5 justify-center">
+              <View className="flex flex-col gap-5 self-center">
                 {/* VIEW PARA LOS INPUTS */}
-                <View className="flex pl-5 pr-5">
+                <View className="top-10">
                   <InputComponent
-                    label="Nombre"
                     name="name"
-                    placeholder="name"
+                    placeholder="Nombre"
                     onChangeText={handleChange("name")}
                     onBlur={handleBlur("name")}
                     value={values.name}
+                    style={styles.input}
                   />
                   <InputComponent
-                    label="Apellido"
                     name="lastname"
-                    placeholder="lastname"
+                    placeholder="Apellido"
                     onChangeText={handleChange("lastname")}
                     onBlur={handleBlur("lastname")}
                     value={values.lastname}
+                    style={styles.input}
                   />
                   <InputComponent
-                    label="Cuit/dni"
                     name="cuit_dni"
-                    placeholder="cuit_dni"
+                    placeholder="Cuit/Dni"
                     onChangeText={handleChange("cuit_dni")}
                     onBlur={handleBlur("cuit_dni")}
                     value={values.cuit_dni}
+                    style={styles.input}
                   />
                   <InputComponent
-                    label="Email"
                     name="email"
-                    placeholder="email"
+                    placeholder="Email"
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     value={values.email}
+                    style={styles.input}
                   />
                   <InputComponent
-                    label="Celular"
                     name="cellphone"
-                    placeholder="cellphone"
+                    placeholder="Teléfono"
                     onChangeText={handleChange("cellphone")}
                     onBlur={handleBlur("cellphone")}
                     value={values.cellphone}
+                    style={styles.input}
                   />
                 </View>
                 {/* VIEW PARA EL BOTON */}
-                <View className="flex justify-center items-center">
-                  <AppButton text="GUARDAR" onPress={() => handleSubmit()} />
+                <View className="self-center">
+                  <GuardarBtn
+                    text="GUARDAR"
+                    width={100}
+                    marginTop={170}
+                    icon={undefined}
+                    onPress={() => handleSubmit()}
+                  />
                 </View>
               </View>
             )}
@@ -103,5 +109,12 @@ const MyData = () => {
     </>
   );
 };
-
+const styles = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    height: 43.88,
+    width: 306.12,
+    marginBottom: 10,
+  },
+});
 export default MyData;

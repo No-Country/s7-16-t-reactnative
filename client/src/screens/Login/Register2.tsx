@@ -11,47 +11,13 @@ import InputComponent from "../../components/InputComponent";
 import PickerComponent from "../../components/PickerComponent";
 import { FormikProps, Formik } from "formik";
 import { registerValidationSchema2 } from "./registerValidationsSchema2";
-import { AntDesign } from "@expo/vector-icons";
 import DateTimePickerComponent from "../../components/DatePickerComponent";
-import { useRegister } from "../../hooks/useRegister";
-import { useNavigation } from "@react-navigation/native";
-
-interface itemList {
-  id: number;
-  nombre: string;
-}
-
-const documentTypes: itemList[] = [
-  { id: 1, nombre: "DNI-Argentina" },
-  { id: 2, nombre: "CURP-México" },
-  { id: 3, nombre: "RUT-Chile" },
-  { id: 4, nombre: "CI-Uruguay" },
-  { id: 5, nombre: "DPI-Guatemala" },
-  { id: 6, nombre: "CPF-Brasil" },
-  { id: 7, nombre: "INE-Honduras" },
-  { id: 8, nombre: "DUI-El Salvador" },
-  { id: 9, nombre: "IFE-México" },
-  { id: 10, nombre: "DNI-Perú" },
-];
-
-const genres: itemList[] = [
-  { id: 1, nombre: "Masculino" },
-  { id: 2, nombre: "Femenino" },
-  { id: 3, nombre: "No binario" },
-];
-interface Values {
-  firstName: string;
-  lastName: string;
-  genre: string;
-  dni: string;
-  documentType: string;
-  phNumber: string;
-  birthdate: string;
-}
+import { useRegister, PartialValues } from "../../hooks/useRegister";
+import { documentTypes, genres } from "../../utils/helpers/pickerItems";
+import { Loader } from "../../components/Loader";
 
 export const Register2 = () => {
-  const navigation = useNavigation();
-  const { handleSubmit2 } = useRegister();
+  const { handleSubmit2, isLoading } = useRegister();
 
   return (
     <KeyboardAvoidingView
@@ -73,7 +39,7 @@ export const Register2 = () => {
           }}
           onSubmit={handleSubmit2 as never}
         >
-          {(props: FormikProps<Values>) => (
+          {(props: FormikProps<PartialValues>) => (
             <>
               <Text style={styles.title}>
                 Estamos felices de que seas parte
@@ -138,6 +104,7 @@ export const Register2 = () => {
           )}
         </Formik>
       </ScrollView>
+      <Loader isLoading={isLoading} />
     </KeyboardAvoidingView>
   );
 };

@@ -45,6 +45,7 @@ export interface ProductResponse {
   product: Product;
 }
 
+// Login response
 export interface LoginResponse {
   message: string;
   userResponse: UserResponse;
@@ -60,6 +61,24 @@ export interface UserResponse {
   profilePic: string;
   dni: number;
   phNumber: number;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+// Business response
+export interface BusinessResponse {
+  business: Business;
+}
+
+export interface Business {
+  _id: string;
+  names: string;
+  email: string;
+  password: string;
+  cuit: string;
+  address: string;
+  qrCode: string;
   createdAt: string;
   updatedAt: string;
   __v: number;

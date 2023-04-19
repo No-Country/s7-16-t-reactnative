@@ -7,64 +7,82 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { SecundaryBtn } from "../../components/LoginButton";
+import { SecondaryBtn } from "../../components/LoginButton";
 import { FormikProps, Formik } from "formik";
 import { loginValidationSchema } from "./loginValidationSchema";
 import InputComponent from "../../components/InputComponent";
 import { Values, useLogin } from "../../hooks/useLogin";
+import { Loader } from "../../components/Loader";
+import { ModalAlert } from "../../components/ModalAlert";
 
 export const Login = () => {
-  const { handleSubmit } = useLogin();
+  const { handleSubmit, isLoading, modalVisible, setModalVisible } = useLogin();
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
-    >
-      <ScrollView>
-        <Image style={styles.image} source={require("../../assets/logo.png")} />
-        <View style={styles.form}>
-          <Formik
-            validationSchema={loginValidationSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => handleSubmit(values)}
-          >
-            {(props: FormikProps<Values>) => (
-              <>
-                <View>
-                  <InputComponent
-                    name="email"
-                    style={styles.input}
-                    placeholder="Mail"
-                    inputMode="email"
-                  />
-                  <InputComponent
-                    name="password"
-                    style={styles.input}
-                    placeholder="Contraseña"
-                    type={true}
-                    inputMode="text"
-                  />
-                  <Text style={styles.question}>
-                    ¿Olvidaste tu constraseña?
-                  </Text>
-                </View>
-                <View style={styles.buttons}>
-                  <SecundaryBtn
-                    width={146}
-                    text="INICIAR SESIÓN"
-                    onPress={props.handleSubmit}
-                    marginTop={undefined}
-                    icon={undefined}
-                  />
-                </View>
-              </>
-            )}
-          </Formik>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+    <>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.select({ ios: 0, android: 500 })}
+      >
+        <ScrollView>
+          <Image
+            style={styles.image}
+            source={require("../../assets/logo.png")}
+          />
+          <View style={styles.form}>
+            <Formik
+              validationSchema={loginValidationSchema}
+              initialValues={{ email: "", password: "" }}
+              onSubmit={(values) => handleSubmit(values)}
+            >
+              {(props: FormikProps<Values>) => (
+                <>
+                  <View>
+                    <InputComponent
+                      name="email"
+                      style={styles.input}
+                      placeholder="Mail"
+                      inputMode="email"
+                    />
+                    <InputComponent
+                      name="password"
+                      style={styles.input}
+                      placeholder="Contraseña"
+                      type={true}
+                      inputMode="text"
+                    />
+                    <Text style={styles.question}>
+                      ¿Olvidaste tu constraseña?
+                    </Text>
+                  </View>
+                  <View style={styles.buttons}>
+                    <SecondaryBtn
+                      text="INICIAR SESIÓN"
+                      onPress={props.handleSubmit}
+                      marginTop={undefined}
+                      icon={undefined}
+                      width={undefined}
+                    />
+                  </View>
+                </>
+              )}
+            </Formik>
+          </View>
+        </ScrollView>
+        <Loader isLoading={isLoading} />
+      </KeyboardAvoidingView>
+
+      {modalVisible && (
+        <ModalAlert
+          title="¡Atención!"
+          body="Mail o contraseña incorrecta, intente nuevamente"
+          modalVisible={modalVisible}
+          closeModal={() => setModalVisible(false)}
+          confirm={() => setModalVisible(false)}
+        />
+      )}
+    </>
   );
 };
 
@@ -102,6 +120,8 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   buttons: {
+    width: "auto",
+    height: 80,
     alignSelf: "center",
     alignItems: "center",
     marginTop: 209 - 18,

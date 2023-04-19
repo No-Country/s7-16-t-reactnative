@@ -19,11 +19,13 @@ import { OrangeButton } from "../components/OrangeButton";
 import axios from "axios";
 import { Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Loader } from "../components/Loader";
+import { useLoader } from "../hooks/useLoader";
+import { useHasPermission } from "../hooks/useHasPermission";
+import { ModalAlert } from "../components/ModalAlert";
 
 export const ScanScreen = () => {
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [scanned, setScanned] = useState<boolean>(false);
-  const [scanning, setScanning] = useState<boolean>(false);
 
   const productosPrueba = {
     products: [
@@ -37,37 +39,46 @@ export const ScanScreen = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
+  const [modalAlertVisible, setModalAlertVisible] = useState<boolean>(false);
+
+  const { openLoader, closeLoader, isLoading } = useLoader(true);
+
+  const { hasPermission } = useHasPermission();
+
   useEffect(() => {
-    const getBarCodeScannerPermissions = async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-
-      setHasPermission(status === "granted");
-    };
-
-    getBarCodeScannerPermissions();
+    setTimeout(() => {
+      closeLoader();
+    }, 1200);
   }, []);
 
   const products = useCartStore((state) => state.products);
   const totalPrices = useCartStore((state) => state.totalPrice);
   const totalProcudtPrice = useCartStore((state) => state.totalAmount);
 
-  const handleBarCodeScanned = async (result: BarCodeScannerResult) => {
-    if (scanning || scanned) {
+  const handleBarCodeScannedDebounced = async (
+    result: BarCodeScannerResult
+  ) => {
+    if (scanned) {
       return;
     }
 
-    setScanning(true);
+    openLoader();
 
     const res = await getOneProduct(Number(result.data));
+
+    // SI scanned ES TRUE, NO ME DEJA SCANEAR
 
     if (res && res.status === 200 && res.data) {
       setScanned(true);
       setProduct(res.data.product);
 
-      setModalVisible(true);
+      setModalVisible(true); // muestra la vista previa del producto encontrado
+    } else {
+      setScanned(true);
+      setModalAlertVisible(true);
     }
 
-    setScanning(false);
+    closeLoader();
   };
 
   if (hasPermission === null) {
@@ -129,6 +140,11 @@ export const ScanScreen = () => {
     }
   };
 
+  const totalPrice = products.reduce(
+    (total, product) => total + product.price * product.amount,
+    0
+  );
+
   return (
     <>
       <View style={styles.container}>
@@ -147,47 +163,60 @@ export const ScanScreen = () => {
         </View>
 
         <View style={{ flex: 2, backgroundColor: "white", width: "100%" }}>
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={[StyleSheet.absoluteFillObject, styles.scanbar]}
-            barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
-            type={BarCodeScanner.Constants.Type.back}
-          />
-
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                borderWidth: 2,
-                borderColor: "white",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "90%",
-                height: "70%",
-              }}
-            ></View>
-            {scanned && (
-              <Button
-                title={"Tap to Scan Again"}
-                onPress={() => setScanned(false)}
+          {!isLoading && (
+            <>
+              <BarCodeScanner
+                onBarCodeScanned={
+                  scanned ? undefined : handleBarCodeScannedDebounced
+                }
+                style={[StyleSheet.absoluteFillObject, styles.scanbar]}
+                barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
+                type={BarCodeScanner.Constants.Type.back}
               />
-            )}
-          </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View
+                  style={{
+                    borderWidth: 2,
+                    borderColor: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "90%",
+                    height: "70%",
+                  }}
+                ></View>
+                {scanned && (
+                  <Button
+                    title={"Tap to Scan Again"}
+                    onPress={() => setScanned(false)}
+                  />
+                )}
+              </View>
+            </>
+          )}
         </View>
 
         <View style={{ flex: 3, backgroundColor: "white" }}>
-          <View className="bg-gray-300 py-2 mb-3">
+          <View className="bg-gray-300 py-2">
             <Text className="text-center font-medium text-base">
               Escanea el producto
             </Text>
           </View>
           {/* Productos */}
+
           <ScrollView className="bg-white">
+            {products.length > 0 && (
+              <Text className="text-center text-acento">
+                Deslizá para eliminar productos de tu carrito
+              </Text>
+            )}
+
             {products.length > 0 &&
               products.map((prod: Product) => (
                 <CardProduct key={prod._id} product={prod} />
@@ -195,7 +224,17 @@ export const ScanScreen = () => {
           </ScrollView>
 
           {/* Terminar compra */}
-          <View className="justify-center items-center my-2">
+          <View className="justify-center items-center my-2 py-1">
+            {products.length > 0 && (
+              <View className="container mx-auto flex-row justify-around mb-3">
+                <Text className="text-grayApp font-semibold text-xl">
+                  Total:
+                </Text>
+                <Text className="font-semibold text-2xl">
+                  $ {totalPrice.toFixed(2)}
+                </Text>
+              </View>
+            )}
             <OrangeButton
               text="Terminar compra"
               // onPress={() => imprimir()}
@@ -226,16 +265,31 @@ export const ScanScreen = () => {
             closeModal={() => setModalVisible(!modalVisible)}
           />
         )}
+        {modalAlertVisible && (
+          <ModalAlert
+            title="¡Atención!"
+            modalVisible={modalAlertVisible}
+            body="No fue posible encontrar el producto scaneado, por favor intente nuevamente."
+            closeModal={() => setModalAlertVisible(false)}
+            confirm={() => setModalAlertVisible(false)}
+          />
+        )}
       </View>
+      <Loader isLoading={isLoading} />
     </>
   );
 };
+
+const { width } = Dimensions.get("window");
+const height = width * 1.33; // aspect ratio 4:3
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
   },
   scanbar: {
-    height: Dimensions.get("window").height - 100,
+    height: height,
+    width: width,
   },
 });

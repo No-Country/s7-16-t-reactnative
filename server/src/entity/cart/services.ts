@@ -4,7 +4,15 @@ import { Cart, CartModel } from './model';
 
 const ObjectId = mongoose.Types.ObjectId;
 
-export async function createCart(userId: mongoose.Schema.Types.ObjectId) {
+interface IProducts {
+  products: {
+    productId: mongoose.Types.ObjectId;
+    quantity: Number;
+  };
+  totalPrice: Number;
+}
+
+export async function createCart(userId: mongoose.Types.ObjectId) {
   const user = await UserModel.findById(userId);
 
   const newCart = new CartModel({
@@ -30,10 +38,15 @@ export async function getCart(userId: string) {
   return responseCart;
 }
 
-export async function updateCart(id: string, data: Cart) {
+export async function updateCart(id: string, data: IProducts) {
   const responseCarts = await CartModel.findOneAndUpdate({ _id: id }, data, {
-    new: true, //modify later in order to add products and its quantity
+    new: true,
   });
+
+  if (!responseCarts) {
+    throw new Error(`Cart ${id} not found`);
+  }
+
   return responseCarts;
 }
 

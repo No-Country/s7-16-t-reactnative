@@ -15,7 +15,7 @@ export const Onboarding3Screen = () => {
 
         <View className="self-center mt-4">
           <Text className="text-center w-[274]">
-            Una vez cargador en la app, podrás
+            Una vez cargados en la app, podrás
             <Text className="font-bold"> pagar a través del carrito </Text>
           </Text>
           <Image

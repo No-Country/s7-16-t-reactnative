@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { PerfilScreen } from "../screens/Home/PerfilScreen";
-import { ScanScreen } from "../screens/ScanScreen";
+import { ScanScreen } from "../screens/Scanners/ScanScreen";
 import { HomeScreen } from "../screens/Home/Inicio";
 import { Image } from "react-native";
 import { useStack } from "../hooks/useStack";

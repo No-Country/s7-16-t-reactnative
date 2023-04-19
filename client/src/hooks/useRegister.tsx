@@ -3,6 +3,7 @@ import { Register, Login } from "../utils/api/smartShopDB";
 import { UseRegisterStore } from "../store/RegisterStore";
 import { UseUserStore } from "../store/UserStore";
 import { useLoader } from "./useLoader";
+import { showMessage } from "react-native-flash-message";
 
 export interface PartialValues {
   firstName: string;
@@ -56,6 +57,12 @@ export const useRegister = () => {
           password: valoresFinales.password,
         });
         if (resLogin && resLogin.status === 200 && resLogin.data) {
+          showMessage({
+            message: "Registro finalizado.",
+            type: "success",
+            duration: 3000,
+            floating: true,
+          });
           setUser(resLogin.data.userResponse);
           navigation.navigate("StackNavigation" as never);
         }

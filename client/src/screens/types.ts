@@ -1,3 +1,5 @@
+import { WebBrowserResult } from "expo-web-browser";
+
 export type RootStackParamList = {
   Onboarding1Name: undefined;
   Onboarding2Name: undefined;
@@ -9,3 +11,10 @@ export type RootStackParamList = {
   Register1: undefined;
   Register2: undefined;
 };
+declare module "expo-web-browser" {
+  export interface WebBrowserResultWithUrl extends WebBrowserResult {
+    url?: string;
+  }
+
+  // Resto del código de la definición de módulo
+}

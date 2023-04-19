@@ -9,13 +9,14 @@
     "splash": {
       "image": "./src/assets/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor":  "rgba(255, 255, 255, 1)"
+      "backgroundColor": "rgba(255, 255, 255, 1)"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.vmrj.smartshop"
     },
     "android": {
       "adaptiveIcon": {

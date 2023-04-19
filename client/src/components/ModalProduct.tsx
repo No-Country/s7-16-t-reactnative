@@ -11,6 +11,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Product } from "../utils/interfaces/api.interfaces";
 import { useCartStore } from "../store/CartStore";
 import { useCounter } from "../hooks/useCounter";
+import { showMessage } from "react-native-flash-message";
 
 interface Props {
   product: Product | null;
@@ -43,7 +44,13 @@ export const ModalProduct = ({ modalVisible, closeModal, product }: Props) => {
     closeModal();
 
     if (products.some((p) => p._id === product._id)) {
-      alert("Producto duplicado. Vuelve a intentarlo");
+      showMessage({
+        message: "Producto duplicado. Vuelve a intentarlo.",
+        type: "warning",
+        duration: 4000,
+        floating: true,
+        icon: "warning",
+      });
       removeProduct(product._id);
     }
   };

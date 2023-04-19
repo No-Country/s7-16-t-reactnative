@@ -15,6 +15,7 @@ import DateTimePickerComponent from "../../components/DatePickerComponent";
 import { useRegister, PartialValues } from "../../hooks/useRegister";
 import { documentTypes, genres } from "../../utils/helpers/pickerItems";
 import { Loader } from "../../components/Loader";
+import FlashMessage from "react-native-flash-message";
 
 export const Register2 = () => {
   const { handleSubmit2, isLoading } = useRegister();
@@ -104,6 +105,7 @@ export const Register2 = () => {
           )}
         </Formik>
       </ScrollView>
+      <FlashMessage position="bottom" />
       <Loader isLoading={isLoading} />
     </KeyboardAvoidingView>
   );

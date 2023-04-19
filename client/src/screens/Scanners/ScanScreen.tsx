@@ -22,7 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Loader } from "../../components/Loader";
 import { useLoader } from "../../hooks/useLoader";
 import { useHasPermission } from "../../hooks/useHasPermission";
-import { ModalAlert } from "../../components/ModalAlert";
+import FlashMessage from "react-native-flash-message";
 
 export const ScanScreen = () => {
   const [scanned, setScanned] = useState<boolean>(false);
@@ -265,16 +265,8 @@ export const ScanScreen = () => {
             closeModal={() => setModalVisible(!modalVisible)}
           />
         )}
-        {modalAlertVisible && (
-          <ModalAlert
-            title="¡Atención!"
-            modalVisible={modalAlertVisible}
-            body="No fue posible encontrar el producto scaneado, por favor intente nuevamente."
-            closeModal={() => setModalAlertVisible(false)}
-            confirm={() => setModalAlertVisible(false)}
-          />
-        )}
       </View>
+      <FlashMessage position="bottom" />
       <Loader isLoading={isLoading} />
     </>
   );

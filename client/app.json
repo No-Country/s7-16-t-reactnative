@@ -20,27 +20,12 @@
     },
     "android": {
       "adaptiveIcon": {
-<<<<<<< HEAD
-        "foregroundImage": "./src/assets/logo.png",
-        "backgroundColor": "white"
-      },
-      "package": "com.vmrj.smartshop"
-    },
-    "web": {
-      "favicon": "./src/assets/logo.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "30f615c8-ab1d-41f3-97d5-e625e86d09d8"
-      }
-=======
         "foregroundImage": "./src/assets/icono.png",
         "backgroundColor":  "white"
       }
     },
     "web": {
       "favicon": "./src/assets/icono.png"
->>>>>>> c3f8530fe9193ec52ef7094718db606052a65a39
     }
   }
 }

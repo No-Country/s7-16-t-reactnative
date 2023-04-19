@@ -30,7 +30,7 @@ export const ModalAlert = ({
         className="flex-1 justify-center items-center"
       >
         <View
-          className=" bg-white shadow-2xl w-[280] h-[171] justify-center"
+          className=" bg-white shadow-2xl py-7 justify-center rounded-md"
           style={{
             shadowColor: "#000",
             shadowOffset: {

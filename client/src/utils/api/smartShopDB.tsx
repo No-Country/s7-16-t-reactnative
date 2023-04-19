@@ -28,7 +28,6 @@ export const getOneProduct = async (barcode: number) => {
     return res;
   } catch (error) {
     console.log(error);
-    alert("No se encontró el producto. Vuelve a intentarlo");
   }
 };
 
@@ -66,6 +65,5 @@ export const getOneTienda = async (qrcode: string) => {
     return res;
   } catch (error) {
     console.log(error);
-    alert("No se encontró la tienda. Vuelve a intentarlo");
   }
 };

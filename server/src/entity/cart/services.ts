@@ -30,6 +30,7 @@ export async function createCart(userId: mongoose.Types.ObjectId) {
   await newCart.save();
   user?.carts.push(newCart._id);
   await user?.save();
+  return newCart;
 }
 
 export async function getCarts() {
@@ -38,20 +39,46 @@ export async function getCarts() {
 
 export async function getCart(userId: string) {
   const objectId = new ObjectId(userId);
-  const responseCart = await CartModel.findOne({ userId: objectId });
+  const responseCart = await CartModel.find({ userId: objectId });
   if (!responseCart) {
     throw new Error(`Cart ${userId} not found`);
   }
   return responseCart;
 }
 
-export async function updateCart(id: string, data: IProducts) {
+export async function getOpenCart(userId: string) {
+  const objectId = new ObjectId(userId);
+  const responseCart = await CartModel.findOne({ userId: objectId }).where({ status: 'open' });
+  if (!responseCart) {
+    throw new Error(`Cart ${userId} not found`);
+  }
+  return responseCart;
+}
+
+export async function getSuccesCart(id: string) {
+  const objectId = new ObjectId(id);
+  const responseCart = await CartModel.find({ userId: objectId }).where({ status: 'approved' });
+
+  if (!responseCart) {
+    throw new Error(`Cart ${id} not found`);
+  }
+  return responseCart;
+}
+
+export async function updateCart(id: string, userId: mongoose.Types.ObjectId, data: IProducts) {
   const responseCarts = await CartModel.findOneAndUpdate({ _id: id }, data, {
     new: true,
-  });
-
+  }).where({ status: 'open' });
+  let newCart: any;
   if (!responseCarts) {
-    throw new Error(`Cart ${id} not found`);
+    const objectId = new ObjectId(userId);
+    newCart = await CartModel.findOne({ userId: objectId }).where({ status: 'open' });
+    if (!newCart) {
+      newCart = await createCart(userId);
+    }
+    return await CartModel.findOneAndUpdate({ _id: newCart._id }, data, {
+      new: true,
+    }).where({ status: 'open' });
   }
 
   return responseCarts;

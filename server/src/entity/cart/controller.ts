@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { createCart, deleteCart, getCart, getCarts, updateCart } from './services';
+import { createCart, deleteCart, getCart, getCarts, getSuccesCart, updateCart } from './services';
 import { NewCartBody } from './schema';
 import { mongoose } from '@typegoose/typegoose';
 
@@ -33,12 +33,24 @@ export async function getCartHandler(req: Request, res: Response) {
   }
 }
 
+export async function getSuccesCartHandler(req: Request, res: Response) {
+  try {
+    const id = res.locals.user._id;
+
+    const cart = await getSuccesCart(id);
+    res.status(StatusCodes.OK).json({ cart });
+  } catch (error: any) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
+  }
+}
+
 export async function updateCartHandler(req: Request, res: Response) {
   try {
     const { id } = req.params;
+    const userId = res.locals.user._id;
     const { body } = req;
 
-    const cart = await updateCart(id, body);
+    const cart = await updateCart(id, userId, body);
     res.status(StatusCodes.OK).json({ cart });
   } catch (error: any) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
@@ -47,13 +59,13 @@ export async function updateCartHandler(req: Request, res: Response) {
 
 export async function updateCartMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
-    const id  = res.locals.user.carts[0];
+    const id = res.locals.user.carts[0];
+    const userId = res.locals.user._id;
     const { body } = req;
 
-    const cart = await updateCart(id, body);
-    
-    next()  
-
+    const cart = await updateCart(id, userId, body);
+    res.locals.lastCartId = cart?._id;
+    next();
   } catch (error: any) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error.message);
   }

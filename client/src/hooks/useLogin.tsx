@@ -4,6 +4,7 @@ import { UseUserStore } from "../store/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLoader } from "./useLoader";
 import { useState } from "react";
+import { showMessage } from "react-native-flash-message";
 
 export interface Values {
   email: string;

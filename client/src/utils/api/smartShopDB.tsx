@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import {
   BusinessResponse,
+  ComprasResponse,
   LoginData,
   LoginResponse,
   ProductResponse,
@@ -8,6 +9,7 @@ import {
   RegisterData,
   RegisterRes,
 } from "../interfaces/api.interfaces";
+import { showMessage } from "react-native-flash-message";
 
 const api: AxiosInstance = axios.create({
   baseURL: "https://s7-16-t-ts-dep-production.up.railway.app/api",
@@ -28,6 +30,13 @@ export const getOneProduct = async (barcode: number) => {
     return res;
   } catch (error) {
     console.log(error);
+    showMessage({
+      message:
+        "No fue posible encontrar el producto. Por favor intente nuevamente.",
+      type: "warning",
+      duration: 4000,
+      floating: true,
+    });
   }
 };
 
@@ -62,6 +71,26 @@ export const getOneTienda = async (qrcode: string) => {
   console.log(qrcode);
   try {
     const res = await api.get<BusinessResponse>(`/business/${qrcode}`);
+    return res;
+  } catch (error) {
+    console.log(error);
+    showMessage({
+      message:
+        "No fue posible encontrar la tienda. Por favor intente nuevamente.",
+      type: "warning",
+      duration: 4000,
+      floating: true,
+    });
+  }
+};
+
+export const getCompras = async (id: string, token: string) => {
+  try {
+    const res = await api.get<ComprasResponse>(`/cart/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
     return res;
   } catch (error) {
     console.log(error);

@@ -9,12 +9,12 @@ import { useLoader } from "../../hooks/useLoader";
 import { Loader } from "../../components/Loader";
 import { useNavigation } from "@react-navigation/native";
 import { useHasPermission } from "../../hooks/useHasPermission";
-import { ModalAlert } from "../../components/ModalAlert";
+import { showMessage } from "react-native-flash-message";
+import FlashMessage from "react-native-flash-message";
 
 export const QrScreen = () => {
   const [scanned, setScanned] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [modalAlertVisible, setModalAlertVisible] = useState<boolean>(false);
   const [tienda, setTienda] = useState<Business | null>(null);
   const { openLoader, closeLoader, isLoading } = useLoader();
   const navigation = useNavigation();
@@ -37,8 +37,14 @@ export const QrScreen = () => {
 
       setModalVisible(true);
     } else {
+      showMessage({
+        message:
+          "No fue posible encontrar la tienda. Por favor intente nuevamente.",
+        type: "warning",
+        duration: 4000,
+        floating: false,
+      });
       setScanned(true);
-      setModalAlertVisible(true);
     }
 
     closeLoader();
@@ -98,15 +104,7 @@ export const QrScreen = () => {
           tienda={tienda!}
         />
       )}
-      {modalAlertVisible && (
-        <ModalAlert
-          title="¡Atención!"
-          modalVisible={modalAlertVisible}
-          body="No fue posible encontrar la tienda scaneada, por favor intente nuevamente."
-          closeModal={() => setModalAlertVisible(false)}
-          confirm={() => setModalAlertVisible(false)}
-        />
-      )}
+      <FlashMessage position="bottom" />
       <Loader isLoading={isLoading} />
     </>
   );

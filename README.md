@@ -1,8 +1,9 @@
-# Grupo: S7-16-t-reactnative
 
-SMARTSHOP: [Descargar Demo](https://drive.google.com/file/d/1rndYl9g6mFpZOWsqP6oqHTgRfzVm-7_J/view?usp=share_link)
+<p align="center">
+  <img src='https://github.com/No-Country/s7-16-t-reactnative/blob/dev/client/src/assets/logo-sin-margenes.png' />
+</p>
 
-![](https://res.cloudinary.com/dqhlqba6n/image/upload/v1681736365/Logo_indumentaria_minimalista_tipografia_azul-removebg-preview_4_gdurc4.png)
+[Descargar Demo: V1.9](https://drive.google.com/file/d/1rndYl9g6mFpZOWsqP6oqHTgRfzVm-7_J/view?usp=share_link)
 
 ## Introducción
 - SmartShop es una aplicación que permite realizar compras en supermercados o almacenes sin luego hacer fila para pagar. 
@@ -11,14 +12,12 @@ SMARTSHOP: [Descargar Demo](https://drive.google.com/file/d/1rndYl9g6mFpZOWsqP6o
 - Abona con tu medio de pago electrónico favorito.
 - ¡Felicitaciones ! Has finalizado tu compra con éxito. 
 
-
 ## Tecnologías
 
 - Figma   | Canva  | Whimsical  |  Optimal Workshop
 - Expo  | Formik y Yup  | Zustand  | Async Storage  | React Native Picker  | Tailwindcss  | TypeScript
 - Node Js  | Express  | Typescript  | Mongo DB
 - Integracion con Mercadopago
-
 
 ## Team
 

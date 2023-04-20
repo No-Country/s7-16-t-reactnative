@@ -7,11 +7,11 @@ import { createCheckout, handlePayment } from '../../providers/mercadopago/contr
 
 const router = express.Router();
 
+router.get('/success', handlePayment);
+
 router.use(requireUser);
 
 router.get('/', getCartsHandler);
-
-router.get('/success', handlePayment);
 
 router.get('/checkout', updateCartMiddleware, createCheckout);
 

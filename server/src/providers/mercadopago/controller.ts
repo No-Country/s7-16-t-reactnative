@@ -60,7 +60,7 @@ export const handlePayment = async (req: Request, res: Response) => {
       throw new Error(`Cart ${external_reference} not found`);
     }
 
-    res.status(200).json({ message: `Payment ${payment_id} was ${status}` });
+    res.redirect('smartshop://success');
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

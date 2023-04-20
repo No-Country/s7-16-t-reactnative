@@ -6,7 +6,7 @@ const clientId = process.env.CLIENT_ID;
 
 export const generatePaymentLink = async (items: any, payer: any, external_reference: any, req: Request) => {
 
-    const server = 'https://localhost:4000/api';
+    const server = 'https://s7-16-t-ts-dep-production.up.railway.app/api';
     const success = `${server}/cart/success`;
     const failure = `${server}/cart/failure`;
     const pending = `${server}/cart/pending`;

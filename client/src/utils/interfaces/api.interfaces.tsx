@@ -83,3 +83,21 @@ export interface Business {
   updatedAt: string;
   __v: number;
 }
+
+// Compras response
+
+export interface ComprasResponse {
+  cart: Cart[];
+}
+
+export interface Cart {
+  _id: string;
+  userId: string;
+  products: Product[];
+  totalPrice: number;
+  status: string;
+  payment_id: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}

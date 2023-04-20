@@ -117,7 +117,7 @@ export const ScanScreen = () => {
       `https://s7-16-t-ts-dep-production.up.railway.app/api/cart/${cart}`,
       {
         products,
-       
+
         totalPrice,
       },
       {

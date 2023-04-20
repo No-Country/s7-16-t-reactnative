@@ -23,17 +23,12 @@ import { Loader } from "../components/Loader";
 import { useLoader } from "../hooks/useLoader";
 import { useHasPermission } from "../hooks/useHasPermission";
 import { ModalAlert } from "../components/ModalAlert";
+import { useNavigation } from "@react-navigation/native";
+import { UseUserStore } from "../store/UserStore";
+// import { UseUserStore } from "../store/UserStore";
 
 export const ScanScreen = () => {
   const [scanned, setScanned] = useState<boolean>(false);
-
-  const productosPrueba = {
-    products: [
-      { productId: "642db013abd8df7c53eb20ed", quantity: "6" },
-      { productId: "642db013abd8df7c53eb20ed", quantity: "5" },
-    ],
-    totalPrice: 300,
-  };
 
   // Modal
   const [product, setProduct] = useState<Product | null>(null);
@@ -44,6 +39,7 @@ export const ScanScreen = () => {
   const { openLoader, closeLoader, isLoading } = useLoader(true);
 
   const { hasPermission } = useHasPermission();
+  const navigation = useNavigation();
 
   useEffect(() => {
     setTimeout(() => {
@@ -54,6 +50,7 @@ export const ScanScreen = () => {
   const products = useCartStore((state) => state.products);
   const totalPrices = useCartStore((state) => state.totalPrice);
   const totalProcudtPrice = useCartStore((state) => state.totalAmount);
+  const cart = UseUserStore((state) => state.user);
 
   const handleBarCodeScannedDebounced = async (
     result: BarCodeScannerResult
@@ -100,50 +97,45 @@ export const ScanScreen = () => {
       }))
     );
     // console.log(product?.amount);
-    console.log(totalPrices);
-  };
-
-  const generatePaymentLink = async (
-    products: Product[],
-    totalPrice: number
-  ): Promise<string> => {
-    const token = await AsyncStorage.getItem("token");
-    console.log(token);
-    try {
-      const response = await axios.get(
-        "https://s7-16-t-ts-dep-production.up.railway.app/api/cart/checkout",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // "Content-Type": "application/json",
-          },
-          // params: {
-          //   // productosPrueba,
-          //   products: JSON.stringify(
-          //     products.map((product) => ({
-          //       productId: product._id,
-          //       quantity: product.amount,
-          //     }))
-          //   ),
-          //   totalPrice: totalPrice,
-          // },
-        }
-      );
-      const mercadoPagoLink = response.data.link;
-      // console.log(response.data);
-      // console.log(mercadoPagoLink);
-      console.log(totalPrice);
-      imprimir();
-      return mercadoPagoLink;
-    } catch (error) {
-      return "";
-    }
+    console.log(totalPrice);
   };
 
   const totalPrice = products.reduce(
     (total, product) => total + product.price * product.amount,
     0
   );
+  useCartStore.setState({ totalPrice: totalPrice });
+
+  const sendCart = async (
+    products: Product[],
+    totalPrice: number,
+    cart: string | undefined
+  ) => {
+    const token = await AsyncStorage.getItem("token");
+
+    const res = await axios.put(
+      `https://s7-16-t-ts-dep-production.up.railway.app/api/cart/${cart}`,
+      {
+        products,
+       
+        totalPrice,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res.status);
+
+    if (res.status === 200) {
+      navigation.navigate("ScreenFinalPayment" as never);
+      res.data;
+      console.log(products);
+      console.log(totalPrice);
+    }
+    console.log("TERMINO");
+  };
 
   return (
     <>
@@ -235,27 +227,25 @@ export const ScanScreen = () => {
                 </Text>
               </View>
             )}
-            <OrangeButton
+            {/* <OrangeButton
               text="Terminar compra"
               // onPress={() => imprimir()}
               onPress={async () => {
-                const mercadoPagoLink = await generatePaymentLink(
-                  products,
-                  totalPrices
-                );
+                const mercadoPagoLink = await generatePaymentLink();
                 Linking.openURL(mercadoPagoLink);
               }}
               // onPress={() => alert("terminar compra")}
               disabled={products.length > 0 ? true : false}
-            />
+            /> */}
           </View>
-          {/* <View>
+          <View>
             <OrangeButton
               text="Terminar compra"
-              onPress={() => handlePayment}
+              onPress={() => sendCart(products, totalPrice, cart?.carts[0])}
+              // onPress={() => navigation.navigate("ScreenFinalPayment" as never)}
               disabled={products.length > 0 ? true : false}
             />
-          </View> */}
+          </View>
         </View>
 
         {modalVisible && (

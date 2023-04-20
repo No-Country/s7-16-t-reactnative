@@ -4,11 +4,13 @@ import MyData from "../screens/Home/MyData";
 import { HomeTabs } from "./HomeTabs";
 import { useStack } from "../hooks/useStack";
 import { QrScreen } from "../screens/Scanners/QrScreen";
+import ScreenFinalPayment from "../screens/Payment/ScreenFinalPayment";
 
 export type RootStackParams = {
   HomeTabs: undefined;
   MyData: undefined;
   QrScreen: undefined;
+  ScreenFinalPayment: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParams>();
@@ -40,6 +42,16 @@ export const StackNavigation = () => {
           headerTransparent: true,
           headerTitle: headerTitleConBack,
         }}
+      />
+      <Stack.Screen
+        name="ScreenFinalPayment"
+        component={ScreenFinalPayment}
+        options={
+          {
+            // headerTransparent: true,
+            // headerTitle: headerTitleConBack,
+          }
+        }
       />
     </Stack.Navigator>
   );

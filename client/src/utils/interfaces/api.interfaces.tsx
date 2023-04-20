@@ -53,7 +53,7 @@ export interface LoginResponse {
 }
 
 export interface UserResponse {
-  carts: Product[];
+  carts: string[];
   _id: string;
   email: string;
   firstName: string;

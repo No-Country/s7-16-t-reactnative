@@ -18,9 +18,13 @@ import { UseUserStore } from "../../store/UserStore";
 
 const ScreenFinalPayment = () => {
   const products = useCartStore((state) => state.products);
-  const totalPrice = useCartStore((state) => state.totalPrice);
+  const totalPrices = useCartStore((state) => state.totalPrice);
   const idCart = UseUserStore((state) => state.user);
   //   const carts = idCart?.carts;
+  const totalPrice = products.reduce(
+    (total, product) => total + product.price * product.amount,
+    0
+  );
 
   const generatePaymentLink = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -46,6 +50,35 @@ const ScreenFinalPayment = () => {
     }
   };
 
+  const sendCart = async (
+    products: Product[],
+    totalPrice: number,
+    cart: string | undefined
+  ) => {
+    const token = await AsyncStorage.getItem("token");
+
+    const res = await axios.put(
+      `https://s7-16-t-ts-dep-production.up.railway.app/api/cart/${cart}`,
+      {
+        products,
+
+        totalPrice,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(res.status);
+    // if (res.status === 200) {
+    //   generatePaymentLink();
+    //   console.log(products);
+    //   console.log(totalPrice);
+    // }
+    return res.status;
+    console.log("TERMINO");
+  };
   return (
     <>
       <View style={styles.container}>
@@ -76,8 +109,15 @@ const ScreenFinalPayment = () => {
           <OrangeButton
             text="Procesar Pago"
             onPress={async () => {
-              const mercadoPagoLink = await generatePaymentLink();
-              Linking.openURL(mercadoPagoLink);
+              const resp = await sendCart(
+                products,
+                totalPrice,
+                idCart?.carts[0]
+              );
+              if (resp === 200) {
+                const mercadoPagoLink = await generatePaymentLink();
+                Linking.openURL(mercadoPagoLink);
+              }
             }}
             disabled={products.length > 0 ? true : false}
           />

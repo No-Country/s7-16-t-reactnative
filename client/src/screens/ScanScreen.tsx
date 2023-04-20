@@ -6,7 +6,7 @@ import {
   Button,
   Image,
   Dimensions,
-  TouchableOpacity,
+  //TouchableOpacity,
 } from "react-native";
 import { BarCodeScanner, BarCodeScannerResult } from "expo-barcode-scanner";
 import { getOneProduct } from "../utils/api/smartShopDB";
@@ -17,7 +17,7 @@ import { ScrollView } from "react-native";
 import { useCartStore } from "../store/CartStore";
 import { OrangeButton } from "../components/OrangeButton";
 import axios from "axios";
-import { Linking } from "react-native";
+//import { Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Loader } from "../components/Loader";
 import { useLoader } from "../hooks/useLoader";
@@ -48,8 +48,8 @@ export const ScanScreen = () => {
   }, []);
 
   const products = useCartStore((state) => state.products);
-  const totalPrices = useCartStore((state) => state.totalPrice);
-  const totalProcudtPrice = useCartStore((state) => state.totalAmount);
+  // const totalPrices = useCartStore((state) => state.totalPrice);
+  // const totalProcudtPrice = useCartStore((state) => state.totalAmount);
   const cart = UseUserStore((state) => state.user);
   // const user = UseUserStore((state) => state.user);
 
@@ -90,17 +90,17 @@ export const ScanScreen = () => {
   if (hasPermission === false) {
     return <Text className="self-center top-52">No access to camera</Text>;
   }
-  const imprimir = () => {
-    // console.log(
-    //   products.map((product) => ({
-    //     productId: product._id,
-    //     quantity: product.amount,
-    //   }))
-    // );
-    // console.log(product?.amount);
-    // console.log(user?.carrito);
-    // console.log(totalPrice);
-  };
+  //const imprimir = () => {
+  // console.log(
+  //   products.map((product) => ({
+  //     productId: product._id,
+  //     quantity: product.amount,
+  //   }))
+  // );
+  // console.log(product?.amount);
+  // console.log(user?.carrito);
+  // console.log(totalPrice);
+  //};
 
   const totalPrice = products.reduce(
     (total, product) => total + product.price * product.amount,

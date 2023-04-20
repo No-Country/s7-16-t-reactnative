@@ -2,7 +2,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Image,
+  //Image,
   Text,
   Linking,
 } from "react-native";
@@ -12,13 +12,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { ScrollView } from "react-native";
 import CardProduct from "../../components/CardProduct";
-import { Product, UserResponse } from "../../utils/interfaces/api.interfaces";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Product } from "../../utils/interfaces/api.interfaces";
+//import { SafeAreaView } from "react-native-safe-area-context";
 import { UseUserStore } from "../../store/UserStore";
 
 const ScreenFinalPayment = () => {
   const products = useCartStore((state) => state.products);
-  const totalPrices = useCartStore((state) => state.totalPrice);
+  //const totalPrices = useCartStore((state) => state.totalPrice);
   const idCart = UseUserStore((state) => state.user);
   //   const carts = idCart?.carts;
   const totalPrice = products.reduce(

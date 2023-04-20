@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "SmartShop",
+    "scheme": "smartshop",
     "slug": "SmartShop",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,11 +22,17 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/icono.png",
-        "backgroundColor":  "white"
-      }
+        "backgroundColor": "white"
+      },
+      "package": "com.vmrj.smartshop"
     },
     "web": {
       "favicon": "./src/assets/icono.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "da41e518-034c-418e-9b28-caa6362b3166"
+      }
     }
   }
 }

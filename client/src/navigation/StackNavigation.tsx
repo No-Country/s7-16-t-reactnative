@@ -54,12 +54,10 @@ export const StackNavigation = () => {
       <Stack.Screen
         name="ScreenFinalPayment"
         component={ScreenFinalPayment}
-        options={
-          {
-            // headerTransparent: true,
-            // headerTitle: headerTitleConBack,
-          }
-        }
+        options={{
+          // headerTransparent: true,
+          headerTitle: headerTitleConBack,
+        }}
       />
 
       <Stack.Screen

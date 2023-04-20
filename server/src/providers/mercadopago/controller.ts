@@ -10,11 +10,7 @@ export const createCheckout = async (req: Request, res: Response) => {
     const tokenCartId = res.locals.lastCartId.toString();
 
     const userId = res.locals.user?._id;
-<<<<<<< HEAD
-    const cart = await getCart(userId);
-=======
     const cart = await getOpenCart(userId);
->>>>>>> a1893468f3ccbdc46a3dbe7fae9c15b7ba24e566
     const customer = res.locals.user;
 
     const items = [

@@ -29,11 +29,7 @@ export class Cart {
   @prop({ required: true, default: 'open' })
   public status!: string;
 
-<<<<<<< HEAD
-  @prop({ required: true, default: null })
-=======
   @prop({ required: true, default: "null" })
->>>>>>> a1893468f3ccbdc46a3dbe7fae9c15b7ba24e566
   public payment_id!: string;
 }
 

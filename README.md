@@ -21,20 +21,20 @@
 
 ## Team
 
-Santiago Roa | PM | [Linkedin](https://www.linkedin.com/in/santiago-d-roa)
-Melisa Andrea Ramirez | Tester/QA | [Linkedin](http://www.linkedin.com/in/melisa-a-ramirez)
-Franco De Carli | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/francoandres-decarli)
-Micaela Ailen Andrés | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/micaelaandres)
-Julieta Castro | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/julieta-castro-681a621b4)
-Victor Romero Juárez | Frontend | [Linkedin](https://www.linkedin.com/in/victor-manuel-romero-juarez-6a5940206)
-Diego Nicita | Frontend | [Linkedin](https://www.linkedin.com/in/diegonicita/)
-Tomás Aybar | Frontend | [Linkedin](https://www.linkedin.com/in/tomasaybar/)
-Zoe Guzman | Frontend |  [Linkedin](www.linkedin.com/in/zoeg00)
-Miguel Vera Perez | Backend | [Linkedin](https://www.linkedin.com/in/miguel-verap/)
-Juan Manuel Fernández  | Backend | [Linkedin](https://www.linkedin.com/in/juan-manuel-fernandez-dev/)
+- Santiago Roa | PM | [Linkedin](https://www.linkedin.com/in/santiago-d-roa)
+- Melisa Andrea Ramirez | Tester/QA | [Linkedin](http://www.linkedin.com/in/melisa-a-ramirez)
+- Franco De Carli | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/francoandres-decarli)
+- Micaela Ailen Andrés | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/micaelaandres)
+- Julieta Castro | Diseño UX/UI | [Linkedin](https://www.linkedin.com/in/julieta-castro-681a621b4)
+- Victor Romero Juárez | Frontend | [Linkedin](https://www.linkedin.com/in/victor-manuel-romero-juarez-6a5940206)
+- Diego Nicita | Frontend | [Linkedin](https://www.linkedin.com/in/diegonicita/)
+- Tomás Aybar | Frontend | [Linkedin](https://www.linkedin.com/in/tomasaybar/)
+- Zoe Guzman | Frontend |  [Linkedin](www.linkedin.com/in/zoeg00)
+- Miguel Vera Perez | Backend | [Linkedin](https://www.linkedin.com/in/miguel-verap/)
+- Juan Manuel Fernández  | Backend | [Linkedin](https://www.linkedin.com/in/juan-manuel-fernandez-dev/)
 
 
-##Funcionalidades
+## Funcionalidades
 - ✅ Registrarse con email y password.
 - ✅ Escanear el comercio en el que te encuentras desde un qr.
 - ✅ Escanear los productos.

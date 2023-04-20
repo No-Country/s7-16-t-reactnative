@@ -51,6 +51,7 @@ export const ScanScreen = () => {
   const totalPrices = useCartStore((state) => state.totalPrice);
   const totalProcudtPrice = useCartStore((state) => state.totalAmount);
   const cart = UseUserStore((state) => state.user);
+  // const user = UseUserStore((state) => state.user);
 
   const handleBarCodeScannedDebounced = async (
     result: BarCodeScannerResult
@@ -90,14 +91,15 @@ export const ScanScreen = () => {
     return <Text className="self-center top-52">No access to camera</Text>;
   }
   const imprimir = () => {
-    console.log(
-      products.map((product) => ({
-        productId: product._id,
-        quantity: product.amount,
-      }))
-    );
+    // console.log(
+    //   products.map((product) => ({
+    //     productId: product._id,
+    //     quantity: product.amount,
+    //   }))
+    // );
     // console.log(product?.amount);
-    console.log(totalPrice);
+    // console.log(user?.carrito);
+    // console.log(totalPrice);
   };
 
   const totalPrice = products.reduce(
@@ -127,7 +129,6 @@ export const ScanScreen = () => {
       }
     );
     console.log(res.status);
-
     if (res.status === 200) {
       navigation.navigate("ScreenFinalPayment" as never);
       res.data;
@@ -227,22 +228,12 @@ export const ScanScreen = () => {
                 </Text>
               </View>
             )}
-            {/* <OrangeButton
-              text="Terminar compra"
-              // onPress={() => imprimir()}
-              onPress={async () => {
-                const mercadoPagoLink = await generatePaymentLink();
-                Linking.openURL(mercadoPagoLink);
-              }}
-              // onPress={() => alert("terminar compra")}
-              disabled={products.length > 0 ? true : false}
-            /> */}
           </View>
           <View>
             <OrangeButton
-              text="Terminar compra"
+              text="Terminar Compra"
               onPress={() => sendCart(products, totalPrice, cart?.carts[0])}
-              // onPress={() => navigation.navigate("ScreenFinalPayment" as never)}
+              // onPress={() => console.log("HOLA")}
               disabled={products.length > 0 ? true : false}
             />
           </View>

@@ -25,7 +25,7 @@ export const useLogin = () => {
 
     if (res && res.status === 200 && res.data) {
       setUser(res.data.userResponse);
-      console.log(res.data.userResponse.carts);
+      console.log(res.data.userResponse.carts[0]);
       await AsyncStorage.setItem("token", res.data.token);
       navigation.navigate("StackNavigation" as never);
     } else {

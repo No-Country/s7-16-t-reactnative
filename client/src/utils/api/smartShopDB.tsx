@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import {
   BusinessResponse,
+  ComprasResponse,
   LoginData,
   LoginResponse,
   ProductResponse,
@@ -80,5 +81,18 @@ export const getOneTienda = async (qrcode: string) => {
       duration: 4000,
       floating: true,
     });
+  }
+};
+
+export const getCompras = async (id: string, token: string) => {
+  try {
+    const res = await api.get<ComprasResponse>(`/cart/${id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log(error);
   }
 };

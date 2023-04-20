@@ -3,7 +3,8 @@ import { Image, Text, View } from "react-native";
 import { Product } from "../utils/interfaces/api.interfaces";
 
 interface Props {
-  compra: Product[];
+  products: Product[];
+  totalPrice: string;
 }
 
 interface PropCompra {
@@ -42,19 +43,14 @@ const CardCompra = ({ product }: PropCompra) => {
   );
 };
 
-export const CardMisCompras = ({ compra }: Props) => {
-  const totalPrice = compra.reduce(
-    (total, product) => total + product.price * product.amount,
-    0
-  );
-
+export const CardMisCompras = ({ products, totalPrice }: Props) => {
   return (
     // Contenedor card productos
     <View className="shadow-2xl rounded-lg border border-gray-200 my-2">
       <View className="px-5">
         {/* card producto individual*/}
 
-        {compra.map((prod) => (
+        {products.map((prod) => (
           <CardCompra product={prod} key={prod._id} />
         ))}
       </View>

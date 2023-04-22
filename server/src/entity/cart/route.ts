@@ -3,11 +3,13 @@ import express from 'express';
 // import { newCartSchema } from './schema';
 import { getCartHandler, getCartsHandler, getSuccesCartHandler, newCartHandler, updateCartHandler, updateCartMiddleware } from './controller';
 import { requireUser } from '../../middleware';
-import { createCheckout, handlePayment } from '../../providers/mercadopago/controller';
+import { createCheckout, getPaymentStatusHandler, handlePayment } from '../../providers/mercadopago/controller';
 
 const router = express.Router();
 
 router.get('/success', handlePayment);
+
+router.get('/payments/:payment_id', getPaymentStatusHandler);
 
 router.use(requireUser);
 

@@ -2,7 +2,7 @@ import { Business } from '../../entity/business/model';
 import { Cart, CartModel } from '../../entity/cart/model';
 import { getCart, getOpenCart } from '../../entity/cart/services';
 import { User, UserModel } from '../../entity/user/model';
-import { generatePaymentLink } from './service';
+import { generatePaymentLink, getPaymentStatus } from './service';
 import { Request, Response } from 'express';
 
 export const createCheckout = async (req: Request, res: Response) => {
@@ -61,6 +61,16 @@ export const handlePayment = async (req: Request, res: Response) => {
     }
 
     res.redirect('smartshop://success');
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getPaymentStatusHandler = async (req: Request, res: Response) => {
+  try {
+    const { payment_id } = req.params;
+    const paymentResponse = await getPaymentStatus(Number(payment_id));
+    res.status(paymentResponse.status).json({ payment_status: paymentResponse });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }

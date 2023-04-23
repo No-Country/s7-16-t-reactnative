@@ -9,7 +9,7 @@
     "splash": {
       "image": "./src/assets/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "rgba(255, 255, 255, 1)"
+      "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,11 +21,17 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/icono.png",
-        "backgroundColor":  "white"
+        "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "favicon": "./src/assets/icono.png"
+    },
+    "scheme": "smartshop",
+    "extra": {
+      "eas": {
+        "projectId": "da41e518-034c-418e-9b28-caa6362b3166"
+      }
     }
   }
 }
